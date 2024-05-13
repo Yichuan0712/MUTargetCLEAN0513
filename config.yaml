@@ -1,6 +1,6 @@
 fix_seed: 0
 checkpoints_every: 16
-result_path: ./results_test
+result_path: ./results_supcon
 config_path: ./config.yaml
 
 resume:
@@ -18,16 +18,24 @@ encoder:
   frag_overlap: 200
 
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
+decoder:
+  type: "CNN" #"CNN" "linear"
+  cnn_channel: 8
+  cnn_kernel: 14
+  droprate: 0.3
 
 train_settings:
+  dataloader: "batchsample" #"batchsample","clean"
   num_epochs: 20
   shuffle: True
   device: cuda
-  batch_size: 16
+  batch_size: 16 #16
   grad_accumulation: 1
   loss_pos_weight: 35
   dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
+  log_every: 30
+
 
 
 valid_settings:
@@ -43,9 +51,9 @@ predict_settings:
 
 optimizer:
   name: adam
-  lr: 1e-4 #-4
+  lr: 1e-4 #1e-2
   weight_decouple: True
-  weight_decay: 1e-3
+  weight_decay: 1e-3 #0.0005
   eps: 1e-16
   beta_1: 0.9
   beta_2: 0.999
@@ -56,15 +64,16 @@ optimizer:
     min_lr: 1e-5
     gamma: 0.2
     num_restarts: 1
+    first_cycle_steps: null  #null before
   mode: cosine #skip, cosine
 
 supcon:
-  apply: True
-  device: cuda
+  apply: False
   drop_out: 0.1
-  n_pos: 9
-  n_neg: 30
+  n_pos: 2 #9
+  n_neg: 2 #30
   temperature: 0.1
-  hard_neg: True
+  hard_neg: False
   weight: 1
   warm_start: 0
+  apply_supcon_loss: False #if False can still apply supcon sampling method, but no supcon loss!
