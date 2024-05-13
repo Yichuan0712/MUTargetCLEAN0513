@@ -199,6 +199,7 @@ class SimpleCNN(nn.Module):
     
     def forward(self, x):
         x = self.conv_layer(x)
+        # 改这儿
         x = self.dropout(x)
         x = self.conv_layer2(x)
         #x = self.dropout(x)
