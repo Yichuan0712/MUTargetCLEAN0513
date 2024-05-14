@@ -180,6 +180,7 @@ def initialize_weights(layer):
 class SimpleCNN(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding, droprate=0.3):
         super(SimpleCNN, self).__init__()
+        self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
         self.relu = nn.ReLU()
@@ -201,7 +202,6 @@ class SimpleCNN(nn.Module):
         # print(1, x.shape)
         x = self.conv_layer(x)
         # print(2, x.shape)
-        # 改这儿
         x = self.dropout(x)
         # print(3, x.shape)
         x = self.conv_layer2(x)
@@ -210,14 +210,12 @@ class SimpleCNN(nn.Module):
         x = self.activation_spread(x)
         # print(4.1, x.shape)
         # print(x)
-        # exit(0)
         #x = self.dropout(x)
         #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
         # print(5, x.shape)
         x = x.squeeze(1)
         # print(6, x.shape)
-        # exit(0)
         """
         1 torch.Size([18, 1280, 1022])
         2 torch.Size([18, 8, 1022])
@@ -229,13 +227,12 @@ class SimpleCNN(nn.Module):
         #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
-    def activation_spread(self, x, kernel_size=14):
-
-        if kernel_size % 2 == 0:
-            pad_left = (kernel_size // 2) - 1
-            pad_right = kernel_size // 2
+    def activation_spread(self, x):
+        if self.kernel_size % 2 == 0:
+            pad_left = (self.kernel_size // 2) - 1
+            pad_right = self.kernel_size // 2
         else:
-            pad_left = pad_right = (kernel_size - 1) // 2
+            pad_left = pad_right = (self.kernel_size - 1) // 2
 
         # Assuming x is the input activation map
         entries, classes, length = x.size()
@@ -247,7 +244,7 @@ class SimpleCNN(nn.Module):
 
         # Fill the spread_output tensor
         for i in range(0, length):
-            spread_output[:, :, i + pad_left: i + pad_left + kernel_size] += x[:, :, i:i + 1]
+            spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
 
         spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
 
