@@ -155,6 +155,7 @@ def train_loop(tools, configs, warm_starting,train_writer):
             class_loss = -1
             position_loss=-1
             if not warm_starting:
+                print('target_frag_pt', target_frag_pt.shape)
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
 
