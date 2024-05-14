@@ -206,9 +206,12 @@ class SimpleCNN(nn.Module):
         print(3, x.shape)
         x = self.conv_layer2(x)
         print(4, x.shape)
+        print(x)
 
         x = self.activation_spread(x)
         print(4.1, x.shape)
+
+        print(x)
         exit(0)
         #x = self.dropout(x)
         #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
@@ -239,6 +242,8 @@ class SimpleCNN(nn.Module):
         # Assuming x is the input activation map
         entries, classes, length = x.size()
         # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+
+        # spread and x should be in the same device (cuda)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
 
