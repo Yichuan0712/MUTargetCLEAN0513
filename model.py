@@ -234,7 +234,7 @@ class SimpleCNN(nn.Module):
         else:
             pad_left = pad_right = (self.kernel_size - 1) // 2
 
-        # Assuming x is the input activation map
+        # x is the input activation map
         entries, classes, length = x.size()
         # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
 
