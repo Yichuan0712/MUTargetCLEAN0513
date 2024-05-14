@@ -507,8 +507,6 @@ class Encoder(nn.Module):
             """CASE D"""
 
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
-            print(motif_logits.shape)
-            exit(0)
             if self.combine:
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
