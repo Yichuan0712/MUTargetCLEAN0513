@@ -185,7 +185,7 @@ class SimpleCNN(nn.Module):
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=droprate)
-        #self.linear = nn.Linear(out_channels, 1)
+        # self.linear = nn.Linear(out_channels, 1)
         """
         #Initialize weights from a uniform distribution within the specified range
         weight_range = torch.sqrt(torch.tensor(1.0 / in_channels))  # Range for weight initialization
@@ -194,9 +194,9 @@ class SimpleCNN(nn.Module):
         # Initialize biases to zeros
         nn.init.zeros_(self.conv_layer.bias)
         """
-        #self.conv_layer.apply(initialize_weights)
+        # self.conv_layer.apply(initialize_weights)
         # Use nn.Linear's default initialization for conv1d weights
-        #self.conv_layer.reset_parameters()
+        # self.conv_layer.reset_parameters()
     
     def forward(self, x):
         # print(1, x.shape)
@@ -210,8 +210,8 @@ class SimpleCNN(nn.Module):
         x = self.activation_spread(x)
         # print(4.1, x.shape)
         # print(x)
-        #x = self.dropout(x)
-        #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
+        # x = self.dropout(x)
+        # x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
         # print(5, x.shape)
         x = x.squeeze(1)
@@ -224,7 +224,7 @@ class SimpleCNN(nn.Module):
         5 torch.Size([18, 1, 1022])
         6 torch.Size([18, 1022])
         """
-        #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
+        # x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
     def activation_spread(self, x):
