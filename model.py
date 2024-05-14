@@ -402,11 +402,11 @@ class Encoder(nn.Module):
         emb_pro_list=torch.stack(emb_pro_list, dim=0)
         return emb_pro_list
     
-    def get_pro_class(self, id, id_frags_list, seq_frag_tuple, motif_logits,overlap):
+    def get_pro_class(self, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         #motif_logits_max, _ = torch.max(motif_logits, dim=-1, keepdim=True).squeeze(-1) #should be [batch,num_class]
         #print(motif_logits_max)
         motif_pro_list=[]
-        print('id', len(id))
+        print('id_frags_list', len(id_frags_list))
         for id_protein in id:
             ind_frag=0
             id_frag = id_protein+"@"+str(ind_frag)
