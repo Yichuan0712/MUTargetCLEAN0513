@@ -506,6 +506,7 @@ class Encoder(nn.Module):
                 projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
         else:
             """CASE D"""
+            print('last_hidden_state', last_hidden_state.shape)
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
             print('motif logits', motif_logits.shape)
             if self.combine:
