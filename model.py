@@ -238,7 +238,9 @@ class SimpleCNN(nn.Module):
 
         # Assuming x is the input activation map
         entries, classes, length = x.size()
-        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+        # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
 
         # Fill the spread_output tensor
         for i in range(0, length):
