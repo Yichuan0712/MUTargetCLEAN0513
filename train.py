@@ -157,6 +157,10 @@ def train_loop(tools, configs, warm_starting,train_writer):
             if not warm_starting:
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
+
+                print('motif_logits', motif_logits.shape)
+                print('target_frag', target_frag.shape)
+
                 position_loss = tools['loss_function'](
                                 motif_logits, 
                                 target_frag.to(tools['train_device']))
@@ -167,8 +171,8 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 if configs.train_settings.data_aug.enable:
                     class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                 else:
-                    print(type_protein_pt.shape)
-                    exit(0)
+                    # print(type_protein_pt.shape)
+                    # exit(0)
                     class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
                 
                 train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
