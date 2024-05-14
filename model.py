@@ -425,7 +425,7 @@ class Encoder(nn.Module):
             motif_pro,_ = torch.max(motif_pro, dim=-1)
             print('-after max', motif_pro.shape) #should be [num_class]
             motif_pro_list.append(motif_pro) #[batch,num_class]
-            exit(0)
+            # exit(0)
         
         motif_pro_list=torch.stack(motif_pro_list, dim=0)
         return motif_pro_list
@@ -507,7 +507,6 @@ class Encoder(nn.Module):
             """CASE D"""
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
             print('motif logits', motif_logits.shape)
-            print('emb_pro', emb_pro.shape)
             if self.combine:
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
