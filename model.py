@@ -178,7 +178,7 @@ def initialize_weights(layer):
         nn.init.zeros_(layer.bias)  # Initialize biases to zero
 
 class SimpleCNN(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride, padding,droprate=0.3):
+    def __init__(self, in_channels, out_channels, kernel_size, stride, padding, droprate=0.3):
         super(SimpleCNN, self).__init__()
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
@@ -198,26 +198,51 @@ class SimpleCNN(nn.Module):
         #self.conv_layer.reset_parameters()
     
     def forward(self, x):
-        print(1, x.shape)
+        # print(1, x.shape)
         x = self.conv_layer(x)
-        print(2, x.shape)
+        # print(2, x.shape)
         # 改这儿
         x = self.dropout(x)
-        print(3, x.shape)
+        # print(3, x.shape)
         x = self.conv_layer2(x)
-        print(4, x.shape)
+        # print(4, x.shape)
         #x = self.dropout(x)
         #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
-        print(5, x.shape)
+        # print(5, x.shape)
         x = x.squeeze(1)
-        print(6, x.shape)
-        exit(0)
+        # print(6, x.shape)
+        # exit(0)
+        """
+        1 torch.Size([18, 1280, 1022])
+        2 torch.Size([18, 8, 1022])
+        3 torch.Size([18, 8, 1022])
+        4 torch.Size([18, 8, 1022])
+        5 torch.Size([18, 1, 1022])
+        6 torch.Size([18, 1022])
+        """
         #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
-    def activation_spread(self, x):
-        return x
+    def activation_spread(self, x, kernel_size=14):
+
+        if kernel_size % 2 == 0:
+            pad_left = (kernel_size // 2) - 1
+            pad_right = kernel_size // 2
+        else:
+            pad_left = pad_right = (kernel_size - 1) // 2
+
+        # Assuming x is the input activation map
+        entries, classes, length = x.size()
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+
+        # Fill the spread_output tensor
+        for i in range(0, length):
+            spread_output[:, :, i + pad_left: i + pad_left + kernel_size] += x[:, :, i:i + 1]
+
+        spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
+
+        return spread_output
 
 import torch
 
