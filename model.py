@@ -378,7 +378,7 @@ class Encoder(nn.Module):
 
     def get_pro_emb(self, id, id_frags_list, seq_frag_tuple, emb_frags, overlap):
         # print(seq_frag_tuple)
-        print('emb_frag', emb_frags.shape)
+        # print('emb_frag', emb_frags.shape)
         emb_pro_list=[]
         for id_protein in id:
             ind_frag=0
@@ -510,7 +510,7 @@ class Encoder(nn.Module):
             if self.combine:
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
-                print('emb_pro', emb_pro.shape)
+                # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
                 # print(classification_head.shape)
                 # print(classification_head)
