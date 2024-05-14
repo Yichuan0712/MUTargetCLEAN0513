@@ -19,7 +19,7 @@ encoder:
 
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 decoder:
-  type: "CNN" #"CNN" "linear"
+  type: "cnn" #"CNN" "linear"
   cnn_channel: 8
   cnn_kernel: 14
   droprate: 0.3
