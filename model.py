@@ -427,9 +427,6 @@ class Encoder(nn.Module):
             motif_pro_list.append(motif_pro) #[batch,num_class]
         
         motif_pro_list=torch.stack(motif_pro_list, dim=0)
-        print(motif_pro_list.shape)
-        print(motif_pro_list)
-        exit(0)
         return motif_pro_list
     
     
@@ -513,6 +510,9 @@ class Encoder(nn.Module):
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
+                print(classification_head.shape)
+                print(classification_head)
+                exit(0)
         
         #print(motif_logits[0,0,:])
         #print(motif_logits.shape)
