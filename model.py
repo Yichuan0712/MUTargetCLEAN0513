@@ -231,6 +231,7 @@ class ParallelCNNDecoders(nn.Module):
         ])
     
     def forward(self, x):
+        # 这 检查格式
         decoder_outputs=[]
         motif_index=0
         for decoder in self.cnn_decoders:
