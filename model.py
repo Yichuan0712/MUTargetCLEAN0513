@@ -212,6 +212,7 @@ class SimpleCNN(nn.Module):
         print(5, x.shape)
         x = x.squeeze(1)
         print(6, x.shape)
+        exit(0)
         #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
