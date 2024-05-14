@@ -425,6 +425,7 @@ class Encoder(nn.Module):
             motif_pro,_ = torch.max(motif_pro, dim=-1)
             print('-after max', motif_pro.shape) #should be [num_class]
             motif_pro_list.append(motif_pro) #[batch,num_class]
+            exit(0)
         
         motif_pro_list=torch.stack(motif_pro_list, dim=0)
         return motif_pro_list
