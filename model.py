@@ -198,15 +198,24 @@ class SimpleCNN(nn.Module):
         #self.conv_layer.reset_parameters()
     
     def forward(self, x):
+        print(1, x.shape)
         x = self.conv_layer(x)
+        print(2, x.shape)
         # 改这儿
         x = self.dropout(x)
+        print(3, x.shape)
         x = self.conv_layer2(x)
+        print(4, x.shape)
         #x = self.dropout(x)
         #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
+        print(5, x.shape)
         x = x.squeeze(1)
+        print(6, x.shape)
         #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
+        return x
+
+    def activation_spread(self, x):
         return x
 
 import torch
