@@ -406,7 +406,6 @@ class Encoder(nn.Module):
         #motif_logits_max, _ = torch.max(motif_logits, dim=-1, keepdim=True).squeeze(-1) #should be [batch,num_class]
         #print(motif_logits_max)
         motif_pro_list=[]
-        print('id_frags_list', id_frags_list)
         for id_protein in id:
             ind_frag=0
             id_frag = id_protein+"@"+str(ind_frag)
@@ -422,11 +421,10 @@ class Encoder(nn.Module):
                     motif_pro = torch.concatenate((motif_pro[:,:-overlap], overlap_motif, motif_logit[:,overlap:l]), axis=-1)
                 ind_frag+=1
                 id_frag = id_protein+"@"+str(ind_frag)
-            print('-before max', motif_pro.shape) #should be [num_class,length]
+            # print('-before max', motif_pro.shape) #should be [num_class,length]
             motif_pro,_ = torch.max(motif_pro, dim=-1)
-            print('-after max', motif_pro.shape) #should be [num_class]
+            # print('-after max', motif_pro.shape) #should be [num_class]
             motif_pro_list.append(motif_pro) #[batch,num_class]
-            # exit(0)
         
         motif_pro_list=torch.stack(motif_pro_list, dim=0)
         return motif_pro_list
@@ -506,12 +504,11 @@ class Encoder(nn.Module):
                 projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
         else:
             """CASE D"""
-            print('last_hidden_state', last_hidden_state.shape)
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
-            print('motif logits', motif_logits.shape)
             if self.combine:
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
+                print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
                 # print(classification_head.shape)
                 # print(classification_head)
