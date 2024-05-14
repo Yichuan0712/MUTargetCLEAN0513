@@ -238,7 +238,7 @@ class SimpleCNN(nn.Module):
         entries, classes, length = x.size()
         # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
 
-        # spread and x should be in the same device (cuda)
+        # spread_output and x should be in the same device (cuda)
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
 
