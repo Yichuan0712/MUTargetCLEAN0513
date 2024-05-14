@@ -23,7 +23,7 @@ decoder:
   cnn_channel: 8
   cnn_kernel: 14
   droprate: 0.3
-  combine: False
+  combine: True
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
