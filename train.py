@@ -464,7 +464,7 @@ def get_scores(tools, cutoff, n, data_dict):
         result_pro[head,1] = average_precision_score(target, pred)
         result_pro[head,2] = matthews_corrcoef(target, pred>=cutoff)
         result_pro[head,3] = recall_score(target, pred>=cutoff)
-        result_pro[head,4] = precision_score(target, pred>=cutoff)
+        result_pro[head,4] = precision_score(target, pred>=cutoff, zero_division='warn')
         result_pro[head,5] = f1_score(target, pred>=cutoff)
     
     for head in range(n):
