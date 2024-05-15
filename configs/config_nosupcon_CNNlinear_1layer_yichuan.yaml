@@ -65,7 +65,7 @@ optimizer:
   use_8bit_adam: False
   grad_clip_norm: 1
   decay:
-    warmup: 1024
+    warmup: 10 # 1024
     min_lr: 1e-5
     gamma: 0.2
     num_restarts: 1
