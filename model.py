@@ -227,28 +227,28 @@ class SimpleCNN(nn.Module):
         # x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
-    def activation_spread(self, x):
-        if self.kernel_size % 2 == 0:
-            pad_left = (self.kernel_size // 2) - 1
-            pad_right = self.kernel_size // 2
-        else:
-            pad_left = pad_right = (self.kernel_size - 1) // 2
-
-        # x is the input activation map
-        entries, classes, length = x.size()
-        # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
-
-        # spread_output and x should be in the same device (cuda)
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
-
-        # Fill the spread_output tensor
-        for i in range(0, length):
-            spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
-
-        spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
-
-        return spread_output
+    # def activation_spread(self, x):
+    #     if self.kernel_size % 2 == 0:
+    #         pad_left = (self.kernel_size // 2) - 1
+    #         pad_right = self.kernel_size // 2
+    #     else:
+    #         pad_left = pad_right = (self.kernel_size - 1) // 2
+    #
+    #     # x is the input activation map
+    #     entries, classes, length = x.size()
+    #     # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+    #
+    #     # spread_output and x should be in the same device (cuda)
+    #     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    #     spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
+    #
+    #     # Fill the spread_output tensor
+    #     for i in range(0, length):
+    #         spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
+    #
+    #     spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
+    #
+    #     return spread_output
 
 import torch
 
