@@ -180,7 +180,7 @@ def initialize_weights(layer):
 class SimpleCNN(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding, droprate=0.3):
         super(SimpleCNN, self).__init__()
-        # self.kernel_size = kernel_size
+        self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
         self.relu = nn.ReLU()
@@ -207,7 +207,7 @@ class SimpleCNN(nn.Module):
         x = self.conv_layer2(x)
         # print(4, x.shape)
         # print(x)
-        # x = self.activation_spread(x)
+        x = self.activation_spread(x)
         # print(4.1, x.shape)
         # print(x)
         # x = self.dropout(x)
@@ -227,28 +227,28 @@ class SimpleCNN(nn.Module):
         # x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
 
-    # def activation_spread(self, x):
-    #     if self.kernel_size % 2 == 0:
-    #         pad_left = (self.kernel_size // 2) - 1
-    #         pad_right = self.kernel_size // 2
-    #     else:
-    #         pad_left = pad_right = (self.kernel_size - 1) // 2
-    #
-    #     # x is the input activation map
-    #     entries, classes, length = x.size()
-    #     # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
-    #
-    #     # spread_output and x should be in the same device (cuda)
-    #     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    #     spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
-    #
-    #     # Fill the spread_output tensor
-    #     for i in range(0, length):
-    #         spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
-    #
-    #     spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
-    #
-    #     return spread_output
+    def activation_spread(self, x):
+        if self.kernel_size % 2 == 0:
+            pad_left = (self.kernel_size // 2) - 1
+            pad_right = self.kernel_size // 2
+        else:
+            pad_left = pad_right = (self.kernel_size - 1) // 2
+
+        # x is the input activation map
+        entries, classes, length = x.size()
+        # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+
+        # spread_output and x should be in the same device (cuda)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
+
+        # Fill the spread_output tensor
+        for i in range(0, length):
+            spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
+
+        spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
+
+        return spread_output
 
 import torch
 
