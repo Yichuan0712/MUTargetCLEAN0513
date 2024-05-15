@@ -180,7 +180,7 @@ def initialize_weights(layer):
 class SimpleCNN(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, stride, padding, droprate=0.3):
         super(SimpleCNN, self).__init__()
-        self.kernel_size = kernel_size
+        # self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
         self.relu = nn.ReLU()
@@ -207,7 +207,7 @@ class SimpleCNN(nn.Module):
         x = self.conv_layer2(x)
         # print(4, x.shape)
         # print(x)
-        x = self.activation_spread(x)
+        # x = self.activation_spread(x)
         # print(4.1, x.shape)
         # print(x)
         # x = self.dropout(x)
