@@ -242,12 +242,12 @@ class SimpleCNN(nn.Module):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
 
-        print(spread_output.shape)
+        # print(spread_output.shape)
         # Fill the spread_output tensor
         for i in range(0, length):
-            print(i + self.kernel_size)
+            # print(i + self.kernel_size)
             spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
-        exit(0)
+        # exit(0)
 
 
         spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
