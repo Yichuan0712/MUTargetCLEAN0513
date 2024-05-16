@@ -248,8 +248,7 @@ class SimpleCNN(nn.Module):
             print(i + pad_left + self.kernel_size)
             spread_output[:, :, i + pad_left: i + pad_left + self.kernel_size] += x[:, :, i:i + 1]
         exit(0)
-        # for i in range(0, length):
-        #     spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
+
 
         spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
 
