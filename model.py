@@ -245,7 +245,6 @@ class SimpleCNN(nn.Module):
         # print(spread_output.shape)
         # Fill the spread_output tensor
         for i in range(0, length):
-            # print(i + self.kernel_size)
             spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
         # exit(0)
 
@@ -269,9 +268,12 @@ class SimpleCNN(nn.Module):
         spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
 
         # Fill the spread_output tensor
-        for i in range(length):
-            for j in range(self.kernel_size):
-                spread_output[:, :, i + j] = torch.max(spread_output[:, :, i + j], x[:, :, i])
+        # for i in range(length):
+        #     for j in range(self.kernel_size):
+        #         spread_output[:, :, i + j] = torch.max(spread_output[:, :, i + j], x[:, :, i])
+        for i in range(0, length):
+            # print(i + self.kernel_size)
+            spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
 
         # Trim the padding to match the input size
         spread_output = spread_output[:, :, pad_left:-pad_right]
