@@ -245,7 +245,7 @@ class SimpleCNN(nn.Module):
         print(spread_output.shape)
         # Fill the spread_output tensor
         for i in range(0, length):
-            print(i + pad_left + self.kernel_size)
+            print(i + self.kernel_size)
             spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
         exit(0)
 
