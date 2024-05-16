@@ -250,6 +250,30 @@ class SimpleCNN(nn.Module):
 
         return spread_output
 
+    def activation_spread_max(self, x):
+        if self.kernel_size % 2 == 0:
+            pad_left = (self.kernel_size // 2) - 1
+            pad_right = self.kernel_size // 2
+        else:
+            pad_left = pad_right = (self.kernel_size - 1) // 2
+
+        # x is the input activation map
+        entries, classes, length = x.size()
+
+        # Ensure spread_output and x are on the same device (cuda)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
+
+        # Fill the spread_output tensor
+        for i in range(length):
+            for j in range(self.kernel_size):
+                spread_output[:, :, i + pad_left + j] = torch.max(spread_output[:, :, i + pad_left + j], x[:, :, i])
+
+        # Trim the padding to match the input size
+        spread_output = spread_output[:, :, pad_left:length + pad_left]
+
+        return spread_output
+
 import torch
 
 def relu_max(input):
