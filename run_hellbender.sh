@@ -22,6 +22,6 @@ export HF_HOME=/home/yz3qt/data/transformers_cache/
 #--resume_path /cluster/pixstor/xudong-lab/duolin/MUTargetCLEAN/results_supcon_hardTrue_onlysampling/b10_p2_n4/2024-03-28__11-36-17/checkpoints//best_model.pth \
 #--result_path ./results_supcon_hardTrue_onlysampling/b10_p2_n4/run2
 
-python train.py --config_path ./configs/config_nosupcon_CNNlinear_yichuan.yaml \
---result_path ./result_nosupcon/cnnlinear_decoder/cnn2linear_c32_k7_drop0.15
+python train.py --config_path ./configs/config_nosupcon_CNNlinear_yichuan_0517.yaml \
+--result_path ./result_nosupcon/cnnlinear_decoder_optimizer/cnn2linear_wmup128_gma0.2
 #1594176
