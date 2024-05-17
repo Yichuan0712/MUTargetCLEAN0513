@@ -2,7 +2,11 @@
 #SBATCH --mem 50G
 #SBATCH -n 1
 #SBATCH --gres gpu:A100:1
-##SBATCH --time 2-00:00:00 #Time for the job to run
+
+#SBATCH --output=output.log         # 标准输出和错误日志文件
+#SBATCH --error=error.log           # 错误日志文件
+#SBATCH --time=0-00:05:00           # 设置作业运行时间限制为5分钟
+
 #SBATCH --job-name mutarget
 ##SBATCH -p gpu
 ##SBATCH -p xudong-gpu
