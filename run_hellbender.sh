@@ -2,6 +2,9 @@
 #SBATCH --mem 50G
 #SBATCH -n 1
 #SBATCH --gres gpu:A100:1
+
+#SBATCH --error=error.log           # 错误日志文件
+
 #SBATCH --time 2-00:00:00 #Time for the job to run
 #SBATCH --job-name mutarget
 #SBATCH -p gpu
