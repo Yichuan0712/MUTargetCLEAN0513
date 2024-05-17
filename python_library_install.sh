@@ -9,3 +9,6 @@ pip install pytest-shutil
 pip install peft
 pip install transformers==4.38.2
 pip install scikit-learn
+
+pip install tensorboard
+pip install biopython
