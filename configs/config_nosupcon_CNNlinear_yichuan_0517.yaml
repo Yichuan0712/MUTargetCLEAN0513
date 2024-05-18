@@ -25,7 +25,7 @@ decoder:
   combine: False #combine classification and motif? 
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
-  cnn_kernel: 7
+  cnn_kernel: 11
   droprate: 0.15
 
 train_settings:
