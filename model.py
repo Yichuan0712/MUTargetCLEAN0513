@@ -202,7 +202,7 @@ class SimpleCNN(nn.Module):
         # print(1, x.shape)
         x = self.conv_layer(x)
         # print(2, x.shape)
-        # x = self.dropout(x)
+        x = self.dropout(x)
         # print(3, x.shape)
         x = self.conv_layer2(x)
         # print(4, x.shape)
