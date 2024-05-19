@@ -358,6 +358,9 @@ def evaluate_protein(dataloader, tools):
             y_frag = np.array(target_frag_pt.cpu())    #[batch, head, seq]
             x_pro = np.array(classification_head.cpu()) #[sample, n]
             y_pro = np.array(type_protein_pt.cpu()) #[sample, n]
+            print(x_frag.shape)
+            print(x_pro.shape)
+            exit(0)
             for i in range(len(id_frags_list)):
                 id_protein=id_frags_list[i].split('@')[0]
                 j= id_tuple.index(id_protein)
