@@ -456,7 +456,7 @@ def get_scores(tools, cutoff, n, data_dict):
             pred = np.array(x_list)
             target = np.array(y_list)
 
-            writer.writerow([head, pred, target])
+            writer.writerow([head, pred.tolist(), target.tolist()])
 
             # 打印调试信息
             print(f"Head {head}: Predictions = {pred}, Targets = {target}")
