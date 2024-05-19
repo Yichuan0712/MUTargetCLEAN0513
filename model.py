@@ -183,6 +183,8 @@ class SimpleCNN(nn.Module):
         self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
+        self.ln1 = nn.LayerNorm(out_channels)
+        self.ln2 = nn.LayerNorm(out_channels)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=droprate)
         # self.linear = nn.Linear(out_channels, 1)
@@ -201,10 +203,12 @@ class SimpleCNN(nn.Module):
     def forward(self, x):
         # print(1, x.shape)
         x = self.conv_layer(x)
+        x = self.ln1(x)
         # print(2, x.shape)
         x = self.dropout(x)
         # print(3, x.shape)
         x = self.conv_layer2(x)
+        x = self.ln2(x)
         # print(4, x.shape)
         # print(x)
         x = self.activation_spread(x)
