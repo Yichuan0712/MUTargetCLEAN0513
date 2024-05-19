@@ -183,8 +183,8 @@ class SimpleCNN(nn.Module):
         self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
-        self.ln1 = nn.LayerNorm(out_channels)
-        self.ln2 = nn.LayerNorm(out_channels)
+        self.ln1 = nn.BatchNorm1d(out_channels)
+        self.ln2 = nn.BatchNorm1d(out_channels)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=droprate)
         # self.linear = nn.Linear(out_channels, 1)
