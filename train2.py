@@ -456,9 +456,7 @@ def get_scores(tools, cutoff, n, data_dict):
             pred = np.array(x_list)
             target = np.array(y_list)
 
-            # 将 pred 和 target 写入CSV文件
-            for p, t in zip(pred, target):
-                writer.writerow([head, p, t])
+            writer.writerow([head, pred, target])
 
             # 打印调试信息
             print(f"Head {head}: Predictions = {pred}, Targets = {target}")
