@@ -212,7 +212,7 @@ class SimpleCNN(nn.Module):
         # print(x)
         # x = self.dropout(x)
         # x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
-        x, _ = torch.mean(x, dim=1, keepdim=True)  # Max pooling across output channels
+        x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
         # print(5, x.shape)
         x = x.squeeze(1)
         # print(6, x.shape)
