@@ -204,7 +204,7 @@ class SimpleCNN(nn.Module):
         # print(2, x.shape)
         x = self.dropout(x)
         # print(3, x.shape)
-        x = self.conv_layer2(x)
+        # x = self.conv_layer2(x)
         # print(4, x.shape)
         # print(x)
         x = self.activation_spread(x)
