@@ -414,72 +414,71 @@ def evaluate_protein(dataloader, tools):
             customlog(tools["logfilepath"], tem.__repr__())
             # tem.to_csv(tools["logfilepath"],mode='a',sep="\t")
 
-
+import csv
 def get_scores(tools, cutoff, n, data_dict):
     cs_num = np.zeros(n)
     cs_correct = np.zeros(n)
     cs_acc = np.zeros(n)
 
-    # TP_frag=np.zeros(n)
-    # FP_frag=np.zeros(n)
-    # FN_frag=np.zeros(n)
-    # #Intersection over Union (IoU) or Jaccard Index
-    # IoU = np.zeros(n)
-    # Negtive_detect_num=0
-    # Negtive_num=0
-
-    TPR_pro=np.zeros(n)
-    FPR_pro=np.zeros(n)
-    FNR_pro=np.zeros(n)
+    TPR_pro = np.zeros(n)
+    FPR_pro = np.zeros(n)
+    FNR_pro = np.zeros(n)
     IoU_pro = np.zeros(n)
-    # Negtive_detect_pro=0
-    # Negtive_pro=0
-    result_pro=np.zeros([n,6])
+    result_pro = np.zeros([n, 6])
+
+    # 打开CSV文件以追加模式写入
+    with open('pred_target_results.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        # 写入CSV文件头（仅在文件为空时写入）
+        file.seek(0, 2)  # 移动到文件末尾
+        if file.tell() == 0:
+            writer.writerow(['Head', 'Prediction', 'Target'])
+
+        for head in range(n):
+            x_list = []
+            y_list = []
+            for id_protein in data_dict.keys():
+                x_pro = data_dict[id_protein]['type_pred'][head]  # [1]
+                y_pro = data_dict[id_protein]['type_target'][head]  # [1]
+                x_list.append(x_pro)
+                y_list.append(y_pro)
+                if y_pro == 1:
+                    x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
+                    y_frag = data_dict[id_protein]['motif_target_protein'][head]
+                    TPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
+                    FPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 0)) / np.sum(y_frag == 0)
+                    FNR_pro[head] += np.sum((x_frag < cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
+
+                    cs_num[head] += np.sum(y_frag == 1) > 0
+                    if np.sum(y_frag == 1) > 0:
+                        cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
+
+            pred = np.array(x_list)
+            target = np.array(y_list)
+
+            # 将 pred 和 target 写入CSV文件
+            for p, t in zip(pred, target):
+                writer.writerow([head, p, t])
+
+            # 打印调试信息
+            print(f"Head {head}: Predictions = {pred}, Targets = {target}")
+
+            result_pro[head, 0] = roc_auc_score(target, pred)
+            result_pro[head, 1] = average_precision_score(target, pred)
+            result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
+            result_pro[head, 3] = recall_score(target, pred >= cutoff)
+            result_pro[head, 4] = precision_score(target, pred >= cutoff, zero_division='warn')
+            result_pro[head, 5] = f1_score(target, pred >= cutoff)
+
     for head in range(n):
-        x_list=[]
-        y_list=[]
-        for id_protein in data_dict.keys():
-            x_pro = data_dict[id_protein]['type_pred'][head]  #[1]
-            y_pro = data_dict[id_protein]['type_target'][head]  #[1]   
-            x_list.append(x_pro)  
-            y_list.append(y_pro)
-            if y_pro==1:
-                x_frag = data_dict[id_protein]['motif_logits_protein'][head]  #[seq]
-                y_frag = data_dict[id_protein]['motif_target_protein'][head]
-                # Negtive_pro += np.sum(np.max(y)==0)
-                # Negtive_detect_pro += np.sum((np.max(y)==0) * (np.max(x>=cutoff)==1))
-                TPR_pro[head] += np.sum((x_frag>=cutoff) * (y_frag==1))/np.sum(y_frag==1)
-                FPR_pro[head] += np.sum((x_frag>=cutoff) * (y_frag==0))/np.sum(y_frag==0)
-                FNR_pro[head] += np.sum((x_frag<cutoff) * (y_frag==1))/np.sum(y_frag==1)
-                # x_list.append(np.max(x))
-                # y_list.append(np.max(y))
-    
-                cs_num[head] += np.sum(y_frag==1)>0
-                if np.sum(y_frag==1)>0:
-                    cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
-              
-        pred=np.array(x_list)
-        target=np.array(y_list)
-        print(pred)
-        print(target)
-        exit(0)
-        result_pro[head,0] = roc_auc_score(target, pred)
-        result_pro[head,1] = average_precision_score(target, pred)
-        result_pro[head,2] = matthews_corrcoef(target, pred>=cutoff)
-        result_pro[head,3] = recall_score(target, pred>=cutoff)
-        result_pro[head,4] = precision_score(target, pred>=cutoff, zero_division='warn')
-        result_pro[head,5] = f1_score(target, pred>=cutoff)
-    
-    for head in range(n):
-        # IoU[head] = TP_frag[head] / (TP_frag[head] + FP_frag[head] + FN_frag[head])
         IoU_pro[head] = TPR_pro[head] / (TPR_pro[head] + FPR_pro[head] + FNR_pro[head])
         cs_acc[head] = cs_correct[head] / cs_num[head]
-    # FDR_frag = Negtive_detect_num / Negtive_num
-    # FDR_pro = Negtive_detect_pro / Negtive_pro
-    
-    scores={"IoU_pro":IoU_pro, #[n]
-            "result_pro":result_pro, #[n, 6]
-            "cs_acc": cs_acc} #[n]
+
+    scores = {
+        "IoU_pro": IoU_pro,  # [n]
+        "result_pro": result_pro,  # [n, 6]
+        "cs_acc": cs_acc  # [n]
+    }
     return scores
 
 def debug_dataloader(train_loader):
