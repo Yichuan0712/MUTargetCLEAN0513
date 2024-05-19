@@ -598,6 +598,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
           model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
     
     customlog(logfilepath, f"Loading checkpoint from {model_path}\n")
+    model_path = '/content/MUTargetCLEAN0513/best_model_gmma1.pth'
     model_checkpoint = torch.load(model_path, map_location='cpu')
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
     customlog(logfilepath, f"Fold {valid_batch_number} test\n-------------------------------\n")
