@@ -112,6 +112,7 @@ class LocalizationDataset(Dataset):
                 if target_list != better_target_list:
                     print(target_list)
                     print(better_target_list)
+                    print(class_positions)
                     exit(0)
                 # exit(0)
                 # aug_seq_frag_list = [self.random_mutation(sequence,
