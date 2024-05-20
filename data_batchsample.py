@@ -83,48 +83,38 @@ class LocalizationDataset(Dataset):
                 "ER" C
                 "Peroxisome" N/C
                 """
-                target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
-                               in zip(seq_frag_list, target_frag_list)]
-                # class_list = [class_positions[0]]*len(target_list)
-                # print(len(target_list), class_positions, class_list, len(class_list))
-                print(len(target_list), class_positions, len(class_positions))
-                for targets, ptype in zip(target_list, class_positions):
-                    # print(ptype)
-                    if ptype == 1:
-                        for i in range(len(targets) - 1, -1, -1):
-                            if targets[i] == 1:
-                                break
-                            targets[i] = 1
-                    elif ptype == 0 or ptype == 4:
-                        pass
-                    elif ptype == 2:
-                        idx = targets.index(1)
-                        if idx < len(targets) / 2:
-                            targets[:idx] = [1] * idx
-                        else:
-                            targets[idx + 1:] = [1] * (len(targets) - idx - 1)
-                    else:
-                        for i in range(len(targets)):
-                            if targets[i] == 1:
-                                break
-                            targets[i] = 1
+                # target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
+                #                in zip(seq_frag_list, target_frag_list)]
+                # for targets, ptype in zip(target_list, class_positions):
+                #     # print(ptype)
+                #     if ptype == 1:
+                #         for i in range(len(targets) - 1, -1, -1):
+                #             if targets[i] == 1:
+                #                 break
+                #             targets[i] = 1
+                #     elif ptype == 0 or ptype == 4:
+                #         pass
+                #     elif ptype == 2:
+                #         idx = targets.index(1)
+                #         if idx < len(targets) / 2:
+                #             targets[:idx] = [1] * idx
+                #         else:
+                #             targets[idx + 1:] = [1] * (len(targets) - idx - 1)
+                #     else:
+                #         for i in range(len(targets)):
+                #             if targets[i] == 1:
+                #                 break
+                #             targets[i] = 1
 
-                # if target_list != better_target_list:
-                #     print(target_list)
-                #     print(better_target_list)
-                #     print(class_positions)
-                #     print(len(target_list))
-                #     print(class_positions*len(target_list))
-                #     exit(0)
+                aug_seq_frag_list = [self.random_mutation(sequence,
+                                                          [int(max(set(column))) for column in zip(*target)][:len(sequence)],
+                                                          configs.train_settings.data_aug.mutation_rate)
+                                     for sequence, target in zip(seq_frag_list, target_frag_list)]
 
                 # aug_seq_frag_list = [self.random_mutation(sequence,
-                #                                           [int(max(set(column))) for column in zip(*target)][:len(sequence)],
+                #                                           target,
                 #                                           configs.train_settings.data_aug.mutation_rate)
-                #                      for sequence, target in zip(seq_frag_list, target_frag_list)]
-                aug_seq_frag_list = [self.random_mutation(sequence,
-                                                          target,
-                                                          configs.train_settings.data_aug.mutation_rate)
-                                     for sequence, target in zip(seq_frag_list, target_list)]
+                #                      for sequence, target in zip(seq_frag_list, target_list)]
                 aug_target_frag_list = target_frag_list
                 aug_type_protein = type_protein
                 aug_samples.append((aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
