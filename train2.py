@@ -435,7 +435,7 @@ def get_scores(tools, cutoff, n, data_dict):
         # 写入CSV文件头（仅在文件为空时写入）
         file.seek(0, 2)  # 移动到文件末尾
         if file.tell() == 0:
-            writer.writerow(['ID', 'Head', 'Prediction', 'Target'])
+            writer.writerow(['ID', 'Head', 'x_pro', 'y_pro', 'x_frag', 'y_frag'])
 
         for head in range(n):
             x_list = []
@@ -445,7 +445,8 @@ def get_scores(tools, cutoff, n, data_dict):
                 y_pro = data_dict[id_protein]['type_target'][head]  # [1]
                 x_list.append(x_pro)
                 y_list.append(y_pro)
-                writer.writerow([id_protein, head, data_dict[id_protein]['motif_logits_protein'][head].tolist(), data_dict[id_protein]['motif_target_protein'][head].tolist()])
+                writer.writerow([id_protein, head, x_pro, y_pro, data_dict[id_protein]['motif_logits_protein'][head].tolist(),
+                                 data_dict[id_protein]['motif_target_protein'][head].tolist()])
                 if y_pro == 1:
                     x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
                     y_frag = data_dict[id_protein]['motif_target_protein'][head]
