@@ -73,7 +73,11 @@ class LocalizationDataset(Dataset):
             #print(class_weights)
             #print(type_protein)
             #print(np.max([class_weights[x] for x in class_positions]))
-            per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times*np.max([class_weights[x] for x in class_positions])))])
+            per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times
+                                              *np.max([class_weights[x] for x in class_positions]))
+                                      )])
+            print(per_times)
+            # exit(0)
             for aug_i in range(per_times):
                 aug_id = id+"_"+str(aug_i)
                 aug_id_frag_list = [aug_id+"@"+id_frag.split("@")[1] for id_frag in id_frag_list]
