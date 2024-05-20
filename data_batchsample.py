@@ -85,9 +85,9 @@ class LocalizationDataset(Dataset):
                 """
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
-                # print(target_list)
+                print(class_positions)
                 better_target_list = []
-                for targets, ptype in zip(target_list, class_positions*len(target_list)):
+                for targets, ptype in zip(target_list, class_positions):
                     # print(ptype)
                     if ptype == 1:
                         for i in range(len(targets) - 1, -1, -1):
@@ -109,14 +109,14 @@ class LocalizationDataset(Dataset):
                             targets[i] = 1
                     better_target_list.append(targets)
 
-                if target_list != better_target_list:
-                    print(target_list)
-                    print(better_target_list)
-                    print(class_positions)
-                    print(len(target_list))
-                    print(class_positions*len(target_list))
-                    exit(0)
-                # exit(0)
+                # if target_list != better_target_list:
+                #     print(target_list)
+                #     print(better_target_list)
+                #     print(class_positions)
+                #     print(len(target_list))
+                #     print(class_positions*len(target_list))
+                #     exit(0)
+
                 # aug_seq_frag_list = [self.random_mutation(sequence,
                 #                                           [int(max(set(column))) for column in zip(*target)][:len(sequence)],
                 #                                           configs.train_settings.data_aug.mutation_rate)
