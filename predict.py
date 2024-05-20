@@ -4,7 +4,7 @@ import argparse
 import os
 import yaml
 import numpy as np
-from model0520 import *
+from model import *
 from utils import *
 import pandas as pd
 from torch.utils.data import Dataset
