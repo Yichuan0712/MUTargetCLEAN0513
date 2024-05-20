@@ -493,7 +493,7 @@ def get_scores(tools, cutoff, n, data_dict):
 
     # 保存 scores 和 results_df 到 pickle 文件
     with open('results.pkl', 'wb') as file:
-        pickle.dump((scores, results_df), file)
+        pickle.dump(results_df, file)
 
     return scores
 # def get_scores(tools, cutoff, n, data_dict):
