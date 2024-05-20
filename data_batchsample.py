@@ -107,7 +107,8 @@ class LocalizationDataset(Dataset):
                                 break
                             targets[i] = 1
                     better_target_list.append(targets)
-                print(len(better_target_list))
+                print(target_list)
+                print(better_target_list)
                 exit(0)
                 # aug_seq_frag_list = [self.random_mutation(sequence,
                 #                                           [int(max(set(column))) for column in zip(*target)][:len(sequence)],
