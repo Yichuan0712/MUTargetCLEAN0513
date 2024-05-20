@@ -113,6 +113,7 @@ class LocalizationDataset(Dataset):
                     print(target_list)
                     print(better_target_list)
                     print(class_positions)
+                    print(len(target_list))
                     print(class_positions*len(target_list))
                     exit(0)
                 # exit(0)
