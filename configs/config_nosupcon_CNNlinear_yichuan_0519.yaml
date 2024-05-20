@@ -1,6 +1,3 @@
-# cuda: 0
-# training num_epoch: 20
-
 fix_seed: 0
 checkpoints_every: 16
 result_path: ./results_supcon
@@ -41,7 +38,7 @@ train_settings:
   log_every: 30
   data_aug:
     enable: True
-    per_times: 10
+    per_times: 5
     add_original: False
     mutation_rate: 0.3
   
