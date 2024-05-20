@@ -554,6 +554,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
        encoder, start_epoch = load_checkpoints(configs, optimizer, scheduler, logfilepath, encoder)
 
     # w=(torch.ones([9,1,1])*5).to(configs.train_settings.device)
+    # 这
     w = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
     #debug_dataloader(dataloaders_dict["train"]) #936 after call dataloaders_dict['train']
     
