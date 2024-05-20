@@ -447,7 +447,7 @@ def get_scores(tools, cutoff, n, data_dict):
                 y_list.append(y_pro)
                 print(id_protein)
                 if id_protein=='Q9U943':
-                    print(***)
+                    print('***')
                 print(id_protein, head, x_pro, y_pro, data_dict[id_protein]['motif_logits_protein'][head].tolist(),
                       data_dict[id_protein]['motif_target_protein'][head])
 
