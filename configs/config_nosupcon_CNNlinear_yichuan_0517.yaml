@@ -39,11 +39,6 @@ train_settings:
   dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
-#  data_aug:
-#    enable: False
-#    per_times: 10
-#    add_original: False
-#    mutation_rate: 0.3
   
 
 
@@ -71,7 +66,7 @@ optimizer:
   decay:
     warmup: 128
     min_lr: 1e-5
-    gamma: 0.95 # 0.2
+    gamma: 1 # 0.2
     num_restarts: 1
     first_cycle_steps: null  #null before
   mode: cosine #skip, cosine
