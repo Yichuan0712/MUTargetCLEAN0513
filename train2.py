@@ -7,7 +7,7 @@ import yaml
 import numpy as np
 # import torchmetrics
 from time import time
-from model0520 import *
+from model import *
 from utils import *
 from sklearn.metrics import roc_auc_score,average_precision_score,matthews_corrcoef,recall_score,precision_score,f1_score
 import pandas as pd
@@ -18,8 +18,8 @@ pd.set_option('display.max_columns', None)
 from loss import SupConHardLoss
 from utils import prepare_tensorboard
 from data_clean import prepare_dataloaders as prepare_dataloader_clean 
-from data_batchsample0520 import prepare_dataloaders as prepare_dataloader_batchsample
-from model0520 import MaskedLMDataCollator
+from data_batchsample import prepare_dataloaders as prepare_dataloader_batchsample
+from model import MaskedLMDataCollator
 
 def loss_fix(id_frag, motif_logits, target_frag, tools):
     #id_frag [batch]
