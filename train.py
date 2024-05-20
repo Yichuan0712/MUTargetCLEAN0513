@@ -155,8 +155,15 @@ def train_loop(tools, configs, warm_starting,train_writer):
             class_loss = -1
             position_loss=-1
             if not warm_starting:
+                # print('target_frag_pt', target_frag_pt.shape)
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
+
+                # print('motif_logits', motif_logits.shape)
+                # print(motif_logits)
+                # print('target_frag', target_frag.shape)
+                # print(target_frag)
+
                 position_loss = tools['loss_function'](
                                 motif_logits, 
                                 target_frag.to(tools['train_device']))
@@ -167,6 +174,8 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 if configs.train_settings.data_aug.enable:
                     class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                 else:
+                    # print(type_protein_pt.shape)
+                    # exit(0)
                     class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
                 
                 train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
@@ -256,7 +265,7 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             #position_loss = torch.mean(position_loss * class_weights.to(tools['valid_device']))
             
             if configs.train_settings.data_aug.enable:
-               class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
+                class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
             else:
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
             
@@ -455,7 +464,7 @@ def get_scores(tools, cutoff, n, data_dict):
         result_pro[head,1] = average_precision_score(target, pred)
         result_pro[head,2] = matthews_corrcoef(target, pred>=cutoff)
         result_pro[head,3] = recall_score(target, pred>=cutoff)
-        result_pro[head,4] = precision_score(target, pred>=cutoff)
+        result_pro[head,4] = precision_score(target, pred>=cutoff, zero_division='warn')
         result_pro[head,5] = f1_score(target, pred>=cutoff)
     
     for head in range(n):
@@ -545,6 +554,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
        encoder, start_epoch = load_checkpoints(configs, optimizer, scheduler, logfilepath, encoder)
 
     # w=(torch.ones([9,1,1])*5).to(configs.train_settings.device)
+    # 这
     w = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
     #debug_dataloader(dataloaders_dict["train"]) #936 after call dataloaders_dict['train']
     

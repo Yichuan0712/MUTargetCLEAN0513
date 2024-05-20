@@ -178,13 +178,14 @@ def initialize_weights(layer):
         nn.init.zeros_(layer.bias)  # Initialize biases to zero
 
 class SimpleCNN(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, stride, padding,droprate=0.3):
+    def __init__(self, in_channels, out_channels, kernel_size, stride, padding, droprate=0.3):
         super(SimpleCNN, self).__init__()
+        self.kernel_size = kernel_size
         self.conv_layer = nn.Conv1d(in_channels, out_channels, kernel_size, stride, padding)
         self.conv_layer2 = nn.Conv1d(out_channels, out_channels, kernel_size, stride, padding)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=droprate)
-        #self.linear = nn.Linear(out_channels, 1)
+        # self.linear = nn.Linear(out_channels, 1)
         """
         #Initialize weights from a uniform distribution within the specified range
         weight_range = torch.sqrt(torch.tensor(1.0 / in_channels))  # Range for weight initialization
@@ -193,20 +194,71 @@ class SimpleCNN(nn.Module):
         # Initialize biases to zeros
         nn.init.zeros_(self.conv_layer.bias)
         """
-        #self.conv_layer.apply(initialize_weights)
+        # self.conv_layer.apply(initialize_weights)
         # Use nn.Linear's default initialization for conv1d weights
-        #self.conv_layer.reset_parameters()
+        # self.conv_layer.reset_parameters()
     
     def forward(self, x):
         x = self.conv_layer(x)
         x = self.dropout(x)
         x = self.conv_layer2(x)
-        #x = self.dropout(x)
-        #x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
+        x = self.activation_spread(x)
+        # x = self.dropout(x)
+        # x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels
         x = x.squeeze(1)
-        #x  = self.linear(x.permute(0,2,1)).squeeze(-1)
+        # x  = self.linear(x.permute(0,2,1)).squeeze(-1)
         return x
+
+    def activation_spread(self, x):
+        if self.kernel_size % 2 == 0:
+            pad_left = (self.kernel_size // 2) - 1
+            pad_right = self.kernel_size // 2
+        else:
+            pad_left = pad_right = (self.kernel_size - 1) // 2
+
+        # x is the input activation map
+        entries, classes, length = x.size()
+        # spread_output = torch.zeros((entries, classes, length + pad_left + pad_right))
+
+        # spread_output and x should be in the same device (cuda)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
+
+        # print(spread_output.shape)
+        # Fill the spread_output tensor
+        for i in range(0, length):
+            spread_output[:, :, i: i + self.kernel_size] += x[:, :, i:i + 1]
+        # exit(0)
+
+
+        spread_output = spread_output[:, :, pad_left:-pad_right]  # Trim padding
+
+        return spread_output
+
+    def activation_spread_max(self, x):
+        if self.kernel_size % 2 == 0:
+            pad_left = (self.kernel_size // 2) - 1
+            pad_right = self.kernel_size // 2
+        else:
+            pad_left = pad_right = (self.kernel_size - 1) // 2
+
+        # x is the input activation map
+        entries, classes, length = x.size()
+
+        # Ensure spread_output and x are on the same device (cuda)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        spread_output = torch.zeros((entries, classes, length + pad_left + pad_right), device=device)
+
+        # Fill the spread_output tensor
+        for i in range(length):
+            for j in range(self.kernel_size):
+                spread_output[:, :, i + j] = torch.max(spread_output[:, :, i + j].clone(), x[:, :, i])
+
+        # Trim the padding to match the input size
+        spread_output = spread_output[:, :, pad_left:-pad_right]
+
+        return spread_output
 
 import torch
 
@@ -377,6 +429,7 @@ class Encoder(nn.Module):
 
     def get_pro_emb(self, id, id_frags_list, seq_frag_tuple, emb_frags, overlap):
         # print(seq_frag_tuple)
+        # print('emb_frag', emb_frags.shape)
         emb_pro_list=[]
         for id_protein in id:
             ind_frag=0
@@ -401,7 +454,7 @@ class Encoder(nn.Module):
         emb_pro_list=torch.stack(emb_pro_list, dim=0)
         return emb_pro_list
     
-    def get_pro_class(self, id, id_frags_list, seq_frag_tuple, motif_logits,overlap):
+    def get_pro_class(self, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         #motif_logits_max, _ = torch.max(motif_logits, dim=-1, keepdim=True).squeeze(-1) #should be [batch,num_class]
         #print(motif_logits_max)
         motif_pro_list=[]
@@ -420,9 +473,9 @@ class Encoder(nn.Module):
                     motif_pro = torch.concatenate((motif_pro[:,:-overlap], overlap_motif, motif_logit[:,overlap:l]), axis=-1)
                 ind_frag+=1
                 id_frag = id_protein+"@"+str(ind_frag)
-            #print('-before max', motif_pro.shape) #should be [num_class,length]
+            # print('-before max', motif_pro.shape) #should be [num_class,length]
             motif_pro,_ = torch.max(motif_pro, dim=-1)
-            #print('-after max', motif_pro.shape) #should be [num_class]
+            # print('-after max', motif_pro.shape) #should be [num_class]
             motif_pro_list.append(motif_pro) #[batch,num_class]
         
         motif_pro_list=torch.stack(motif_pro_list, dim=0)
@@ -503,12 +556,16 @@ class Encoder(nn.Module):
                 projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
         else:
             """CASE D"""
+
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
-            #print(motif_logits.shape)
             if self.combine:
                 classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
+                # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
+                # print(classification_head.shape)
+                # print(classification_head)
+                # exit(0)
         
         #print(motif_logits[0,0,:])
         #print(motif_logits.shape)
