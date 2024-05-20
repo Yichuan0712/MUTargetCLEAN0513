@@ -26,5 +26,5 @@ export HF_HOME=/home/yz3qt/data/transformers_cache/
 #--result_path ./results_supcon_hardTrue_onlysampling/b10_p2_n4/run2
 
 python train.py --config_path ./configs/config_nosupcon_CNNlinear_yichuan_0519.yaml \
---result_path ./result_nosupcon/cnnlinear_decoder_optimizer/cnn2linear_aug
+--result_path ./result_nosupcon/cnnlinear_decoder_optimizer/cnn2linear_aug_gma0.2
 #1594176
