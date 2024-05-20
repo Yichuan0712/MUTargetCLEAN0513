@@ -30,7 +30,7 @@ decoder:
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 10
+  num_epochs: 50
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
