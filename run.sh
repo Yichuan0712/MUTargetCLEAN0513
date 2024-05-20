@@ -9,7 +9,7 @@ python train.py --config_path ./config_supcon.yaml
 
 
 python train.py --config_path ./configs/config_supcon_onlysampling.yaml --result_path ./results_supcon_hardTrue_pft2
-#this was wrong! use supcon's data sampling method but didn't calculate supcon loss becuase in train.py set 
+#this was wrong! use supcon's data sampling method but didn't calculate supcon loss becuase in train0520.py set
 #to calculate supcon loss only if configs.supcon.apply and warm_starting:  already changed this but still need to see this performance!
 #in config add one additional parameter if configs.supcon.apply and configs.apply_supcon_loss: will apply the supcon loss
 #this provide apply supcon sampling without supcon loss for previous old mutarget loss!
@@ -31,7 +31,7 @@ python train.py --config_path ./config_supcon.yaml
 
 
 python train.py --config_path ./configs/config_supcon_onlysampling.yaml --result_path ./results_supcon_hardTrue_pft2
-#this was wrong! use supcon's data sampling method but didn't calculate supcon loss becuase in train.py set 
+#this was wrong! use supcon's data sampling method but didn't calculate supcon loss becuase in train0520.py set
 #to calculate supcon loss only if configs.supcon.apply and warm_starting:  already changed this but still need to see this performance!
 #in config add one additional parameter if configs.supcon.apply and configs.apply_supcon_loss: will apply the supcon loss
 #this provide apply supcon sampling without supcon loss for previous old mutarget loss!

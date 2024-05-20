@@ -358,9 +358,6 @@ def evaluate_protein(dataloader, tools):
             y_frag = np.array(target_frag_pt.cpu())    #[batch, head, seq]
             x_pro = np.array(classification_head.cpu()) #[sample, n]
             y_pro = np.array(type_protein_pt.cpu()) #[sample, n]
-            # print(x_frag.shape)
-            # print(x_pro.shape)
-            # exit(0)
             for i in range(len(id_frags_list)):
                 id_protein=id_frags_list[i].split('@')[0]
                 j= id_tuple.index(id_protein)
@@ -417,220 +414,70 @@ def evaluate_protein(dataloader, tools):
             customlog(tools["logfilepath"], tem.__repr__())
             # tem.to_csv(tools["logfilepath"],mode='a',sep="\t")
 
-# import csv
-import pickle
+
 def get_scores(tools, cutoff, n, data_dict):
     cs_num = np.zeros(n)
     cs_correct = np.zeros(n)
     cs_acc = np.zeros(n)
 
-    TPR_pro = np.zeros(n)
-    FPR_pro = np.zeros(n)
-    FNR_pro = np.zeros(n)
+    # TP_frag=np.zeros(n)
+    # FP_frag=np.zeros(n)
+    # FN_frag=np.zeros(n)
+    # #Intersection over Union (IoU) or Jaccard Index
+    # IoU = np.zeros(n)
+    # Negtive_detect_num=0
+    # Negtive_num=0
+
+    TPR_pro=np.zeros(n)
+    FPR_pro=np.zeros(n)
+    FNR_pro=np.zeros(n)
     IoU_pro = np.zeros(n)
-    result_pro = np.zeros([n, 6])
-
-    results_list = []
-
+    # Negtive_detect_pro=0
+    # Negtive_pro=0
+    result_pro=np.zeros([n,6])
     for head in range(n):
-        x_list = []
-        y_list = []
+        x_list=[]
+        y_list=[]
         for id_protein in data_dict.keys():
-            x_pro = data_dict[id_protein]['type_pred'][head]  # [1]
-            y_pro = data_dict[id_protein]['type_target'][head]  # [1]
-            x_list.append(x_pro)
+            x_pro = data_dict[id_protein]['type_pred'][head]  #[1]
+            y_pro = data_dict[id_protein]['type_target'][head]  #[1]   
+            x_list.append(x_pro)  
             y_list.append(y_pro)
-            # print(id_protein)
-            # if id_protein == 'Q9U943':
-            #     print('***')
-            # print(id_protein, head, x_pro, y_pro, data_dict[id_protein]['motif_logits_protein'][head].tolist(),
-            #       data_dict[id_protein]['motif_target_protein'][head])
-
-            results_list.append({
-                'ID': id_protein,
-                'Head': head,
-                'x_pro': x_pro,
-                'y_pro': y_pro,
-                'x_frag': data_dict[id_protein]['motif_logits_protein'][head].tolist(),
-                'y_frag': data_dict[id_protein]['motif_target_protein'][head].tolist()
-            })
-
-            if y_pro == 1:
-                x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
+            if y_pro==1:
+                x_frag = data_dict[id_protein]['motif_logits_protein'][head]  #[seq]
                 y_frag = data_dict[id_protein]['motif_target_protein'][head]
-                TPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-                FPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 0)) / np.sum(y_frag == 0)
-                FNR_pro[head] += np.sum((x_frag < cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-
-                cs_num[head] += np.sum(y_frag == 1) > 0
-                if np.sum(y_frag == 1) > 0:
+                # Negtive_pro += np.sum(np.max(y)==0)
+                # Negtive_detect_pro += np.sum((np.max(y)==0) * (np.max(x>=cutoff)==1))
+                TPR_pro[head] += np.sum((x_frag>=cutoff) * (y_frag==1))/np.sum(y_frag==1)
+                FPR_pro[head] += np.sum((x_frag>=cutoff) * (y_frag==0))/np.sum(y_frag==0)
+                FNR_pro[head] += np.sum((x_frag<cutoff) * (y_frag==1))/np.sum(y_frag==1)
+                # x_list.append(np.max(x))
+                # y_list.append(np.max(y))
+    
+                cs_num[head] += np.sum(y_frag==1)>0
+                if np.sum(y_frag==1)>0:
                     cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
-
-        pred = np.array(x_list)
-        target = np.array(y_list)
-
-        print(f"Head {head}: Predictions = {pred}, Targets = {target}")
-
-        result_pro[head, 0] = roc_auc_score(target, pred)
-        result_pro[head, 1] = average_precision_score(target, pred)
-        result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
-        result_pro[head, 3] = recall_score(target, pred >= cutoff)
-        result_pro[head, 4] = precision_score(target, pred >= cutoff, zero_division='warn')
-        result_pro[head, 5] = f1_score(target, pred >= cutoff)
-
+              
+        pred=np.array(x_list)
+        target=np.array(y_list)
+        result_pro[head,0] = roc_auc_score(target, pred)
+        result_pro[head,1] = average_precision_score(target, pred)
+        result_pro[head,2] = matthews_corrcoef(target, pred>=cutoff)
+        result_pro[head,3] = recall_score(target, pred>=cutoff)
+        result_pro[head,4] = precision_score(target, pred>=cutoff, zero_division='warn')
+        result_pro[head,5] = f1_score(target, pred>=cutoff)
+    
     for head in range(n):
+        # IoU[head] = TP_frag[head] / (TP_frag[head] + FP_frag[head] + FN_frag[head])
         IoU_pro[head] = TPR_pro[head] / (TPR_pro[head] + FPR_pro[head] + FNR_pro[head])
         cs_acc[head] = cs_correct[head] / cs_num[head]
-
-    scores = {
-        "IoU_pro": IoU_pro,  # [n]
-        "result_pro": result_pro,  # [n, 6]
-        "cs_acc": cs_acc  # [n]
-    }
-
-    # 将结果转换为 DataFrame
-    results_df = pd.DataFrame(results_list)
-
-    # 保存 scores 和 results_df 到 pickle 文件
-    with open('results.pkl', 'wb') as file:
-        pickle.dump(results_df, file)
-
+    # FDR_frag = Negtive_detect_num / Negtive_num
+    # FDR_pro = Negtive_detect_pro / Negtive_pro
+    
+    scores={"IoU_pro":IoU_pro, #[n]
+            "result_pro":result_pro, #[n, 6]
+            "cs_acc": cs_acc} #[n]
     return scores
-# def get_scores(tools, cutoff, n, data_dict):
-#     cs_num = np.zeros(n)
-#     cs_correct = np.zeros(n)
-#     cs_acc = np.zeros(n)
-#
-#     TPR_pro = np.zeros(n)
-#     FPR_pro = np.zeros(n)
-#     FNR_pro = np.zeros(n)
-#     IoU_pro = np.zeros(n)
-#     result_pro = np.zeros([n, 6])
-#
-#     # 打开CSV文件以追加模式写入
-#     with open('pred_target_results.csv', mode='a', newline='') as file:
-#         writer = csv.writer(file)
-#         # 写入CSV文件头（仅在文件为空时写入）
-#         file.seek(0, 2)  # 移动到文件末尾
-#         if file.tell() == 0:
-#             writer.writerow(['ID', 'Head', 'x_pro', 'y_pro', 'x_frag', 'y_frag'])
-#
-#         for head in range(n):
-#             x_list = []
-#             y_list = []
-#             for id_protein in data_dict.keys():
-#                 x_pro = data_dict[id_protein]['type_pred'][head]  # [1]
-#                 y_pro = data_dict[id_protein]['type_target'][head]  # [1]
-#                 x_list.append(x_pro)
-#                 y_list.append(y_pro)
-#                 print(id_protein)
-#                 if id_protein=='Q9U943':
-#                     print('***')
-#                 print(id_protein, head, x_pro, y_pro, data_dict[id_protein]['motif_logits_protein'][head].tolist(),
-#                       data_dict[id_protein]['motif_target_protein'][head])
-#
-#                 writer.writerow([id_protein, head, x_pro, y_pro, data_dict[id_protein]['motif_logits_protein'][head].tolist(),
-#                                  data_dict[id_protein]['motif_target_protein'][head].tolist()])
-#                 if y_pro == 1:
-#                     x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
-#                     y_frag = data_dict[id_protein]['motif_target_protein'][head]
-#                     TPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-#                     FPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 0)) / np.sum(y_frag == 0)
-#                     FNR_pro[head] += np.sum((x_frag < cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-#
-#                     cs_num[head] += np.sum(y_frag == 1) > 0
-#                     if np.sum(y_frag == 1) > 0:
-#                         cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
-#
-#             pred = np.array(x_list)
-#             target = np.array(y_list)
-#
-#             # writer.writerow([head, pred.tolist(), target.tolist()])
-#
-#             # 打印调试信息
-#             print(f"Head {head}: Predictions = {pred}, Targets = {target}")
-#
-#             result_pro[head, 0] = roc_auc_score(target, pred)
-#             result_pro[head, 1] = average_precision_score(target, pred)
-#             result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
-#             result_pro[head, 3] = recall_score(target, pred >= cutoff)
-#             result_pro[head, 4] = precision_score(target, pred >= cutoff, zero_division='warn')
-#             result_pro[head, 5] = f1_score(target, pred >= cutoff)
-#
-#     for head in range(n):
-#         IoU_pro[head] = TPR_pro[head] / (TPR_pro[head] + FPR_pro[head] + FNR_pro[head])
-#         cs_acc[head] = cs_correct[head] / cs_num[head]
-#
-#     scores = {
-#         "IoU_pro": IoU_pro,  # [n]
-#         "result_pro": result_pro,  # [n, 6]
-#         "cs_acc": cs_acc  # [n]
-#     }
-#     return scores
-# def get_scores(tools, cutoff, n, data_dict):
-#     cs_num = np.zeros(n)
-#     cs_correct = np.zeros(n)
-#     cs_acc = np.zeros(n)
-#
-#     TPR_pro = np.zeros(n)
-#     FPR_pro = np.zeros(n)
-#     FNR_pro = np.zeros(n)
-#     IoU_pro = np.zeros(n)
-#     result_pro = np.zeros([n, 6])
-#
-#     # 打开CSV文件以追加模式写入
-#     with open('pred_target_results.csv', mode='a', newline='') as file:
-#         writer = csv.writer(file)
-#         # 写入CSV文件头（仅在文件为空时写入）
-#         file.seek(0, 2)  # 移动到文件末尾
-#         if file.tell() == 0:
-#             writer.writerow(['ID', 'Head', 'Prediction', 'Target'])
-#
-#         for head in range(n):
-#             x_list = []
-#             y_list = []
-#             for id_protein in data_dict.keys():
-#                 x_pro = data_dict[id_protein]['type_pred'][head]  # [1]
-#                 y_pro = data_dict[id_protein]['type_target'][head]  # [1]
-#                 x_list.append(x_pro)
-#                 y_list.append(y_pro)
-#                 writer.writerow([id_protein, head, x_pro, y_pro])
-#                 if y_pro == 1:
-#                     x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
-#                     y_frag = data_dict[id_protein]['motif_target_protein'][head]
-#                     TPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-#                     FPR_pro[head] += np.sum((x_frag >= cutoff) * (y_frag == 0)) / np.sum(y_frag == 0)
-#                     FNR_pro[head] += np.sum((x_frag < cutoff) * (y_frag == 1)) / np.sum(y_frag == 1)
-#
-#                     cs_num[head] += np.sum(y_frag == 1) > 0
-#                     if np.sum(y_frag == 1) > 0:
-#                         cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
-#
-#             pred = np.array(x_list)
-#             target = np.array(y_list)
-#
-#             # writer.writerow([head, pred.tolist(), target.tolist()])
-#
-#             # 打印调试信息
-#             print(f"Head {head}: Predictions = {pred}, Targets = {target}")
-#
-#             result_pro[head, 0] = roc_auc_score(target, pred)
-#             result_pro[head, 1] = average_precision_score(target, pred)
-#             result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
-#             result_pro[head, 3] = recall_score(target, pred >= cutoff)
-#             result_pro[head, 4] = precision_score(target, pred >= cutoff, zero_division='warn')
-#             result_pro[head, 5] = f1_score(target, pred >= cutoff)
-#
-#     for head in range(n):
-#         IoU_pro[head] = TPR_pro[head] / (TPR_pro[head] + FPR_pro[head] + FNR_pro[head])
-#         cs_acc[head] = cs_correct[head] / cs_num[head]
-#
-#     scores = {
-#         "IoU_pro": IoU_pro,  # [n]
-#         "result_pro": result_pro,  # [n, 6]
-#         "cs_acc": cs_acc  # [n]
-#     }
-#     return scores
 
 def debug_dataloader(train_loader):
     for batch in train_loader:
@@ -654,21 +501,21 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         torch.manual_seed(configs.fix_seed)
         torch.random.manual_seed(configs.fix_seed)
         np.random.seed(configs.fix_seed)
-
+    
     torch.cuda.empty_cache()
     curdir_path, result_path, checkpoint_path, logfilepath = prepare_saving_dir(configs,args.config_path)
-
+    
     train_writer, valid_writer = prepare_tensorboard(result_path)
     npz_file = os.path.join(curdir_path, "targetp_data.npz")
     seq_file = os.path.join(curdir_path, "idmapping_2023_08_25.tsv")
-
+    
     customlog(logfilepath, f'use k-fold index: {valid_batch_number}\n')
-
+    
     if configs.train_settings.dataloader=="batchsample":
         dataloaders_dict = prepare_dataloader_batchsample(configs, valid_batch_number, test_batch_number)
     elif configs.train_settings.dataloader=="clean":
             dataloaders_dict = prepare_dataloader_clean(configs, valid_batch_number, test_batch_number)
-
+    
     #debug_dataloader(dataloaders_dict["train"]) #981
     customlog(logfilepath, "Done Loading data\n")
     customlog(logfilepath, f'number of steps for training data: {len(dataloaders_dict["train"])}\n')
@@ -685,7 +532,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
        masked_lm_data_collator = MaskedLMDataCollator(tokenizer, mlm_probability=configs.train_settings.MLM.mask_ratio)
     else:
        masked_lm_data_collator=None
-
+    
     """
     #for debug
     config_path = "/data/duolin/MUTargetCLEAN/MUTarget-main/config.yaml"
@@ -707,13 +554,14 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
        encoder, start_epoch = load_checkpoints(configs, optimizer, scheduler, logfilepath, encoder)
 
     # w=(torch.ones([9,1,1])*5).to(configs.train_settings.device)
+    # 这
     w = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
     #debug_dataloader(dataloaders_dict["train"]) #936 after call dataloaders_dict['train']
-
+    
     tools = {
         'frag_overlap': configs.encoder.frag_overlap,
         'cutoffs': configs.predict_settings.cutoffs,
-        'composition': configs.encoder.composition,
+        'composition': configs.encoder.composition, 
         'max_len': configs.encoder.max_len,
         'tokenizer': tokenizer,
         'prm4prmpro': configs.encoder.prm4prmpro,
@@ -741,17 +589,91 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'num_classes': configs.encoder.num_classes,
         'masked_lm_data_collator': masked_lm_data_collator,
     }
+    if args.predict !=1:
+        customlog(logfilepath, f'number of train steps per epoch: {len(tools["train_loader"])}\n')
+        customlog(logfilepath, "Start training...\n")
+        
+        best_valid_loss = np.inf
+        global global_step
+        global_step=0
+        if configs.train_settings.dataloader=="clean":
+           total_steps_per_epoch = int(len(tools["train_loader"].dataset.samples)/configs.train_settings.batch_size)
+        
+        for epoch in range(start_epoch, configs.train_settings.num_epochs + 1):
+            warm_starting = False
+            if epoch < configs.supcon.warm_start:
+                warm_starting = True
+                if epoch ==0:
+                   print('== Warm Start Began    ==')
+                   customlog(logfilepath,f"== Warm Start Began ==\n")
+        
+        
+            if epoch == configs.supcon.warm_start:
+                best_valid_loss = np.inf #reset best_valid_loss when warmend ends
+                warm_starting = False
+                print('== Warm Start Finished ==')
+                customlog(logfilepath,f"== Warm Start Finished ==\n")
+        
+            tools['epoch'] = epoch
+            if (configs.train_settings.dataloader == "clean" and global_step % total_steps_per_epoch == 0) or configs.train_settings.dataloader != "clean":
+               print(f"Fold {valid_batch_number} Epoch {epoch}\n-------------------------------")
+               customlog(logfilepath, f"Fold {valid_batch_number} Epoch {epoch} train...\n-------------------------------\n")
+            
+            start_time = time()
+            train_loss = train_loop(tools, configs, warm_starting,train_writer)
+            if configs.train_settings.dataloader != "clean":
+               if configs.train_settings.data_aug.enable:
+                   tools['train_loader'].dataset.samples = tools['train_loader'].dataset.data_aug_train(tools['train_loader'].dataset.original_samples,configs,tools['train_loader'].dataset.class_weights)
+            else: #clean 
+               if configs.train_settings.data_aug.enable and global_step % total_steps_per_epoch==0:
+                  tools['train_loader'].dataset.samples = tools['train_loader'].dataset.data_aug_train(tools['train_loader'].dataset.original_samples,configs,tools['train_loader'].dataset.class_weights)
+            
+            train_writer.add_scalar('epoch loss',train_loss,global_step=epoch)
+            end_time = time()
+        
+        
+            if epoch % configs.valid_settings.do_every == 0 and epoch != 0:
+                customlog(logfilepath, f'Epoch {epoch}: train loss: {train_loss:>5f}\n')
+                print(f'Epoch {epoch}: train loss: {train_loss:>5f}\n')
+                print(f"Fold {valid_batch_number} Epoch {epoch} validation...\n-------------------------------\n")
+                customlog(logfilepath, f"Fold {valid_batch_number} Epoch {epoch} validation...\n-------------------------------\n")
+                start_time = time()
+                dataloader = tools["valid_loader"]
+                
+                valid_loss,valid_class_loss,valid_position_loss = test_loop(tools, dataloader,train_writer,valid_writer,configs) #In test loop, never test supcon loss
+                
+                valid_writer.add_scalar('epoch loss',valid_loss,global_step=epoch)
+                valid_writer.add_scalar('epoch class_loss',valid_class_loss,global_step=epoch)
+                valid_writer.add_scalar('epoch position_loss',valid_position_loss,global_step=epoch)
+                customlog(logfilepath,f'Epoch {epoch}: valid loss:{valid_loss:>5f}\n')
+                customlog(logfilepath,f'Epoch {epoch}: valid_class_loss:{valid_class_loss:>5f}\tvalid_position_loss:{valid_position_loss:>5f}\n')
+                print(f'Epoch {epoch}: valid loss:{valid_loss:>5f}\n')
+                print(f'Epoch {epoch}: valid_class_loss:{valid_class_loss:>5f}\tvalid_position_loss:{valid_position_loss:>5f}\n')
+                end_time = time()
+            
+        
+                if warm_starting: #in warm_starting only supcon loss, and train_loss
+                  if train_loss < best_valid_loss:
+                    customlog(logfilepath, f"Epoch {epoch}: train loss {train_loss} smaller than best loss {best_valid_loss}\n-------------------------------\n")
+                    best_valid_loss = train_loss
+                    model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+                    customlog(logfilepath, f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
+                    save_checkpoint(epoch, model_path, tools)
+                else:
+                  if valid_loss < best_valid_loss:
+                    customlog(logfilepath, f"Epoch {epoch}: valid loss {valid_loss} smaller than best loss {best_valid_loss}\n-------------------------------\n")
+                    best_valid_loss = valid_loss
+                    model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+                    customlog(logfilepath, f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
+                    save_checkpoint(epoch, model_path, tools)
+    
     if args.predict==1:
-       # if os.path.exists(configs.resume.resume_path):
-       #    model_path = configs.resume.resume_path
-       # else:
-       #    model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
-        pass
-    model_path = '/content/MUTargetCLEAN0513/best_model_gmma1.pth'
-    # print(tools)
-    # exit(0)
+       if os.path.exists(configs.resume.resume_path):
+          model_path = configs.resume.resume_path
+       else:
+          model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    
     customlog(logfilepath, f"Loading checkpoint from {model_path}\n")
-    # model_path = '/content/MUTargetCLEAN0513/best_model_gmma1.pth'
     model_checkpoint = torch.load(model_path, map_location='cpu')
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
     customlog(logfilepath, f"Fold {valid_batch_number} test\n-------------------------------\n")

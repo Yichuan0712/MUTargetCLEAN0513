@@ -26,7 +26,7 @@ class LocalizationDataset(Dataset):
         if mode == "train" and configs.train_settings.data_aug.enable:
            self.data_aug = True
            samples = self.data_aug_train(samples,configs,self.class_weights)
-        
+
         self.samples = samples
         #print(samples[0:2]) #same as original
         self.apply_supcon = configs.supcon.apply
@@ -34,7 +34,7 @@ class LocalizationDataset(Dataset):
            self.n_pos = configs.supcon.n_pos
            self.n_neg = configs.supcon.n_neg
            self.hard_neg = configs.supcon.hard_neg
-    
+
     #"""
     def random_mutation(self,sequence,target,mutation_rate):
         amino_acids = "ACDEFGHIKLMNPQRSTVWY"  # List of standard amino acids
@@ -51,7 +51,7 @@ class LocalizationDataset(Dataset):
                 # Ensure the mutated amino acid is different from the original
                 new_aa = random.choice([aa for aa in amino_acids if aa != seq_list[pos]])
                 seq_list[pos] = new_aa
-            
+
             # Join the mutated amino acids back into a sequence
             mutated_sequence = ''.join(seq_list)
             #print(sequence)
@@ -60,30 +60,71 @@ class LocalizationDataset(Dataset):
         else:
            return sequence
     #"""
-    
+
     def data_aug_train(self,samples,configs,class_weights):
         print("data aug on len of "+str(len(samples)))
         aug_samples=[]
-        
+
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             if configs.train_settings.data_aug.add_original:
-               aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein)) #add original 
-            
+               aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein)) #add original
+
             class_positions = np.where(type_protein == 1)[0]
             #print(class_weights)
             #print(type_protein)
             #print(np.max([class_weights[x] for x in class_positions]))
-            per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times*np.max([class_weights[x] for x in class_positions])))])
+            per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times
+                                              *np.max([class_weights[x] for x in class_positions]))
+                                      )])
+            # print(per_times)
+            # exit(0)
             for aug_i in range(per_times):
                 aug_id = id+"_"+str(aug_i)
                 aug_id_frag_list = [aug_id+"@"+id_frag.split("@")[1] for id_frag in id_frag_list]
-                aug_seq_frag_list = [self.random_mutation(sequence,[int(max(set(column))) for column in zip(*target)][:len(sequence)],configs.train_settings.data_aug.mutation_rate) for sequence,target in zip(seq_frag_list,target_frag_list)]
+
+                """
+                "Mitochondrion","SIGNAL", "chloroplast", "Thylakoid" N
+                "ER" C
+                "Peroxisome" N/C
+                """
+                # target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
+                #                in zip(seq_frag_list, target_frag_list)]
+                # for targets, ptype in zip(target_list, [class_positions[0]]*len(target_list)):
+                #     # print(ptype)
+                #     if ptype == 1:
+                #         for i in range(len(targets) - 1, -1, -1):
+                #             if targets[i] == 1:
+                #                 break
+                #             targets[i] = 1
+                #     elif ptype == 0 or ptype == 4:
+                #         pass
+                #     elif ptype == 2:
+                #         idx = targets.index(1)
+                #         if idx < len(targets) / 2:
+                #             targets[:idx] = [1] * idx
+                #         else:
+                #             targets[idx + 1:] = [1] * (len(targets) - idx - 1)
+                #     else:
+                #         for i in range(len(targets)):
+                #             if targets[i] == 1:
+                #                 break
+                #             targets[i] = 1
+                # aug_seq_frag_list = [self.random_mutation(sequence,
+                #                                           target,
+                #                                           configs.train_settings.data_aug.mutation_rate)
+                #                      for sequence, target in zip(seq_frag_list, target_list)]
+
+                aug_seq_frag_list = [self.random_mutation(sequence,
+                                                          [int(max(set(column))) for column in zip(*target)][:len(sequence)],
+                                                          configs.train_settings.data_aug.mutation_rate)
+                                     for sequence, target in zip(seq_frag_list, target_frag_list)]
+
                 aug_target_frag_list = target_frag_list
                 aug_type_protein = type_protein
                 aug_samples.append((aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
-        
+
         return aug_samples
-    
+
     @staticmethod
     def count_samples_by_class(n, samples):
         """Count the number of samples for each class."""
@@ -93,10 +134,10 @@ class LocalizationDataset(Dataset):
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             class_counts += type_protein
         return class_counts
-    
+
     def __len__(self):
            return len(self.samples)
-        
+
     def __getitem__(self, idx):
         #print(idx)
         id, id_frag_list, seq_frag_list, target_frag_list, type_protein = self.samples[idx]
@@ -151,7 +192,7 @@ class LocalizationDataset(Dataset):
         filtered_samples = [sample for idx, sample in enumerate(self.samples) if idx != anchor_idx]
         anchor_type_protein = self.samples[anchor_idx][4] #class
         if self.hard_neg:
-            hneg = self.hard_mining(anchor_type_protein) #similiar 
+            hneg = self.hard_mining(anchor_type_protein) #similiar
             neg_samples = [sample for sample in filtered_samples if
                            np.any(np.logical_and(hneg == 1, sample[4] == 1))]
         else:
@@ -310,7 +351,7 @@ def prepare_samples(csv_file, configs):
                 # motif_left = motif.split("|")[0].split(":")[0].split("-")[0]
                 motif_left = motif.split(":")[0].split("-")[0]
                 motif_right = motif.split(":")[0].split("-")[1]
-                
+
                 motif_left, motif_right, type_protein, targets = fix_sample(motif_left, motif_right, label, label2idx, type_protein, targets)
                 if label in label2idx:
                     index_row = label2idx[label]
@@ -325,7 +366,7 @@ def prepare_samples(csv_file, configs):
                         targets[index_row, motif_left] = 1
                     elif label == "Nucleus" or label == "Nucleus_export":
                         targets[index_row, motif_left:motif_right] = 1
-        
+
         id_frag_list, seq_frag_list, target_frag_list = split_protein_sequence(prot_id, seq, targets, configs)
         samples.append((prot_id, id_frag_list, seq_frag_list, target_frag_list, type_protein))
         # for j in range(len(fragments)):
@@ -346,11 +387,6 @@ def prepare_dataloaders(configs, valid_batch_number, test_batch_number):
         samples.extend(prepare_samples("./parsed_EC7_v3/ANIMALS_uniprot.csv", configs))
         samples.extend(prepare_samples("./parsed_EC7_v3/FUNGI_uniprot.csv", configs))
         cv = pd.read_csv("./parsed_EC7_v3/split/type/partition.csv")
-    elif configs.train_settings.dataset == 'v4':
-        samples = prepare_samples("./parsed_v4/PLANTS_uniprot.csv", configs)
-        samples.extend(prepare_samples("./parsed_v4/ANIMALS_uniprot.csv", configs))
-        samples.extend(prepare_samples("./parsed_v4/FUNGI_uniprot.csv", configs))
-        cv = pd.read_csv("./parsed_v4/partition.csv")
 
     train_id = []
     val_id = []

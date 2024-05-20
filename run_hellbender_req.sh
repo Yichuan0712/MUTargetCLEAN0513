@@ -22,7 +22,7 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-#python train.py --config_path ./configs/config_supcon_onlysampling.yaml \
+#python train0520.py --config_path ./configs/config_supcon_onlysampling.yaml \
 #--resume_path /cluster/pixstor/xudong-lab/duolin/MUTargetCLEAN/results_supcon_hardTrue_onlysampling/b10_p2_n4/2024-03-28__11-36-17/checkpoints//best_model.pth \
 #--result_path ./results_supcon_hardTrue_onlysampling/b10_p2_n4/run2
 
