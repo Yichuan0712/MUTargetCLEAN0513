@@ -417,7 +417,7 @@ def evaluate_protein(dataloader, tools):
             customlog(tools["logfilepath"], tem.__repr__())
             # tem.to_csv(tools["logfilepath"],mode='a',sep="\t")
 
-import csv
+# import csv
 import pickle
 def get_scores(tools, cutoff, n, data_dict):
     cs_num = np.zeros(n)
