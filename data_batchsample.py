@@ -85,8 +85,8 @@ class LocalizationDataset(Dataset):
                 """
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
-                print(len(target_list), class_positions, len(class_positions))
-                better_target_list = []
+                class_list = [class_positions[aug_i]]*len(target_list)
+                print(len(target_list), class_list, len(class_list))
                 for targets, ptype in zip(target_list, class_positions):
                     # print(ptype)
                     if ptype == 1:
@@ -107,7 +107,6 @@ class LocalizationDataset(Dataset):
                             if targets[i] == 1:
                                 break
                             targets[i] = 1
-                    better_target_list.append(targets)
 
                 # if target_list != better_target_list:
                 #     print(target_list)
