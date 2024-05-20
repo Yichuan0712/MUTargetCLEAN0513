@@ -358,9 +358,9 @@ def evaluate_protein(dataloader, tools):
             y_frag = np.array(target_frag_pt.cpu())    #[batch, head, seq]
             x_pro = np.array(classification_head.cpu()) #[sample, n]
             y_pro = np.array(type_protein_pt.cpu()) #[sample, n]
-            print(x_frag.shape)
-            print(x_pro.shape)
-            exit(0)
+            # print(x_frag.shape)
+            # print(x_pro.shape)
+            # exit(0)
             for i in range(len(id_frags_list)):
                 id_protein=id_frags_list[i].split('@')[0]
                 j= id_tuple.index(id_protein)
@@ -435,7 +435,7 @@ def get_scores(tools, cutoff, n, data_dict):
         # 写入CSV文件头（仅在文件为空时写入）
         file.seek(0, 2)  # 移动到文件末尾
         if file.tell() == 0:
-            writer.writerow(['Head', 'Prediction', 'Target'])
+            writer.writerow(['ID', 'Head', 'Prediction', 'Target'])
 
         for head in range(n):
             x_list = []
@@ -445,6 +445,7 @@ def get_scores(tools, cutoff, n, data_dict):
                 y_pro = data_dict[id_protein]['type_target'][head]  # [1]
                 x_list.append(x_pro)
                 y_list.append(y_pro)
+                writer.writerow([id_protein, head, x_pro, y_pro])
                 if y_pro == 1:
                     x_frag = data_dict[id_protein]['motif_logits_protein'][head]  # [seq]
                     y_frag = data_dict[id_protein]['motif_target_protein'][head]
@@ -459,7 +460,7 @@ def get_scores(tools, cutoff, n, data_dict):
             pred = np.array(x_list)
             target = np.array(y_list)
 
-            writer.writerow([head, pred.tolist(), target.tolist()])
+            # writer.writerow([head, pred.tolist(), target.tolist()])
 
             # 打印调试信息
             print(f"Head {head}: Predictions = {pred}, Targets = {target}")
