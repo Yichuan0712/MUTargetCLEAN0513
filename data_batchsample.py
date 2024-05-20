@@ -86,7 +86,7 @@ class LocalizationDataset(Dataset):
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
                 for targets, ptype in zip(target_list, class_positions):
-                    print(ptype)
+                    # print(ptype)
                     if ptype == 1:
                         print(targets)
                     elif ptype == 0 or ptype == 4:
