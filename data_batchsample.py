@@ -112,6 +112,7 @@ class LocalizationDataset(Dataset):
                 if target_list != better_target_list:
                     print(target_list)
                     print(better_target_list)
+                    print(class_positions)
                     print(class_positions*len(target_list))
                     exit(0)
                 # exit(0)
