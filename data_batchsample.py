@@ -89,6 +89,7 @@ class LocalizationDataset(Dataset):
                     # print(ptype)
                     if ptype == 1:
                         print(targets)
+                        exit(0)
                     elif ptype == 0 or ptype == 4:
                         pass
 
