@@ -88,11 +88,17 @@ class LocalizationDataset(Dataset):
                 for targets, ptype in zip(target_list, class_positions):
                     # print(ptype)
                     if ptype == 1:
-                        print(targets)
-                        exit(0)
+                        for i in range(len(targets) - 1, -1, -1):
+                            if targets[i] == 1:
+                                break
+                            targets[i] = 1
+                    # print(targets)
+                    # exit(0)
                     elif ptype == 0 or ptype == 4:
                         pass
-
+                    elif ptype == 2:
+                        print(targets)
+                        exit(0)
 
                 aug_seq_frag_list = [self.random_mutation(sequence,
                                                           [int(max(set(column))) for column in zip(*target)][:len(sequence)],
