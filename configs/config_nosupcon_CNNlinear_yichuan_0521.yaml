@@ -39,7 +39,7 @@ train_settings:
   data_aug:
     enable: True
     per_times: 5
-    add_original: False
+    add_original: True
     mutation_rate: 0.3
   MLM:
     enable: True
