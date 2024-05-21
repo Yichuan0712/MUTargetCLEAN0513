@@ -657,6 +657,10 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
                     model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
                     customlog(logfilepath, f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
                     save_checkpoint(epoch, model_path, tools)
+
+            if epoch % configs.checkpoints_every == 0 and epoch != 0:
+                model_path = os.path.join(tools['checkpoint_path'], f'checkpoint_{epoch}.pth')
+                save_checkpoint(epoch, model_path, tools)
     
     if args.predict==1:
        if os.path.exists(configs.resume.resume_path):
