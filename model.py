@@ -202,7 +202,7 @@ class SimpleCNN(nn.Module):
         x = self.conv_layer(x)
         x = self.dropout(x)
         x = self.conv_layer2(x)
-        # x = self.activation_spread(x)
+        x = self.activation_spread(x)
         # x = self.dropout(x)
         # x = self.relu(x)  #relu cannot be used with sigmoid!!! smallest will be 0.5
         x, _ = torch.max(x, dim=1, keepdim=True)  # Max pooling across output channels

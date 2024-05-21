@@ -70,7 +70,7 @@ optimizer:
   decay:
     warmup: 1024
     min_lr: 1e-5
-    gamma: 0.2
+    gamma: 0.9
     num_restarts: 1
     first_cycle_steps: null  #null before
   mode: cosine #skip, cosine
