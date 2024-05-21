@@ -27,7 +27,7 @@ decoder:
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 100
+  num_epochs: 15
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
@@ -41,7 +41,6 @@ train_settings:
     per_times: 5
     add_original: False
     mutation_rate: 0.3
-
   MLM:
     enable: True
     mask_ratio: 0.1
