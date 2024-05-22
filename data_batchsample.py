@@ -69,10 +69,6 @@ class LocalizationDataset(Dataset):
             if configs.train_settings.data_aug.add_original:
                 aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
 
-            if id == 'H9D1R1':
-                print(", ".join(map(str, target_frag_list[0][1])))
-                exit(0)
-
             class_positions = np.where(type_protein == 1)[0]
             # print(class_weights)
             # print(type_protein)
@@ -84,22 +80,22 @@ class LocalizationDataset(Dataset):
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
 
 
-                # aug_target_frag_list = target_frag_list.copy()
-                #
-                # if len(aug_target_frag_list) == 1:
-                #     if 1 in aug_target_frag_list[0][1]:
-                #         # print(len(aug_target_frag_list[0][1]))
-                #         # print(aug_target_frag_list[0][1])
-                #         print(id)
-                #         print(", ".join(map(str, aug_target_frag_list[0][1])))
-                #         for i in range(len(aug_target_frag_list[0][1]) - 1, -1, -1):
-                #             if aug_target_frag_list[0][1][i] == 1:
-                #                 break
-                #             aug_target_frag_list[0][1][i] = 1
-                #         # print(aug_target_frag_list[0][1])
-                #         # print(", ".join(map(str, aug_target_frag_list[0][1])))
-                #         print()
-                #         print()
+                aug_target_frag_list = target_frag_list.copy()
+
+                if len(aug_target_frag_list) == 1:
+                    if 1 in aug_target_frag_list[0][1]:
+                        # print(len(aug_target_frag_list[0][1]))
+                        # print(aug_target_frag_list[0][1])
+                        print(id)
+                        print(", ".join(map(str, aug_target_frag_list[0][1])))
+                        for i in range(len(aug_target_frag_list[0][1]) - 1, -1, -1):
+                            if aug_target_frag_list[0][1][i] == 1:
+                                break
+                            aug_target_frag_list[0][1][i] = 1
+                        # print(aug_target_frag_list[0][1])
+                        # print(", ".join(map(str, aug_target_frag_list[0][1])))
+                        print()
+                        print()
 
 
 
