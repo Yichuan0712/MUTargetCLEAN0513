@@ -78,11 +78,12 @@ class LocalizationDataset(Dataset):
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
-                if aug_id == 'H9D1R1':
+                if id == 'H9D1R1':
                     print(", ".join(map(str, target_frag_list[0][1])))
                     exit(0)
-                # aug_target_frag_list = target_frag_list.copy()
 
+                # aug_target_frag_list = target_frag_list.copy()
+                #
                 # if len(aug_target_frag_list) == 1:
                 #     if 1 in aug_target_frag_list[0][1]:
                 #         # print(len(aug_target_frag_list[0][1]))
@@ -97,21 +98,7 @@ class LocalizationDataset(Dataset):
                 #         # print(", ".join(map(str, aug_target_frag_list[0][1])))
                 #         print()
                 #         print()
-                #     elif (1 in aug_target_frag_list[0][0]) or (1 in aug_target_frag_list[0][4]):
-                #         pass
-                #     elif 2 in aug_target_frag_list[0][2]:
-                #         idx = aug_target_frag_list[0][2].index(1)
-                #         if idx < len(aug_target_frag_list[0][2]) / 2:
-                #             aug_target_frag_list[0][2][:idx] = [1] * idx
-                #         else:
-                #             aug_target_frag_list[0][2][idx + 1:] = [1] * (len(aug_target_frag_list[0][2]) - idx - 1)
-                    #
-                    #
-                    # else:
-                    #     for i in range(len(targets)):
-                    #         if targets[i] == 1:
-                    #             break
-                    #         targets[i] = 1
+
 
 
 
