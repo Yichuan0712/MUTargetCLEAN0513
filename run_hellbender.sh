@@ -25,6 +25,6 @@ export HF_HOME=/home/yz3qt/data/transformers_cache/
 #--resume_path /cluster/pixstor/xudong-lab/duolin/MUTargetCLEAN/results_supcon_hardTrue_onlysampling/b10_p2_n4/2024-03-28__11-36-17/checkpoints//best_model.pth \
 #--result_path ./results_supcon_hardTrue_onlysampling/b10_p2_n4/run2
 
-python train.py --config_path ./configs/config_nosupcon_CNNlinear_yichuan_0522.yaml \
+python train.py --config_path ./configs/config_nosupcon_CNNlinear_v4_yichuan_0522.yaml \
 --result_path ./result_nosupcon/0522
 #1594176
