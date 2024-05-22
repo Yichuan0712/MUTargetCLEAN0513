@@ -61,20 +61,19 @@ class LocalizationDataset(Dataset):
            return sequence
     #"""
 
-    def data_aug_train(self,samples,configs,class_weights):
+    def data_aug_train(self, samples, configs, class_weights):
         print("data aug on len of "+str(len(samples)))
-        aug_samples=[]
-
+        aug_samples = []
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             if configs.train_settings.data_aug.add_original:
                aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein)) #add original
 
             class_positions = np.where(type_protein == 1)[0]
-            print(len(target_frag_list[0]))
-            exit(0)
-            # print(type_protein)
+            # print(len(target_frag_list[0]))
+            # exit(0)
+            # # print(type_protein)
             #print(np.max([class_weights[x] for x in class_positions]))
-            per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times*np.max([class_weights[x] for x in class_positions])))])
+            per_times = np.max([2, int(np.ceil(configs.train_settings.data_aug.per_times*np.max([class_weights[x] for x in class_positions])))])
             for aug_i in range(per_times):
                 aug_id = id+"_"+str(aug_i)
                 aug_id_frag_list = [aug_id+"@"+id_frag.split("@")[1] for id_frag in id_frag_list]
@@ -84,6 +83,10 @@ class LocalizationDataset(Dataset):
                 "ER" C
                 "Peroxisome" N/C
                 """
+
+                print(seq_frag_list.shape())
+                exit(0)
+
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
                 for targets, ptype in zip(target_list, [class_positions[0]]*len(target_list)):
