@@ -390,19 +390,28 @@ def evaluate_protein(dataloader, tools):
 
         customlog(tools["logfilepath"], f"===========================================\n")
         customlog(tools["logfilepath"], f" Jaccard Index (protein): \n")
+        print(f"===========================================\n")
+        print(f" Jaccard Index (protein): \n")
         IoU_pro_difcut=pd.DataFrame(IoU_pro_difcut,columns=cutoffs,index=classname)
         customlog(tools["logfilepath"], IoU_pro_difcut.__repr__())
+        print(IoU_pro_difcut.__repr__())
         # IoU_pro_difcut.to_csv(tools["logfilepath"],mode='a',sep="\t")
         customlog(tools["logfilepath"], f"===========================================\n")
+        print(f"===========================================\n")
         # customlog(tools["logfilepath"], f"===========================================\n")
         customlog(tools["logfilepath"], f" cs acc: \n")
+        print(f" cs acc: \n")
         cs_acc_difcut=pd.DataFrame(cs_acc_difcut,columns=cutoffs,index=classname)
         customlog(tools["logfilepath"], cs_acc_difcut.__repr__())
+        print(cs_acc_difcut.__repr__())
         customlog(tools["logfilepath"], f"===========================================\n")
+        print(f"===========================================\n")
         for i in range(len(classname)):
             customlog(tools["logfilepath"], f" Class prediction performance ({classname[i]}): \n")
+            print(f" Class prediction performance ({classname[i]}): \n")
             tem = pd.DataFrame(result_pro_difcut[i],columns=cutoffs,index=criteria)
             customlog(tools["logfilepath"], tem.__repr__())
+            print(tem.__repr__())
             # tem.to_csv(tools["logfilepath"],mode='a',sep="\t")
 
 
