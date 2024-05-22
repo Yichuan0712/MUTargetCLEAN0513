@@ -659,8 +659,8 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
                     save_checkpoint(epoch, model_path, tools)
 
             if epoch % configs.checkpoints_every == 0 and epoch != 0:
-                model_path = os.path.join(tools['checkpoint_path'], f'checkpoint_{epoch}.pth')
-                save_checkpoint(epoch, model_path, tools)
+                model_path_every = os.path.join(tools['checkpoint_path'], f'checkpoint_{epoch}.pth')
+                save_checkpoint(epoch, model_path_every, tools)
     
     if args.predict==1:
        if os.path.exists(configs.resume.resume_path):
