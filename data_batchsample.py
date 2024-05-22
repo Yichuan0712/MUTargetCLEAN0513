@@ -70,7 +70,7 @@ class LocalizationDataset(Dataset):
                aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein)) #add original
 
             class_positions = np.where(type_protein == 1)[0]
-            print(type(target_frag_list))
+            print(len(target_frag_list))
             exit(0)
             # print(type_protein)
             #print(np.max([class_weights[x] for x in class_positions]))
