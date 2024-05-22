@@ -80,6 +80,9 @@ class LocalizationDataset(Dataset):
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
                 aug_target_frag_list = target_frag_list.copy()
                 print(len(aug_target_frag_list))
+                if len(aug_target_frag_list)==2:
+                    print(len(aug_target_frag_list[0]), len(aug_target_frag_list[1]))
+                    exit(0)
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
                                          configs.train_settings.data_aug.mutation_rate) for sequence, target in
