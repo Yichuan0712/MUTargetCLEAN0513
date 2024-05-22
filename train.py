@@ -419,13 +419,16 @@ def get_scores(tools, cutoff, n, data_dict):
     # Negtive_detect_num=0
     # Negtive_num=0
 
-    TPR_pro=np.zeros(n)
-    FPR_pro=np.zeros(n)
-    FNR_pro=np.zeros(n)
+    TPR_pro = np.zeros(n)
+    FPR_pro = np.zeros(n)
+    FNR_pro = np.zeros(n)
     IoU_pro = np.zeros(n)
     # Negtive_detect_pro=0
     # Negtive_pro=0
-    result_pro=np.zeros([n,6])
+    result_pro = np.zeros([n, 6])
+
+    results_list = []
+
     for head in range(n):
         x_list = []
         y_list = []
@@ -434,6 +437,16 @@ def get_scores(tools, cutoff, n, data_dict):
             y_pro = data_dict[id_protein]['type_target'][head]  #[1]   
             x_list.append(x_pro)  
             y_list.append(y_pro)
+
+            results_list.append({
+                'ID': id_protein,
+                'Head': head,
+                'x_pro': x_pro,
+                'y_pro': y_pro,
+                'x_frag': data_dict[id_protein]['motif_logits_protein'][head].tolist(),
+                'y_frag': data_dict[id_protein]['motif_target_protein'][head].tolist()
+            })
+
             if y_pro==1:
                 x_frag = data_dict[id_protein]['motif_logits_protein'][head]  #[seq]
                 y_frag = data_dict[id_protein]['motif_target_protein'][head]
@@ -465,9 +478,17 @@ def get_scores(tools, cutoff, n, data_dict):
     # FDR_frag = Negtive_detect_num / Negtive_num
     # FDR_pro = Negtive_detect_pro / Negtive_pro
     
-    scores={"IoU_pro":IoU_pro, #[n]
-            "result_pro":result_pro, #[n, 6]
-            "cs_acc": cs_acc} #[n]
+    scores = {
+        "IoU_pro": IoU_pro,  # [n]
+        "result_pro": result_pro,  # [n, 6]
+        "cs_acc": cs_acc  # [n]
+    }
+
+    import pickle
+    results_df = pd.DataFrame(results_list)
+    with open('pro_frag.pkl', 'wb') as file:
+        pickle.dump(results_df, file)
+
     return scores
 
 def debug_dataloader(train_loader):
