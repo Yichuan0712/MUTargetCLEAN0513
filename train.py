@@ -427,8 +427,8 @@ def get_scores(tools, cutoff, n, data_dict):
     # Negtive_pro=0
     result_pro=np.zeros([n,6])
     for head in range(n):
-        x_list=[]
-        y_list=[]
+        x_list = []
+        y_list = []
         for id_protein in data_dict.keys():
             x_pro = data_dict[id_protein]['type_pred'][head]  #[1]
             y_pro = data_dict[id_protein]['type_target'][head]  #[1]   
