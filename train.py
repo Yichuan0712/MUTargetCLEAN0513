@@ -462,14 +462,14 @@ def get_scores(tools, cutoff, n, data_dict):
                 if np.sum(y_frag==1)>0:
                     cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
               
-        pred=np.array(x_list)
-        target=np.array(y_list)
-        result_pro[head,0] = roc_auc_score(target, pred)
-        result_pro[head,1] = average_precision_score(target, pred)
-        result_pro[head,2] = matthews_corrcoef(target, pred>=cutoff)
-        result_pro[head,3] = recall_score(target, pred>=cutoff)
-        result_pro[head,4] = precision_score(target, pred>=cutoff, zero_division='warn')
-        result_pro[head,5] = f1_score(target, pred>=cutoff)
+        pred = np.array(x_list)
+        target = np.array(y_list)
+        result_pro[head, 0] = roc_auc_score(target, pred)
+        result_pro[head, 1] = average_precision_score(target, pred)
+        result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
+        result_pro[head, 3] = recall_score(target, pred >= cutoff)
+        result_pro[head, 4] = precision_score(target, pred >= cutoff, zero_division='warn')
+        result_pro[head, 5] = f1_score(target, pred >= cutoff)
     
     for head in range(n):
         # IoU[head] = TP_frag[head] / (TP_frag[head] + FP_frag[head] + FN_frag[head])
