@@ -373,15 +373,20 @@ def prepare_samples(csv_file, configs):
 def prepare_dataloaders(configs, valid_batch_number, test_batch_number):
     # id_to_seq = prot_id_to_seq(seq_file)
     if configs.train_settings.dataset == 'v2':
-        samples = prepare_samples("./parsed_v4/PLANTS_uniprot.csv", configs)
-        samples.extend(prepare_samples("./parsed_v4/ANIMALS_uniprot.csv", configs))
-        samples.extend(prepare_samples("./parsed_v4/FUNGI_uniprot.csv", configs))
-        cv = pd.read_csv("./parsed_v4/split/type/partition.csv")
+        samples = prepare_samples("./parsed_EC7_v2/PLANTS_uniprot.csv", configs)
+        samples.extend(prepare_samples("./parsed_EC7_v2/ANIMALS_uniprot.csv", configs))
+        samples.extend(prepare_samples("./parsed_EC7_v2/FUNGI_uniprot.csv", configs))
+        cv = pd.read_csv("./parsed_EC7_v2/split/type/partition.csv")
     elif configs.train_settings.dataset == 'v3':
         samples = prepare_samples("./parsed_EC7_v3/PLANTS_uniprot.csv", configs)
         samples.extend(prepare_samples("./parsed_EC7_v3/ANIMALS_uniprot.csv", configs))
         samples.extend(prepare_samples("./parsed_EC7_v3/FUNGI_uniprot.csv", configs))
         cv = pd.read_csv("./parsed_EC7_v3/split/type/partition.csv")
+    if configs.train_settings.dataset == 'v4':
+        samples = prepare_samples("./parsed_v4/PLANTS_uniprot.csv", configs)
+        samples.extend(prepare_samples("./parsed_v4/ANIMALS_uniprot.csv", configs))
+        samples.extend(prepare_samples("./parsed_v4/FUNGI_uniprot.csv", configs))
+        cv = pd.read_csv("./parsed_v4/partition.csv")
 
     train_id = []
     val_id = []
