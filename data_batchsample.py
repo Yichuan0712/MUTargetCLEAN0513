@@ -72,7 +72,7 @@ class LocalizationDataset(Dataset):
             class_positions = np.where(type_protein == 1)[0]
             print(class_positions)
             print(type_protein)
-            exit(0)
+            # exit(0)
             #print(np.max([class_weights[x] for x in class_positions]))
             per_times = np.max([2,int(np.ceil(configs.train_settings.data_aug.per_times*np.max([class_weights[x] for x in class_positions])))])
             for aug_i in range(per_times):
@@ -84,6 +84,10 @@ class LocalizationDataset(Dataset):
                 "ER" C
                 "Peroxisome" N/C
                 """
+                for targets, ptype in zip(target_list, class_positions):
+                    print(targets)
+                    print(ptype)
+                exit(0)
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
                 for targets, ptype in zip(target_list, [class_positions[0]]*len(target_list)):
