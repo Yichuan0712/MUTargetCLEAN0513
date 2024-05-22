@@ -78,30 +78,32 @@ class LocalizationDataset(Dataset):
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
-                aug_target_frag_list = target_frag_list.copy()
+                if aug_id == 'H9D1R1':
+                    print(", ".join(map(str, target_frag_list[0][1])))
+                # aug_target_frag_list = target_frag_list.copy()
 
-                if len(aug_target_frag_list) == 1:
-                    if 1 in aug_target_frag_list[0][1]:
-                        # print(len(aug_target_frag_list[0][1]))
-                        # print(aug_target_frag_list[0][1])
-                        print(id)
-                        print(", ".join(map(str, aug_target_frag_list[0][1])))
-                        for i in range(len(aug_target_frag_list[0][1]) - 1, -1, -1):
-                            if aug_target_frag_list[0][1][i] == 1:
-                                break
-                            aug_target_frag_list[0][1][i] = 1
-                        # print(aug_target_frag_list[0][1])
-                        # print(", ".join(map(str, aug_target_frag_list[0][1])))
-                        print()
-                        print()
-                    elif (1 in aug_target_frag_list[0][0]) or (1 in aug_target_frag_list[0][4]):
-                        pass
-                    elif 2 in aug_target_frag_list[0][2]:
-                        idx = aug_target_frag_list[0][2].index(1)
-                        if idx < len(aug_target_frag_list[0][2]) / 2:
-                            aug_target_frag_list[0][2][:idx] = [1] * idx
-                        else:
-                            aug_target_frag_list[0][2][idx + 1:] = [1] * (len(aug_target_frag_list[0][2]) - idx - 1)
+                # if len(aug_target_frag_list) == 1:
+                #     if 1 in aug_target_frag_list[0][1]:
+                #         # print(len(aug_target_frag_list[0][1]))
+                #         # print(aug_target_frag_list[0][1])
+                #         print(id)
+                #         print(", ".join(map(str, aug_target_frag_list[0][1])))
+                #         for i in range(len(aug_target_frag_list[0][1]) - 1, -1, -1):
+                #             if aug_target_frag_list[0][1][i] == 1:
+                #                 break
+                #             aug_target_frag_list[0][1][i] = 1
+                #         # print(aug_target_frag_list[0][1])
+                #         # print(", ".join(map(str, aug_target_frag_list[0][1])))
+                #         print()
+                #         print()
+                #     elif (1 in aug_target_frag_list[0][0]) or (1 in aug_target_frag_list[0][4]):
+                #         pass
+                #     elif 2 in aug_target_frag_list[0][2]:
+                #         idx = aug_target_frag_list[0][2].index(1)
+                #         if idx < len(aug_target_frag_list[0][2]) / 2:
+                #             aug_target_frag_list[0][2][:idx] = [1] * idx
+                #         else:
+                #             aug_target_frag_list[0][2][idx + 1:] = [1] * (len(aug_target_frag_list[0][2]) - idx - 1)
                     #
                     #
                     # else:
@@ -112,17 +114,11 @@ class LocalizationDataset(Dataset):
 
 
 
-                # print(len(aug_target_frag_list))
-                # if len(aug_target_frag_list)==2:
-                #     print(len(aug_target_frag_list[0][0]), len(aug_target_frag_list[1][0]))
-                #     exit(0)
-
-
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
                                          configs.train_settings.data_aug.mutation_rate) for sequence, target in
                     zip(seq_frag_list, target_frag_list)]
-                # aug_target_frag_list = target_frag_list
+                aug_target_frag_list = target_frag_list
                 aug_type_protein = type_protein
                 aug_samples.append(
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
