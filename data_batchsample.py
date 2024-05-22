@@ -82,13 +82,15 @@ class LocalizationDataset(Dataset):
 
 
                 if 1 in aug_target_frag_list[0][1]:
-                    print(len(aug_target_frag_list[0][1]))
-                    print(aug_target_frag_list[0][1])
+                    # print(len(aug_target_frag_list[0][1]))
+                    # print(aug_target_frag_list[0][1])
+                    print(", ".join(map(str, aug_target_frag_list[0][1])))
                     for i in range(len(aug_target_frag_list[0][1]) - 1, -1, -1):
                         if aug_target_frag_list[0][1][i] == 1:
                             break
                         aug_target_frag_list[0][1][i] = 1
-                    print(aug_target_frag_list[0][1])
+                    # print(aug_target_frag_list[0][1])
+                    print(", ".join(map(str, aug_target_frag_list[0][1])))
                     print()
                     print()
 
