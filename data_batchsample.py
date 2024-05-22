@@ -110,8 +110,7 @@ class LocalizationDataset(Dataset):
                             if targets[i] == 1:
                                 break
                             targets[i] = 1
-                print(len(target_list[0]))
-                exit(0)
+
                 aug_seq_frag_list = [self.random_mutation(sequence,
                                                           target,
                                                           configs.train_settings.data_aug.mutation_rate)
