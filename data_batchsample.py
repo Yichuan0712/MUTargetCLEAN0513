@@ -89,7 +89,8 @@ class LocalizationDataset(Dataset):
                             break
                         aug_target_frag_list[0][1][i] = 1
                     print(aug_target_frag_list[0][1])
-                    exit(0)
+                    print()
+                    print()
 
                 # print(len(aug_target_frag_list))
                 # if len(aug_target_frag_list)==2:
