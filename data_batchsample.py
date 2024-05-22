@@ -84,9 +84,9 @@ class LocalizationDataset(Dataset):
                 "Peroxisome" N/C
                 """
 
-                # print(len(seq_frag_list))
-                # print(len(target_frag_list))
-                # exit(0)
+                print(seq_frag_list)
+                print(target_frag_list)
+                exit(0)
 
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
                                in zip(seq_frag_list, target_frag_list)]
@@ -110,7 +110,7 @@ class LocalizationDataset(Dataset):
                             if targets[i] == 1:
                                 break
                             targets[i] = 1
-                print(len(target_list))
+                print(len(target_list[0]))
                 exit(0)
                 aug_seq_frag_list = [self.random_mutation(sequence,
                                                           target,
