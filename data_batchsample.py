@@ -84,7 +84,8 @@ class LocalizationDataset(Dataset):
                 "Peroxisome" N/C
                 """
 
-                print(seq_frag_list.shape())
+                print(len(seq_frag_list))
+                print(len(target_frag_list))
                 exit(0)
 
                 target_list = [[int(max(set(column))) for column in zip(*target)][:len(sequence)] for sequence, target
