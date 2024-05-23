@@ -104,22 +104,16 @@ class LocalizationDataset(Dataset):
                     N_side = [3, 5, 6, 7]
                     for idx in N_side:
                         if 1 in flattened_aug_target_frag_list[idx]:
-                            # print(idx)
-                            # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
                             for i in range(len(flattened_aug_target_frag_list[idx])):
                                 if flattened_aug_target_frag_list[idx][i] == 1:
                                     break
                                 flattened_aug_target_frag_list[idx][i] = 1
-                            # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
-                            # print()
 
                     shapes = [arr.shape for arr in aug_target_frag_list]
 
                     split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
-
-
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
