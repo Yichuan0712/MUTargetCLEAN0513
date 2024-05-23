@@ -87,7 +87,7 @@ class LocalizationDataset(Dataset):
                 # 还要判断一下augi!!!
                 if aug_i == 0:
                     # if len(aug_target_frag_list) == 3:
-                        print(id)
+                    #     print(id)
                         flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
                     #
                     #     print(len(aug_target_frag_list[2][0]))
@@ -96,6 +96,8 @@ class LocalizationDataset(Dataset):
                     #     print(flattened_aug_target_frag_list[0].tolist().index(1))
                     #     print(aug_target_frag_list[1][0].tolist().index(1))
                         # exit(0)
+                        if 1 in flattened_aug_target_frag_list[0] or 1 in flattened_aug_target_frag_list[4]:
+                            pass
 
                         if 1 in flattened_aug_target_frag_list[1]:
                             # print(len(aug_target_frag_list[0][1]))
@@ -110,6 +112,14 @@ class LocalizationDataset(Dataset):
                             print(", ".join(map(str, flattened_aug_target_frag_list[1])))
                             print()
                             print()
+                        if 1 in flattened_aug_target_frag_list[2]:
+                            idx = flattened_aug_target_frag_list[2].index(1)
+                            print("!!!")
+                            exit(0)
+                            # if idx < len(targets) / 2:
+                            #     targets[:idx] = [1] * idx
+                            # else:
+                            #     targets[idx + 1:] = [1] * (len(targets) - idx - 1)
 
 
 
