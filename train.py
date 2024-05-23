@@ -194,10 +194,15 @@ def train_loop(tools, configs, warm_starting,train_writer):
                                             global_step=global_step)
                     train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
                                             global_step=global_step)
-                    print(f"{global_step} class_loss:{class_loss.item()}  " +
-                          f"position_loss_6:{position_loss.item()}  " +
+
+                    element_num = motif_logits.numel()
+                    print(element_num)
+                    exit(0)
+
+                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{}  " +
+                          f"(position_loss_6:{position_loss.item()}  " +
                           f"nucleus_position_loss:{nucleus_position_loss.item()}  " +
-                          f"nucleus_export_position_loss:{nucleus_export_position_loss.item()}")
+                          f"nucleus_export_position_loss:{nucleus_export_position_loss.item()})")
                     weighted_loss_sum = class_loss + position_loss + nucleus_position_loss + nucleus_export_position_loss
                 else:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
