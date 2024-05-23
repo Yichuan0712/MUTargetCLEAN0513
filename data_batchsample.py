@@ -122,7 +122,7 @@ class LocalizationDataset(Dataset):
 
                         shapes = [arr.shape for arr in aug_target_frag_list]
 
-                        split_indices = np.cumsum([shape[1] for shape in shapes])
+                        split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
 
                         split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
                         print(len(split_aug_target_frag_list[0]))
