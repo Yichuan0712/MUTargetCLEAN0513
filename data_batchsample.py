@@ -125,7 +125,7 @@ class LocalizationDataset(Dataset):
                         # 计算每个分割点的位置
                         split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
                         print(split_indices)
-                        eixt(0)
+                        exit(0)
 
                         # 将平铺数组分割回原始数组
                         split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
