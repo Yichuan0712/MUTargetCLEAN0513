@@ -158,12 +158,15 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
                 print(motif_logits.shape)
+                print(motif_logits)
                 # print(target_frag.shape)
                 # exit(0)
                 if configs.train_settings.additional_pos_weights:
 
                     motif_logits_nucleus = motif_logits[:, 0:1, :]
                     print(motif_logits_nucleus.shape)
+                    print(motif_logits_nucleus)
+                    exit(0)
                     motif_logits_nucleus_export = motif_logits[:, 4:5, :]
                     print(motif_logits_nucleus_export.shape)
                     # Concatenate the parts that exclude indices 0 and 4
