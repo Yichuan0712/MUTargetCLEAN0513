@@ -84,6 +84,19 @@ class LocalizationDataset(Dataset):
                 if aug_i == 0:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
 
+                    """
+                    overlap check start
+                    """
+                    idxs = [1, 2, 3, 5, 6, 7]
+                    for idx in idxs:
+                        if flattened_aug_target_frag_list.count(idx):
+                            print("!!!")
+                            print(idx)
+                            exit(0)
+                    """
+                    overlap check end
+                    """
+
                     if 1 in flattened_aug_target_frag_list[0] or 1 in flattened_aug_target_frag_list[4]:
                         pass
 
@@ -114,11 +127,6 @@ class LocalizationDataset(Dataset):
                     split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
-
-                print(type_protein)
-                print(target_frag_list)
-                print(aug_target_frag_list)
-                exit(0)
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
