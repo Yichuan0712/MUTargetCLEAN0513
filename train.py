@@ -199,7 +199,7 @@ def train_loop(tools, configs, warm_starting,train_writer):
                     print(element_num)
                     exit(0)
 
-                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{}  " +
+                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{1}  " +\
                           f"(position_loss_6:{position_loss.item()}  " +
                           f"nucleus_position_loss:{nucleus_position_loss.item()}  " +
                           f"nucleus_export_position_loss:{nucleus_export_position_loss.item()})")
