@@ -127,6 +127,7 @@ class LocalizationDataset(Dataset):
                         split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
                         print(len(split_aug_target_frag_list))
                         print(len(split_aug_target_frag_list[0]))
+                        print(len(split_aug_target_frag_list[0][0]))
                         exit(0)
 
                         # 转换回原始形状
