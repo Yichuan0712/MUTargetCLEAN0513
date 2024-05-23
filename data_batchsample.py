@@ -90,6 +90,8 @@ class LocalizationDataset(Dataset):
                         flattened_aug_target_frag_list = np.concatenate(aug_target_frag_list, axis=0)
                         print(aug_target_frag_list)
                         print(flattened_aug_target_frag_list)
+                        print(len(flattened_aug_target_frag_list))
+                        print(len(flattened_aug_target_frag_list[0]))
                         exit(0)
                         if 1 in aug_target_frag_list[0][1]:
                             # print(len(aug_target_frag_list[0][1]))
