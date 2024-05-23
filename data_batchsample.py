@@ -82,60 +82,42 @@ class LocalizationDataset(Dataset):
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
 
                 if aug_i == 0:
-                    if len(aug_target_frag_list) == 3:
-                    #     print(id)
-                        flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
-                    #
-                    #     print(len(aug_target_frag_list[2][0]))
-                    #     print(len(flattened_aug_target_frag_list[0]))
-                    #
-                    #     print(flattened_aug_target_frag_list[0].tolist().index(1))
-                    #     print(aug_target_frag_list[1][0].tolist().index(1))
-                        # exit(0)
-                        if 1 in flattened_aug_target_frag_list[0] or 1 in flattened_aug_target_frag_list[4]:
-                            pass
+                    flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
 
-                        if 1 in flattened_aug_target_frag_list[1]:
-                            for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
-                                if flattened_aug_target_frag_list[1][i] == 1:
+                    if 1 in flattened_aug_target_frag_list[0] or 1 in flattened_aug_target_frag_list[4]:
+                        pass
+
+                    if 1 in flattened_aug_target_frag_list[1]:
+                        for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
+                            if flattened_aug_target_frag_list[1][i] == 1:
+                                break
+                            flattened_aug_target_frag_list[1][i] = 1
+
+                    if 1 in flattened_aug_target_frag_list[2]:
+                        idx = flattened_aug_target_frag_list[2].tolist().index(1)
+                        if idx < len(flattened_aug_target_frag_list[2]) / 2:
+                            flattened_aug_target_frag_list[2][:idx] = [1] * idx
+                        else:
+                            flattened_aug_target_frag_list[2][idx + 1:] = [1] * (
+                                        len(flattened_aug_target_frag_list[2]) - idx - 1)
+
+                    N_side = [3, 5, 6, 7]
+                    for idx in N_side:
+                        if 1 in flattened_aug_target_frag_list[idx]:
+                            # print(idx)
+                            # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                            for i in range(len(flattened_aug_target_frag_list[idx])):
+                                if flattened_aug_target_frag_list[idx][i] == 1:
                                     break
-                                flattened_aug_target_frag_list[1][i] = 1
+                                flattened_aug_target_frag_list[idx][i] = 1
+                            # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                            # print()
 
-                        if 1 in flattened_aug_target_frag_list[2]:
-                            idx = flattened_aug_target_frag_list[2].tolist().index(1)
-                            if idx < len(flattened_aug_target_frag_list[2]) / 2:
-                                flattened_aug_target_frag_list[2][:idx] = [1] * idx
-                            else:
-                                flattened_aug_target_frag_list[2][idx + 1:] = [1] * (len(flattened_aug_target_frag_list[2]) - idx - 1)
+                    shapes = [arr.shape for arr in aug_target_frag_list]
 
-                        N_side = [3, 5, 6, 7]
-                        for idx in N_side:
-                            if 1 in flattened_aug_target_frag_list[idx]:
-                                # print(idx)
-                                # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
-                                for i in range(len(flattened_aug_target_frag_list[idx])):
-                                    if flattened_aug_target_frag_list[idx][i] == 1:
-                                        break
-                                    flattened_aug_target_frag_list[idx][i] = 1
-                                # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
-                                # print()
+                    split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
 
-                        shapes = [arr.shape for arr in aug_target_frag_list]
-
-                        split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
-
-                        split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
-                        print(len(split_aug_target_frag_list))
-                        print(len(split_aug_target_frag_list[0]))
-                        print(len(split_aug_target_frag_list[0][0]))
-                        exit(0)
-
-                        # 转换回原始形状
-                        original_aug_target_frag_list = [arr.reshape(shape) for arr, shape in
-                                                         zip(split_aug_target_frag_list, shapes)]
-
-
-
+                    aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
 
 
 
