@@ -113,7 +113,7 @@ class LocalizationDataset(Dataset):
                             print()
                             print()
                         if 1 in flattened_aug_target_frag_list[2]:
-                            idx = flattened_aug_target_frag_list[2].index(1)
+                            idx = flattened_aug_target_frag_list[2].tolist().index(1)
                             print("!!!")
                             exit(0)
                             # if idx < len(targets) / 2:
