@@ -113,21 +113,24 @@ class LocalizationDataset(Dataset):
                         stop_right = len(flattened_aug_target_frag_list[2]) - 1 - \
                                      flattened_aug_target_frag_list[2].tolist()[::-1].index(1)
                         stop = (stop_left+stop_right)/2
-                        print(flattened_aug_target_frag_list[2])
+                        # print(flattened_aug_target_frag_list[2])
                         if stop < len(flattened_aug_target_frag_list[2]) / 2:
                             flattened_aug_target_frag_list[2][:stop_right] = [1] * stop_right
                         else:
                             flattened_aug_target_frag_list[2][stop_left + 1:] = [1] * (
                                         len(flattened_aug_target_frag_list[2]) - stop_left - 1)
-                        print(flattened_aug_target_frag_list[2])
-                        exit(0)
+                        # print(flattened_aug_target_frag_list[2])
+                        # exit(0)
 
                     N_side = [3, 5, 6, 7]
                     for idx in N_side:
                         if 1 in flattened_aug_target_frag_list[idx]:
+                            print(flattened_aug_target_frag_list[idx])
                             stop_right = len(flattened_aug_target_frag_list[idx]) - 1 - \
                                          flattened_aug_target_frag_list[idx].tolist()[::-1].index(1)
                             flattened_aug_target_frag_list[idx][:stop_right] = [1] * stop_right
+                            print(flattened_aug_target_frag_list[idx])
+                            exit(0)
 
                     shapes = [arr.shape for arr in aug_target_frag_list]
 
