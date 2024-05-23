@@ -91,7 +91,7 @@ class LocalizationDataset(Dataset):
                         flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
                         # print(aug_target_frag_list)
                         # print(flattened_aug_target_frag_list)
-                        print(len(flattened_aug_target_frag_list))
+                        print(len(aug_target_frag_list[0]))
                         print(len(flattened_aug_target_frag_list[0]))
                         print(", ".join(map(str, flattened_aug_target_frag_list[1])))
                         print(flattened_aug_target_frag_list[0].tolist().index(0))
