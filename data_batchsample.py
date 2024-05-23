@@ -88,7 +88,7 @@ class LocalizationDataset(Dataset):
                 if aug_i == 0:
                     if len(aug_target_frag_list) == 3:
                         flattened_aug_target_frag_list = [item for sublist in aug_target_frag_list for item in sublist]
-                        print(len(aug_target_frag_list))
+                        print(aug_target_frag_list)
                         exit(0)
                         if 1 in aug_target_frag_list[0][1]:
                             # print(len(aug_target_frag_list[0][1]))
