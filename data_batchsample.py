@@ -87,12 +87,12 @@ class LocalizationDataset(Dataset):
                     """
                     overlap check start
                     """
-                    idxs = [1, 2, 3, 5, 6, 7]
-                    for idx in idxs:
-                        if flattened_aug_target_frag_list[idx].tolist().count(1)==1:
-                            print("!!!")
-                            print(idx)
-                            exit(0)
+                    # idxs = [1, 2, 3, 5, 6, 7]
+                    # for idx in idxs:
+                    #     if flattened_aug_target_frag_list[idx].tolist().count(1) == 1:
+                    #         print("!!!")
+                    #         print(idx)
+                    #         exit(0)
                     """
                     overlap check end
                     """
@@ -101,26 +101,34 @@ class LocalizationDataset(Dataset):
                         pass
 
                     if 1 in flattened_aug_target_frag_list[1]:
-                        for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
-                            if flattened_aug_target_frag_list[1][i] == 1:
-                                break
-                            flattened_aug_target_frag_list[1][i] = 1
+                        # for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
+                        #     if flattened_aug_target_frag_list[1][i] == 1:
+                        #         break
+                        #     flattened_aug_target_frag_list[1][i] = 1
+                        stop = flattened_aug_target_frag_list[1].tolist().index(1)
+                        flattened_aug_target_frag_list[1][stop + 1:] = [1] * \
+                                                                      (len(flattened_aug_target_frag_list[1]) - stop - 1)
 
                     if 1 in flattened_aug_target_frag_list[2]:
-                        idx = flattened_aug_target_frag_list[2].tolist().index(1)
-                        if idx < len(flattened_aug_target_frag_list[2]) / 2:
-                            flattened_aug_target_frag_list[2][:idx] = [1] * idx
+                        stop = flattened_aug_target_frag_list[2].tolist().index(1)
+                        if stop < len(flattened_aug_target_frag_list[2]) / 2:
+                            flattened_aug_target_frag_list[2][:stop] = [1] * stop
                         else:
-                            flattened_aug_target_frag_list[2][idx + 1:] = [1] * (
-                                        len(flattened_aug_target_frag_list[2]) - idx - 1)
+                            flattened_aug_target_frag_list[2][stop + 1:] = [1] * (
+                                        len(flattened_aug_target_frag_list[2]) - stop - 1)
 
                     N_side = [3, 5, 6, 7]
                     for idx in N_side:
                         if 1 in flattened_aug_target_frag_list[idx]:
-                            for i in range(len(flattened_aug_target_frag_list[idx])):
-                                if flattened_aug_target_frag_list[idx][i] == 1:
-                                    break
-                                flattened_aug_target_frag_list[idx][i] = 1
+                            # for i in range(len(flattened_aug_target_frag_list[idx])):
+                            #     if flattened_aug_target_frag_list[idx][i] == 1:
+                            #         break
+                            #     flattened_aug_target_frag_list[idx][i] = 1
+                            stop = flattened_aug_target_frag_list[idx].tolist().index(1)
+                            print(flattened_aug_target_frag_list)
+                            flattened_aug_target_frag_list[idx][:stop] = [1] * stop
+                            print(flattened_aug_target_frag_list)
+                            exit(0)
 
                     shapes = [arr.shape for arr in aug_target_frag_list]
 
