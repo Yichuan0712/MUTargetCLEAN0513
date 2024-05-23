@@ -75,9 +75,6 @@ class LocalizationDataset(Dataset):
             # print(np.max([class_weights[x] for x in class_positions]))
             per_times = np.max([2, int(np.ceil(
                 configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
-            frag_len = len(target_frag_list[0][0])
-            # print(frag_len)
-            # exit(0)
 
             aug_target_frag_list = target_frag_list.copy()
             for aug_i in range(per_times):
@@ -122,13 +119,13 @@ class LocalizationDataset(Dataset):
                                     flattened_aug_target_frag_list[idx][i] = 1
                                 # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
                                 # print()
-                        # 记录每个原始数组的形状
+
                         shapes = [arr.shape for arr in aug_target_frag_list]
-                        print(shapes)
-                        exit(0)
 
                         # 计算每个分割点的位置
                         split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
+                        print(split_indices)
+                        eixt(0)
 
                         # 将平铺数组分割回原始数组
                         split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
@@ -142,12 +139,17 @@ class LocalizationDataset(Dataset):
 
 
 
-
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
                                          configs.train_settings.data_aug.mutation_rate) for sequence, target in
-                    zip(seq_frag_list, target_frag_list)]
-                aug_target_frag_list = target_frag_list
+                    zip(seq_frag_list, aug_target_frag_list)]
+
+                # aug_seq_frag_list = [
+                #     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
+                #                          configs.train_settings.data_aug.mutation_rate) for sequence, target in
+                #     zip(seq_frag_list, target_frag_list)]
+                # aug_target_frag_list = target_frag_list
+
                 aug_type_protein = type_protein
                 aug_samples.append(
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
