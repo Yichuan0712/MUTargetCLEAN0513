@@ -171,7 +171,7 @@ def train_loop(tools, configs, warm_starting,train_writer):
                     # Concatenate the parts that exclude indices 0 and 4
                     target_frag = torch.cat((target_frag[:, 1:4, :], target_frag[:, 5:, :]), dim=1)
 
-                    position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
+                    position_loss_6 = tools['loss_function_6'](motif_logits, target_frag.to(tools['train_device']))
                     nucleus_position_loss = tools['loss_function_nucleus']\
                         (motif_logits_nucleus, target_frag_nucleus.to(tools['train_device']))
                     nucleus_export_position_loss = tools['loss_function_nucleus_export']\
@@ -189,16 +189,16 @@ def train_loop(tools, configs, warm_starting,train_writer):
 
                 if configs.train_settings.additional_pos_weights:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
-                    train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
+                    train_writer.add_scalar('step position_loss_6', position_loss_6.item(), global_step=global_step)
                     train_writer.add_scalar('step nucleus_position_loss', nucleus_position_loss.item(),
                                             global_step=global_step)
                     train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
                                             global_step=global_step)
                     print(f"{global_step} class_loss:{class_loss.item()}  " +
-                          f"position_loss:{position_loss.item()}  " +
+                          f"position_loss_6:{position_loss_6.item()}  " +
                           f"nucleus_position_loss:{nucleus_position_loss.item()}  " +
                           f"nucleus_export_position_loss:{nucleus_export_position_loss.item()}")
-                    weighted_loss_sum = class_loss + position_loss + nucleus_position_loss + nucleus_export_position_loss
+                    weighted_loss_sum = class_loss + position_loss_6 + nucleus_position_loss + nucleus_export_position_loss
                 else:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
@@ -629,8 +629,9 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'optimizer': optimizer,
         # 'loss_function': torch.nn.CrossEntropyLoss(reduction="none"),
         'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
+        'loss_function_6': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="sum"),
         'loss_function_nucleus': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus, reduction="sum"),
-        'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="mean"),
+        'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="sum"),
         'pos_weight': w,
         #'loss_function': torch.nn.BCELoss(reduction="none"),
         #'loss_function_pro': torch.nn.BCELoss(reduction="none"),
