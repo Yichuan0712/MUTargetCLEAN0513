@@ -114,12 +114,11 @@ class LocalizationDataset(Dataset):
                             print()
                         if 1 in flattened_aug_target_frag_list[2]:
                             idx = flattened_aug_target_frag_list[2].tolist().index(1)
-                            print("!!!")
-                            exit(0)
-                            # if idx < len(targets) / 2:
-                            #     targets[:idx] = [1] * idx
-                            # else:
-                            #     targets[idx + 1:] = [1] * (len(targets) - idx - 1)
+                            if idx < len(flattened_aug_target_frag_list[2]) / 2:
+                                flattened_aug_target_frag_list[2][:idx] = [1] * idx
+                            else:
+                                flattened_aug_target_frag_list[2][idx + 1:] = [1] * (len(flattened_aug_target_frag_list[2]) - idx - 1)
+                            print(flattened_aug_target_frag_list[2])
 
 
 
