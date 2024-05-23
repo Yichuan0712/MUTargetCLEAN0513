@@ -78,13 +78,12 @@ class LocalizationDataset(Dataset):
             frag_len = len(target_frag_list[0][0])
             # print(frag_len)
             # exit(0)
+
+            aug_target_frag_list = target_frag_list.copy()
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
 
-
-                aug_target_frag_list = target_frag_list.copy()
-                # 还要判断一下augi!!!
                 if aug_i == 0:
                     # if len(aug_target_frag_list) == 3:
                     #     print(id)
@@ -100,39 +99,45 @@ class LocalizationDataset(Dataset):
                             pass
 
                         if 1 in flattened_aug_target_frag_list[1]:
-                            # print(len(aug_target_frag_list[0][1]))
-                            # print(aug_target_frag_list[0][1])
-                            # print(id)
-                            # print(", ".join(map(str, flattened_aug_target_frag_list[1])))
                             for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
                                 if flattened_aug_target_frag_list[1][i] == 1:
                                     break
                                 flattened_aug_target_frag_list[1][i] = 1
-                            # print(aug_target_frag_list[0][1])
-                            # print(", ".join(map(str, flattened_aug_target_frag_list[1])))
 
                         if 1 in flattened_aug_target_frag_list[2]:
-                            print(", ".join(map(str, flattened_aug_target_frag_list[2])))
                             idx = flattened_aug_target_frag_list[2].tolist().index(1)
                             if idx < len(flattened_aug_target_frag_list[2]) / 2:
                                 flattened_aug_target_frag_list[2][:idx] = [1] * idx
                             else:
                                 flattened_aug_target_frag_list[2][idx + 1:] = [1] * (len(flattened_aug_target_frag_list[2]) - idx - 1)
-                            print(", ".join(map(str, flattened_aug_target_frag_list[2])))
-                            print()
 
-                        sideN = [3, 5, 6, 7]
-
-                        for idx in sideN:
+                        N_side = [3, 5, 6, 7]
+                        for idx in N_side:
                             if 1 in flattened_aug_target_frag_list[idx]:
-                                print(idx)
-                                print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                                # print(idx)
+                                # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
                                 for i in range(len(flattened_aug_target_frag_list[idx])):
                                     if flattened_aug_target_frag_list[idx][i] == 1:
                                         break
                                     flattened_aug_target_frag_list[idx][i] = 1
-                                print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
-                                print()
+                                # print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                                # print()
+                        # 记录每个原始数组的形状
+                        shapes = [arr.shape for arr in aug_target_frag_list]
+                        print(shapes)
+                        exit(0)
+
+                        # 计算每个分割点的位置
+                        split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
+
+                        # 将平铺数组分割回原始数组
+                        split_aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
+
+                        # 转换回原始形状
+                        original_aug_target_frag_list = [arr.reshape(shape) for arr, shape in
+                                                         zip(split_aug_target_frag_list, shapes)]
+
+
 
 
 
