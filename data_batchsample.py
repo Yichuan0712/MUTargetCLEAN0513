@@ -89,8 +89,8 @@ class LocalizationDataset(Dataset):
                     if len(aug_target_frag_list) == 3:
                         print(id)
                         flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
-                        print(aug_target_frag_list)
-                        print(flattened_aug_target_frag_list)
+                        # print(aug_target_frag_list)
+                        # print(flattened_aug_target_frag_list)
                         print(len(flattened_aug_target_frag_list))
                         print(len(flattened_aug_target_frag_list[0]))
                         print(", ".join(map(str, flattened_aug_target_frag_list[1])))
