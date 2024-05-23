@@ -163,15 +163,15 @@ def train_loop(tools, configs, warm_starting,train_writer):
                     motif_logits_nucleus = motif_logits[:, 0:1, :]
                     motif_logits_nucleus_export = motif_logits[:, 4:5, :]
                     # Concatenate the parts that exclude indices 0 and 4
-                    motif_logits = torch.cat((motif_logits[:, 1:4, :], motif_logits[:, 5:, :]), dim=1)
+                    motif_logits_6 = torch.cat((motif_logits[:, 1:4, :], motif_logits[:, 5:, :]), dim=1)
 
 
                     target_frag_nucleus = target_frag[:, 0:1, :]
                     target_frag_nucleus_export = target_frag[:, 4:5, :]
                     # Concatenate the parts that exclude indices 0 and 4
-                    target_frag = torch.cat((target_frag[:, 1:4, :], target_frag[:, 5:, :]), dim=1)
+                    target_frag_6 = torch.cat((target_frag[:, 1:4, :], target_frag[:, 5:, :]), dim=1)
 
-                    position_loss = tools['loss_function_6'](motif_logits, target_frag.to(tools['train_device']))
+                    position_loss = tools['loss_function_6'](motif_logits_6, target_frag_6.to(tools['train_device']))
                     nucleus_position_loss = tools['loss_function_nucleus']\
                         (motif_logits_nucleus, target_frag_nucleus.to(tools['train_device']))
                     nucleus_export_position_loss = tools['loss_function_nucleus_export']\
