@@ -142,8 +142,7 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 encoded_seq=encoded_seq.to(tools['train_device'])
             
             #print(id_tuple)
-            print(encoded_seq)
-            exit(0)
+            # 这
             classification_head, motif_logits, projection_head = tools['net'](
                                  encoded_seq, 
                                  id_tuple, 
@@ -576,7 +575,6 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
        encoder, start_epoch = load_checkpoints(configs, optimizer, scheduler, logfilepath, encoder)
 
     # w=(torch.ones([9,1,1])*5).to(configs.train_settings.device)
-    # 这
     w = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
     #debug_dataloader(dataloaders_dict["train"]) #936 after call dataloaders_dict['train']
     
