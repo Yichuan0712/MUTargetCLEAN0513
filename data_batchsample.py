@@ -115,6 +115,7 @@ class LocalizationDataset(Dataset):
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
 
+                print(type_protein)
                 print(target_frag_list)
                 print(aug_target_frag_list)
                 exit(0)
