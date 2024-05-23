@@ -142,7 +142,8 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 encoded_seq=encoded_seq.to(tools['train_device'])
             
             #print(id_tuple)
-            #print(encoded_seq)
+            print(encoded_seq)
+            exit(0)
             classification_head, motif_logits, projection_head = tools['net'](
                                  encoded_seq, 
                                  id_tuple, 

@@ -507,10 +507,11 @@ class Encoder(nn.Module):
             
             emb_pro = torch.stack(emb_pro_list, dim=0)
         else:
-            print(encoded_sequence['attention_mask'].shape)
-            print(encoded_sequence['attention_mask'])
-            print(encoded_sequence['input_ids'])
-            exit(0)
+            # print(encoded_sequence['attention_mask'].shape)
+            # print(encoded_sequence['attention_mask'])
+            # print(encoded_sequence['input_ids'])
+            # exit(0)
+            # 这
             features = self.model(input_ids=encoded_sequence['input_ids'],
                               attention_mask=encoded_sequence['attention_mask'])
             #print(features)
