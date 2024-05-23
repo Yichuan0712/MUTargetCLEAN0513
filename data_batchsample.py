@@ -102,23 +102,24 @@ class LocalizationDataset(Dataset):
                         if 1 in flattened_aug_target_frag_list[1]:
                             # print(len(aug_target_frag_list[0][1]))
                             # print(aug_target_frag_list[0][1])
-                            print(id)
-                            print(", ".join(map(str, flattened_aug_target_frag_list[1])))
+                            # print(id)
+                            # print(", ".join(map(str, flattened_aug_target_frag_list[1])))
                             for i in range(len(flattened_aug_target_frag_list[1]) - 1, -1, -1):
                                 if flattened_aug_target_frag_list[1][i] == 1:
                                     break
                                 flattened_aug_target_frag_list[1][i] = 1
                             # print(aug_target_frag_list[0][1])
-                            print(", ".join(map(str, flattened_aug_target_frag_list[1])))
-                            print()
-                            print()
+                            # print(", ".join(map(str, flattened_aug_target_frag_list[1])))
+
                         if 1 in flattened_aug_target_frag_list[2]:
+                            print(", ".join(map(str, flattened_aug_target_frag_list[2])))
                             idx = flattened_aug_target_frag_list[2].tolist().index(1)
                             if idx < len(flattened_aug_target_frag_list[2]) / 2:
                                 flattened_aug_target_frag_list[2][:idx] = [1] * idx
                             else:
                                 flattened_aug_target_frag_list[2][idx + 1:] = [1] * (len(flattened_aug_target_frag_list[2]) - idx - 1)
-                            print(flattened_aug_target_frag_list[2])
+                            print(", ".join(map(str, flattened_aug_target_frag_list[2])))
+                            print()
 
 
 
