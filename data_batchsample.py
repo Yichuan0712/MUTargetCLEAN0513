@@ -94,8 +94,8 @@ class LocalizationDataset(Dataset):
                         print(len(aug_target_frag_list[2][0]))
                         print(len(flattened_aug_target_frag_list[0]))
                         # print(", ".join(map(str, flattened_aug_target_frag_list[1])))
-                        print(flattened_aug_target_frag_list[0].tolist().index(0))
-                        print(aug_target_frag_list[1][0].tolist().index(0))
+                        print(flattened_aug_target_frag_list[0].tolist().index(1))
+                        print(aug_target_frag_list[1][0].tolist().index(1))
                         exit(0)
                         if 1 in aug_target_frag_list[0][1]:
                             # print(len(aug_target_frag_list[0][1]))
