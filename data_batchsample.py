@@ -87,7 +87,7 @@ class LocalizationDataset(Dataset):
                 # 还要判断一下augi!!!
                 if aug_i == 0:
                     if len(aug_target_frag_list) == 3:
-                        flattened_aug_target_frag_list = np.concatenate(aug_target_frag_list, axis=0)
+                        flattened_aug_target_frag_list = np.vstack(aug_target_frag_list)
                         print(aug_target_frag_list)
                         print(flattened_aug_target_frag_list)
                         print(len(flattened_aug_target_frag_list))
