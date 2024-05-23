@@ -190,10 +190,12 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 if configs.train_settings.additional_pos_weights:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
-                    # train_writer.add_scalar('step nucleus_position_loss', nucleus_position_loss.item(),
-                    #                         global_step=global_step)
-                    # train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
-                    #                         global_step=global_step)
+                    print(nucleus_position_loss)
+                    exit(0)
+                    train_writer.add_scalar('step nucleus_position_loss', nucleus_position_loss.item(),
+                                            global_step=global_step)
+                    train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
+                                            global_step=global_step)
                     print(f"{global_step} class_loss:{class_loss.item()}  " +
                           f"position_loss:{position_loss.item()}  " +
                           f"nucleus_position_loss:{nucleus_position_loss.item()}  " +
