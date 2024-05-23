@@ -33,6 +33,9 @@ train_settings:
   batch_size: 16 #16
   grad_accumulation: 1
   loss_pos_weight: 35 #35
+  additional_pos_weights: True
+  loss_pos_weight_nucleus: 35
+  loss_pos_weight_nucleus_export: 35
   dataset: v4 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
