@@ -89,7 +89,7 @@ class LocalizationDataset(Dataset):
                     """
                     idxs = [1, 2, 3, 5, 6, 7]
                     for idx in idxs:
-                        if flattened_aug_target_frag_list.count(idx):
+                        if flattened_aug_target_frag_list.tolist().count(idx):
                             print("!!!")
                             print(idx)
                             exit(0)
