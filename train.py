@@ -197,8 +197,8 @@ def train_loop(tools, configs, warm_starting,train_writer):
 
                     element_num = motif_logits.numel()
                     position_loss_sum = (position_loss + nucleus_position_loss + nucleus_export_position_loss)/element_num
-                    print(element_num)
-                    exit(0)
+                    # print(element_num)
+                    # exit(0)
 
                     print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss_sum}  " +
                           f"(position_loss_6 (sum):{position_loss.item()}  " +
