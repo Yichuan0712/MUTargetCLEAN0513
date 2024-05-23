@@ -76,7 +76,7 @@ class LocalizationDataset(Dataset):
             per_times = np.max([2, int(np.ceil(
                 configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
             frag_len = len(target_frag_list[0][0])
-            print(frag_len)
+            # print(frag_len)
             # exit(0)
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
