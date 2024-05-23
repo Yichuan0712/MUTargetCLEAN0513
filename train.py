@@ -157,22 +157,14 @@ def train_loop(tools, configs, warm_starting,train_writer):
             if not warm_starting:
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
-                print(motif_logits.shape)
-                print(motif_logits)
-                # print(target_frag.shape)
-                # exit(0)
+
                 if configs.train_settings.additional_pos_weights:
 
                     motif_logits_nucleus = motif_logits[:, 0:1, :]
-                    print(motif_logits_nucleus.shape)
-                    print(motif_logits_nucleus)
-                    exit(0)
                     motif_logits_nucleus_export = motif_logits[:, 4:5, :]
-                    print(motif_logits_nucleus_export.shape)
                     # Concatenate the parts that exclude indices 0 and 4
                     motif_logits = torch.cat((motif_logits[:, 1:4, :], motif_logits[:, 5:, :]), dim=1)
-                    print(motif_logits.shape)
-                    exit(0)
+
 
                     target_frag_nucleus = target_frag[:, 0:1, :]
                     target_frag_nucleus_export = target_frag[:, 4:5, :]
@@ -191,9 +183,9 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
                 if configs.train_settings.data_aug.enable:
-                    class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                 else:
-                    class_loss  =  torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
 
                 if configs.train_settings.additional_pos_weights:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
@@ -202,7 +194,8 @@ def train_loop(tools, configs, warm_starting,train_writer):
                                             global_step=global_step)
                     train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
                                             global_step=global_step)
-                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}  " +
+                    print(f"{global_step} class_loss:{class_loss.item()}  " +
+                          f"position_loss:{position_loss.item()}  " +
                           f"nucleus_position_loss:{nucleus_position_loss.item()}  " +
                           f"nucleus_export_position_loss:{nucleus_export_position_loss.item()}")
                     weighted_loss_sum = class_loss + position_loss + nucleus_position_loss + nucleus_export_position_loss
