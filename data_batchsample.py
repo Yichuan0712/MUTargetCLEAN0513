@@ -123,7 +123,7 @@ class LocalizationDataset(Dataset):
                         shapes = [arr.shape for arr in aug_target_frag_list]
 
                         # 计算每个分割点的位置
-                        split_indices = np.cumsum([shape[1] for shape in shapes])[:-1]
+                        split_indices = np.cumsum([shape[1] for shape in shapes])#[:-1]
                         print(split_indices)
                         exit(0)
 
