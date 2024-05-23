@@ -121,6 +121,19 @@ class LocalizationDataset(Dataset):
                             print(", ".join(map(str, flattened_aug_target_frag_list[2])))
                             print()
 
+                        sideN = [3, 5, 6, 7]
+
+                        for idx in sideN:
+                            if 1 in flattened_aug_target_frag_list[idx]:
+                                print(idx)
+                                print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                                for i in range(len(flattened_aug_target_frag_list[idx])):
+                                    if flattened_aug_target_frag_list[idx][i] == 1:
+                                        break
+                                    flattened_aug_target_frag_list[idx][i] = 1
+                                print(", ".join(map(str, flattened_aug_target_frag_list[idx])))
+                                print()
+
 
 
 
