@@ -157,6 +157,9 @@ def train_loop(tools, configs, warm_starting,train_writer):
             if not warm_starting:
                 motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
+                print(motif_logits.shape)
+                print(target_frag.shape)
+                exit(0)
                 position_loss = tools['loss_function'](
                                 motif_logits, 
                                 target_frag.to(tools['train_device']))
@@ -576,6 +579,8 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
 
     # w=(torch.ones([9,1,1])*5).to(configs.train_settings.device)
     w = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
+    w_nucleus = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
+    w_nucleus_export = torch.tensor(configs.train_settings.loss_pos_weight, dtype=torch.float32).to(configs.train_settings.device)
     #debug_dataloader(dataloaders_dict["train"]) #936 after call dataloaders_dict['train']
     
     tools = {
@@ -596,6 +601,8 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'optimizer': optimizer,
         # 'loss_function': torch.nn.CrossEntropyLoss(reduction="none"),
         'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
+        'loss_function_nucleus': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus, reduction="mean"),
+        'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="mean"),
         'pos_weight': w,
         #'loss_function': torch.nn.BCELoss(reduction="none"),
         #'loss_function_pro': torch.nn.BCELoss(reduction="none"),
