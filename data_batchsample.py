@@ -86,7 +86,9 @@ class LocalizationDataset(Dataset):
                 aug_target_frag_list = target_frag_list.copy()
                 # 还要判断一下augi!!!
                 if aug_i == 0:
-                    if len(aug_target_frag_list) == 1:
+                    if len(aug_target_frag_list) == 3:
+                        flattened_aug_target_frag_list = [item for sublist in aug_target_frag_list for item in sublist]
+                        print(len(flattened_aug_target_frag_list))
                         if 1 in aug_target_frag_list[0][1]:
                             # print(len(aug_target_frag_list[0][1]))
                             # print(aug_target_frag_list[0][1])
