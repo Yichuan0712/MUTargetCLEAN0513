@@ -496,9 +496,6 @@ def get_scores(tools, cutoff, n, data_dict):
 
             if y_pro==1:
                 x_frag = data_dict[id_protein]['motif_logits_protein'][head]  #[seq]
-                print(type(x_frag))
-                print(x_frag)
-                exit(0)
                 y_frag = data_dict[id_protein]['motif_target_protein'][head]
                 # Negtive_pro += np.sum(np.max(y)==0)
                 # Negtive_detect_pro += np.sum((np.max(y)==0) * (np.max(x>=cutoff)==1))
