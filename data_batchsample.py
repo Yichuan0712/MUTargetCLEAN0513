@@ -84,19 +84,6 @@ class LocalizationDataset(Dataset):
                 if aug_i == 0:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
 
-                    """
-                    overlap check start
-                    """
-                    # idxs = [1, 2, 3, 5, 6, 7]
-                    # for idx in idxs:
-                    #     if flattened_aug_target_frag_list[idx].tolist().count(1) == 1:
-                    #         print("!!!")
-                    #         print(idx)
-                    #         exit(0)
-                    """
-                    overlap check end
-                    """
-
                     if 1 in flattened_aug_target_frag_list[0] or 1 in flattened_aug_target_frag_list[4]:
                         pass
 
