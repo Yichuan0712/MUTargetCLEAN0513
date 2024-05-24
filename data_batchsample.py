@@ -36,15 +36,15 @@ class LocalizationDataset(Dataset):
            self.hard_neg = configs.supcon.hard_neg
 
     #"""
-    def random_mutation(self,sequence,target,mutation_rate):
+    def random_mutation(self, sequence, target, mutation_rate):
         amino_acids = "ACDEFGHIKLMNPQRSTVWY"  # List of standard amino acids
         seq = Seq(sequence)
         seq_list = list(seq)
         # Get the mutable positions
-        #print(target)
+        # print(target)
         mutable_positions = [i for i, label in enumerate(target) if label == 0]
         num_mutations = int(mutation_rate*len(mutable_positions))
-        if num_mutations>0:
+        if num_mutations > 0:
             num_mutations = min(num_mutations, len(mutable_positions))
             mutation_positions = random.sample(mutable_positions, num_mutations)
             for pos in mutation_positions:
@@ -54,8 +54,8 @@ class LocalizationDataset(Dataset):
 
             # Join the mutated amino acids back into a sequence
             mutated_sequence = ''.join(seq_list)
-            #print(sequence)
-            #print(mutated_sequence)
+            # print(sequence)
+            # print(mutated_sequence)
             return mutated_sequence
         else:
            return sequence
@@ -120,12 +120,13 @@ class LocalizationDataset(Dataset):
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
 
-                # if len(seq_frag_list) == 2:
-                #     for sequence, target in zip(seq_frag_list, aug_target_frag_list):
-                #         print(sequence)
-                #         print(target)
-                #         print("!!!")
-                #     exit(0)
+                if len(seq_frag_list) == 2:
+                    for sequence, target in zip(seq_frag_list, aug_target_frag_list):
+                        print(sequence)
+                        print(target)
+                        [int(max(set(column))) for column in zip(*target)][:len(sequence)]
+                        print("!!!")
+                    exit(0)
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
