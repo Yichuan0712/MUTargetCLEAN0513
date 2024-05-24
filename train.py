@@ -511,9 +511,9 @@ def get_scores(tools, cutoff, n, data_dict):
               
         pred = np.array(x_list)
         target = np.array(y_list)
-        print(target)
-        print(pred>=0.5)
-        exit(0)
+        # print(target)
+        # print(pred>=0.5)
+        # exit(0)
         result_pro[head, 0] = roc_auc_score(target, pred)
         result_pro[head, 1] = average_precision_score(target, pred)
         result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff)
