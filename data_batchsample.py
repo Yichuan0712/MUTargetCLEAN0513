@@ -134,6 +134,7 @@ class LocalizationDataset(Dataset):
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
 
             print(target_frag_list)
+            print(aug_target_frag_list)
             print()
             print()
 
