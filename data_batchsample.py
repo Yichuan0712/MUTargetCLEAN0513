@@ -70,20 +70,21 @@ class LocalizationDataset(Dataset):
                 aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
 
             class_positions = np.where(type_protein == 1)[0]
-            # print(class_weights)
-            # print(type_protein)
-            # print(np.max([class_weights[x] for x in class_positions]))
+
             per_times = np.max([2, int(np.ceil(
                 configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
 
-            print(type_protein)
-            print(seq_frag_list)
-            print(target_frag_list)
+            # print(type_protein)
+            # print(seq_frag_list)
+            # print(target_frag_list)
 
             aug_target_frag_list = target_frag_list.copy()
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
+
+                print(aug_id)
+                print(aug_id_frag_list)
 
                 if aug_i == 0:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
@@ -120,13 +121,13 @@ class LocalizationDataset(Dataset):
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
 
-                if len(seq_frag_list) == 2:
-                    for sequence, target in zip(seq_frag_list, aug_target_frag_list):
-                        print(sequence)
-                        print(target)
-                        print([int(max(set(column))) for column in zip(*target)][:len(sequence)])
-                        print("!!!")
-                    exit(0)
+                # if len(seq_frag_list) == 2:
+                #     for sequence, target in zip(seq_frag_list, aug_target_frag_list):
+                #         print(sequence)
+                #         print(target)
+                #         print([int(max(set(column))) for column in zip(*target)][:len(sequence)])
+                #         print("!!!")
+                #     exit(0)
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
@@ -143,12 +144,12 @@ class LocalizationDataset(Dataset):
                 aug_samples.append(
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
 
-            print(aug_type_protein)
-            print(aug_seq_frag_list)
-            print(target_frag_list)
-            print(aug_target_frag_list)
-            print()
-            print()
+            # print(aug_type_protein)
+            # print(aug_seq_frag_list)
+            # print(target_frag_list)
+            # print(aug_target_frag_list)
+            # print()
+            # print()
 
         return aug_samples
 
