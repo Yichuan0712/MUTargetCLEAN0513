@@ -124,7 +124,7 @@ class LocalizationDataset(Dataset):
                     for sequence, target in zip(seq_frag_list, aug_target_frag_list):
                         print(sequence)
                         print(target)
-                        [int(max(set(column))) for column in zip(*target)][:len(sequence)]
+                        print([int(max(set(column))) for column in zip(*target)][:len(sequence)])
                         print("!!!")
                     exit(0)
 
