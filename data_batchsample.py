@@ -83,8 +83,8 @@ class LocalizationDataset(Dataset):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
 
-                print(aug_id)
-                print(aug_id_frag_list)
+                # print(aug_id)
+                # print(aug_id_frag_list)
 
                 if aug_i == 0:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
