@@ -76,6 +76,7 @@ class LocalizationDataset(Dataset):
             per_times = np.max([2, int(np.ceil(
                 configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
 
+            print(type_protein)
             print(target_frag_list)
 
             aug_target_frag_list = target_frag_list.copy()
@@ -133,6 +134,7 @@ class LocalizationDataset(Dataset):
                 aug_samples.append(
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
 
+            print(aug_type_protein)
             print(target_frag_list)
             print(aug_target_frag_list)
             print()
