@@ -120,11 +120,12 @@ class LocalizationDataset(Dataset):
 
                     aug_target_frag_list = np.split(flattened_aug_target_frag_list, split_indices, axis=1)
 
-                for sequence, target in zip(seq_frag_list, aug_target_frag_list):
-                    print(sequence)
-                    print(target)
-                    print("!!!")
-                exit(0)
+                if len(seq_frag_list) == 2:
+                    for sequence, target in zip(seq_frag_list, aug_target_frag_list):
+                        print(sequence)
+                        print(target)
+                        print("!!!")
+                    exit(0)
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
