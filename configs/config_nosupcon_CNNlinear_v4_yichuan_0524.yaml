@@ -43,7 +43,7 @@ train_settings:
     enable: True
     per_times: 5
     add_original: False
-    mutation_rate: 0.3
+    mutation_rate: 0.1
 
 
 valid_settings:
