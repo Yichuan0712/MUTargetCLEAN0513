@@ -71,7 +71,8 @@ class LocalizationDataset(Dataset):
 
             class_positions = np.where(type_protein == 1)[0]
 
-            per_times = np.max([2, int(np.ceil(
+            #这里我改了2为1, 为了测试
+            per_times = np.max([1, int(np.ceil(
                 configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
 
             # print(type_protein)
