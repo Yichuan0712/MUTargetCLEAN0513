@@ -71,10 +71,10 @@ class LocalizationDataset(Dataset):
 
             class_positions = np.where(type_protein == 1)[0]
 
-            #这里我改了, 为了测试
-            # per_times = np.max([2, int(np.ceil(
-            #     configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
-            per_times = 1
+            # 这里我改了, 为了测试
+            per_times = np.max([2, int(np.ceil(
+                configs.train_settings.data_aug.per_times * np.max([class_weights[x] for x in class_positions])))])
+            # per_times = 1
 
             # print(type_protein)
             # print(seq_frag_list)
