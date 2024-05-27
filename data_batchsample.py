@@ -88,6 +88,7 @@ class LocalizationDataset(Dataset):
                 # print(aug_id)
                 # print(aug_id_frag_list)
                 print(aug_target_frag_list.shape)
+                exit(0)
 
                 if aug_i == 990:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
