@@ -96,30 +96,30 @@ class LocalizationDataset(Dataset):
                         pass
 
                     if 1 in flattened_aug_target_frag_list[1]:
-                        pass
-                        # stop_left = flattened_aug_target_frag_list[1].tolist().index(1)
-                        # flattened_aug_target_frag_list[1][stop_left + 1:] = [1] * \
-                        #                                               (len(flattened_aug_target_frag_list[1]) - stop_left - 1)
+                        # pass
+                        stop_left = flattened_aug_target_frag_list[1].tolist().index(1)
+                        flattened_aug_target_frag_list[1][stop_left + 1:] = [1] * \
+                                                                      (len(flattened_aug_target_frag_list[1]) - stop_left - 1)
 
                     if 1 in flattened_aug_target_frag_list[2]:
-                        pass
-                        # stop_left = flattened_aug_target_frag_list[2].tolist().index(1)
-                        # stop_right = len(flattened_aug_target_frag_list[2]) - 1 - \
-                        #              flattened_aug_target_frag_list[2].tolist()[::-1].index(1)
-                        # stop = (stop_left+stop_right)/2
-                        # if stop < len(flattened_aug_target_frag_list[2]) / 2:
-                        #     flattened_aug_target_frag_list[2][:stop_right] = [1] * stop_right
-                        # else:
-                        #     flattened_aug_target_frag_list[2][stop_left + 1:] = [1] * (
-                        #                 len(flattened_aug_target_frag_list[2]) - stop_left - 1)
+                        # pass
+                        stop_left = flattened_aug_target_frag_list[2].tolist().index(1)
+                        stop_right = len(flattened_aug_target_frag_list[2]) - 1 - \
+                                     flattened_aug_target_frag_list[2].tolist()[::-1].index(1)
+                        stop = (stop_left+stop_right)/2
+                        if stop < len(flattened_aug_target_frag_list[2]) / 2:
+                            flattened_aug_target_frag_list[2][:stop_right] = [1] * stop_right
+                        else:
+                            flattened_aug_target_frag_list[2][stop_left + 1:] = [1] * (
+                                        len(flattened_aug_target_frag_list[2]) - stop_left - 1)
 
                     N_side = [3, 5, 6, 7]
                     for idx in N_side:
-                        pass
-                        # if 1 in flattened_aug_target_frag_list[idx]:
-                        #     stop_right = len(flattened_aug_target_frag_list[idx]) - 1 - \
-                        #                  flattened_aug_target_frag_list[idx].tolist()[::-1].index(1)
-                        #     flattened_aug_target_frag_list[idx][:stop_right] = [1] * stop_right
+                        # pass
+                        if 1 in flattened_aug_target_frag_list[idx]:
+                            stop_right = len(flattened_aug_target_frag_list[idx]) - 1 - \
+                                         flattened_aug_target_frag_list[idx].tolist()[::-1].index(1)
+                            flattened_aug_target_frag_list[idx][:stop_right] = [1] * stop_right
 
                     shapes = [arr.shape for arr in aug_target_frag_list]
 
