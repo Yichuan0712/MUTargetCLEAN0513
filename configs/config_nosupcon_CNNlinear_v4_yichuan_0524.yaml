@@ -36,14 +36,14 @@ train_settings:
   additional_pos_weights: False
   loss_pos_weight_nucleus: 35
   loss_pos_weight_nucleus_export: 35
-  dataset: v2 # v2, v3
+  dataset: v4 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
-    enable: True #
+    enable: True
     per_times: 5
     add_original: False
-    mutation_rate: 0.0
+    mutation_rate: 0.3
 
 
 valid_settings:
@@ -68,9 +68,9 @@ optimizer:
   use_8bit_adam: False
   grad_clip_norm: 1
   decay:
-    warmup: 128 # 1024
+    warmup: 1024
     min_lr: 1e-5
-    gamma: 1 # 0.2
+    gamma: 0.2
     num_restarts: 1
     first_cycle_steps: null  #null before
   mode: cosine #skip, cosine
