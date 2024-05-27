@@ -24,9 +24,8 @@ class LocalizationDataset(Dataset):
         self.class_weights = calculate_class_weights(self.count_samples_by_class(self.n, self.original_samples))
         print(self.class_weights)
         if mode == "train" and configs.train_settings.data_aug.enable:
-            pass
-           # self.data_aug = True
-           # samples = self.data_aug_train(samples,configs,self.class_weights)
+           self.data_aug = True
+           samples = self.data_aug_train(samples,configs,self.class_weights)
 
         self.samples = samples
         #print(samples[0:2]) #same as original
