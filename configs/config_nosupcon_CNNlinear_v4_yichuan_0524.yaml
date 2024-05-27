@@ -41,9 +41,9 @@ train_settings:
   log_every: 30
   data_aug:
     enable: True
-    per_times: 0
+    per_times: 5
     add_original: False
-    mutation_rate: 0.0
+    mutation_rate: 0.3
 
 
 valid_settings:
