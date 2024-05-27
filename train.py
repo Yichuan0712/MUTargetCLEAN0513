@@ -689,6 +689,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
             train_loss = train_loop(tools, configs, warm_starting,train_writer)
             if configs.train_settings.dataloader != "clean":
                if configs.train_settings.data_aug.enable:
+                   pass
                    tools['train_loader'].dataset.samples = tools['train_loader'].dataset.data_aug_train(tools['train_loader'].dataset.original_samples,configs,tools['train_loader'].dataset.class_weights)
             else: #clean 
                if configs.train_settings.data_aug.enable and global_step % total_steps_per_epoch==0:
