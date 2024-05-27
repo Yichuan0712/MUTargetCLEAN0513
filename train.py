@@ -430,6 +430,7 @@ def evaluate_protein(dataloader, tools):
         for cutoff in cutoffs:
             scores=get_scores(tools, cutoff, n, data_dict)
             IoU_pro_difcut[:,cut_dim]=scores['IoU_pro']
+            print(cutoff)
             print(scores)
             result_pro_difcut[:,:,cut_dim]=scores['result_pro']
             cs_acc_difcut[:,cut_dim]=scores['cs_acc']
