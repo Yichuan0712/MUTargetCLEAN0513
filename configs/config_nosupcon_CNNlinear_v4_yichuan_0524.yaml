@@ -40,10 +40,10 @@ train_settings:
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
-    enable: True
+    enable: False
     per_times: 0
     add_original: False
-    mutation_rate: 0.3
+    mutation_rate: 0.0
 
 
 valid_settings:
