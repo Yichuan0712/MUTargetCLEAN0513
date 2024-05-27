@@ -415,23 +415,20 @@ def evaluate_protein(dataloader, tools):
 
         # IoU_difcut=np.zeros([n, 9])
         # FDR_frag_difcut=np.zeros([1,9])
-        IoU_pro_difcut=np.zeros([n, 12])  #just for nuc and nuc_export
+        IoU_pro_difcut=np.zeros([n, 9])  #just for nuc and nuc_export
         # FDR_pro_difcut=np.zeros([1,9])
-        result_pro_difcut=np.zeros([n,6,12])
-        cs_acc_difcut=np.zeros([n, 12])
+        result_pro_difcut=np.zeros([n,6,9])
+        cs_acc_difcut=np.zeros([n, 9])
         classname=["Nucleus", "ER", "Peroxisome", "Mitochondrion", "Nucleus_export",
              "SIGNAL", "chloroplast", "Thylakoid"]
         criteria=["roc_auc_score", "average_precision_score", "matthews_corrcoef",
               "recall_score", "precision_score", "f1_score"]
 
-        # cutoffs=[x / 10 for x in range(1, 10)]
-        cutoffs=[0.025, 0.05, 0.075, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+        cutoffs=[x / 10 for x in range(1, 10)]
         cut_dim=0
         for cutoff in cutoffs:
             scores=get_scores(tools, cutoff, n, data_dict)
             IoU_pro_difcut[:,cut_dim]=scores['IoU_pro']
-            print(cutoff)
-            print(scores)
             result_pro_difcut[:,:,cut_dim]=scores['result_pro']
             cs_acc_difcut[:,cut_dim]=scores['cs_acc']
             cut_dim+=1
