@@ -62,6 +62,7 @@ class LocalizationDataset(Dataset):
     #"""
 
     def data_aug_train(self, samples, configs, class_weights):
+        return samples
         print("data aug on len of " + str(len(samples)))
         aug_samples = []
 
