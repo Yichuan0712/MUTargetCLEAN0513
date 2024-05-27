@@ -95,23 +95,23 @@ class LocalizationDataset(Dataset):
                         if 1 in aug_target_frag_list[0][0] or 1 in aug_target_frag_list[0][4]:
                             pass
                         if 1 in aug_target_frag_list[0][1]:
-                            pass
-                            # stop = aug_target_frag_list[0][1].tolist().index(1)
-                            # aug_target_frag_list[0][1][stop + 1:] = [1] * (len(aug_target_frag_list[0][1]) - stop - 1)
+                            # pass
+                            stop = aug_target_frag_list[0][1].tolist().index(1)
+                            aug_target_frag_list[0][1][stop + 1:] = [1] * (len(aug_target_frag_list[0][1]) - stop - 1)
                         if 1 in aug_target_frag_list[0][2]:
-                            pass
-                            # stop = aug_target_frag_list[0][2].tolist().index(1)
-                            # if stop < len(aug_target_frag_list[0][2]) / 2:
-                            #     aug_target_frag_list[0][2][:stop] = [1] * stop
-                            # else:
-                            #     aug_target_frag_list[0][2][stop + 1:] = [1] * (
-                            #                 len(aug_target_frag_list[0][2]) - stop - 1)
+                            # pass
+                            stop = aug_target_frag_list[0][2].tolist().index(1)
+                            if stop < len(aug_target_frag_list[0][2]) / 2:
+                                aug_target_frag_list[0][2][:stop] = [1] * stop
+                            else:
+                                aug_target_frag_list[0][2][stop + 1:] = [1] * (
+                                            len(aug_target_frag_list[0][2]) - stop - 1)
                         N_side = [3, 5, 6, 7]
                         for idx in N_side:
                             if 1 in aug_target_frag_list[0][idx]:
-                                pass
-                                # stop = aug_target_frag_list[0][idx].tolist().index(1)
-                                # aug_target_frag_list[0][idx][:stop] = [1] * stop
+                                # pass
+                                stop = aug_target_frag_list[0][idx].tolist().index(1)
+                                aug_target_frag_list[0][idx][:stop] = [1] * stop
 
                 if aug_i == 0:
                     flattened_aug_target_frag_list = np.hstack(aug_target_frag_list)
