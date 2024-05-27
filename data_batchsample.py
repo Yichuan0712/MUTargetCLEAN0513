@@ -87,7 +87,7 @@ class LocalizationDataset(Dataset):
 
                 # print(aug_id)
                 # print(aug_id_frag_list)
-                print(aug_target_frag_list[0].shape)
+                print(aug_target_frag_list[0].shape) (8, 1022)
                 if len(aug_id_frag_list)>1:
                     exit(0)
 
