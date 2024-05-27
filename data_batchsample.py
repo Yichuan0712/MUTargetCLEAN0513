@@ -95,11 +95,11 @@ class LocalizationDataset(Dataset):
                         if 1 in aug_target_frag_list[0][0] or 1 in aug_target_frag_list[0][4]:
                             pass
                         if 1 in aug_target_frag_list[0][1]:
-                            # pass
+                            pass
                             stop = aug_target_frag_list[0][1].tolist().index(1)
                             aug_target_frag_list[0][1][stop + 1:] = [1] * (len(aug_target_frag_list[0][1]) - stop - 1)
                         if 1 in aug_target_frag_list[0][2]:
-                            # pass
+                            pass
                             stop = aug_target_frag_list[0][2].tolist().index(1)
                             if stop < len(aug_target_frag_list[0][2]) / 2:
                                 aug_target_frag_list[0][2][:stop] = [1] * stop
