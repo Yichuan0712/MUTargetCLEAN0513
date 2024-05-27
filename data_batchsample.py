@@ -80,7 +80,7 @@ class LocalizationDataset(Dataset):
             # print(seq_frag_list)
             # print(target_frag_list)
 
-            aug_target_frag_list = target_frag_list.deepcopy()
+            aug_target_frag_list = target_frag_list.copy()
             for aug_i in range(per_times):
                 aug_id = id + "_" + str(aug_i)
                 aug_id_frag_list = [aug_id + "@" + id_frag.split("@")[1] for id_frag in id_frag_list]
