@@ -415,10 +415,10 @@ def evaluate_protein(dataloader, tools):
 
         # IoU_difcut=np.zeros([n, 9])
         # FDR_frag_difcut=np.zeros([1,9])
-        IoU_pro_difcut=np.zeros([n, 9])  #just for nuc and nuc_export
+        IoU_pro_difcut=np.zeros([n, 12])  #just for nuc and nuc_export
         # FDR_pro_difcut=np.zeros([1,9])
-        result_pro_difcut=np.zeros([n,6,9])
-        cs_acc_difcut=np.zeros([n, 9]) 
+        result_pro_difcut=np.zeros([n,6,12])
+        cs_acc_difcut=np.zeros([n, 12])
         classname=["Nucleus", "ER", "Peroxisome", "Mitochondrion", "Nucleus_export",
              "SIGNAL", "chloroplast", "Thylakoid"]
         criteria=["roc_auc_score", "average_precision_score", "matthews_corrcoef",
