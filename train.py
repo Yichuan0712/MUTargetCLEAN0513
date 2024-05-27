@@ -425,6 +425,7 @@ def evaluate_protein(dataloader, tools):
               "recall_score", "precision_score", "f1_score"]
 
         cutoffs=[x / 10 for x in range(1, 10)]
+        cutoffs=[0.025, 0.05, 0.075, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
         cut_dim=0
         for cutoff in cutoffs:
             scores=get_scores(tools, cutoff, n, data_dict)
