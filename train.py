@@ -183,8 +183,6 @@ def train_loop(tools, configs, warm_starting,train_writer):
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
                 if configs.train_settings.data_aug.enable:
-                    print("!!!")
-                    exit(0)
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                 else:
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
