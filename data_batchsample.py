@@ -109,6 +109,7 @@ class LocalizationDataset(Dataset):
                         N_side = [3, 5, 6, 7]
                         for idx in N_side:
                             if 1 in aug_target_frag_list[0][idx]:
+                                pass
                                 stop = aug_target_frag_list[0][idx].tolist().index(1)
                                 aug_target_frag_list[0][idx][:stop] = [1] * stop
 
