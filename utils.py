@@ -234,6 +234,9 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     这
     """
     print(net)
+    mdl = net.model
+    for param in mdl.parameters():
+        print(param.requires_grad)
     exit(0)
     return net, start_epoch
 
