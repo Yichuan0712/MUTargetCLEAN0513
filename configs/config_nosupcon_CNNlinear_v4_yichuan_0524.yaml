@@ -41,7 +41,7 @@ train_settings:
   log_every: 30
   data_aug:
     enable: True
-    per_times: 10
+    per_times: 5
     add_original: False
     mutation_rate: 0.3
 
@@ -68,7 +68,7 @@ optimizer:
   use_8bit_adam: False
   grad_clip_norm: 1
   decay:
-    warmup: 1024
+    warmup: 256
     min_lr: 1e-5
     gamma: 0.2
     num_restarts: 1
