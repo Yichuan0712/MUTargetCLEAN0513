@@ -36,21 +36,36 @@ class LocalizationDataset(Dataset):
            self.hard_neg = configs.supcon.hard_neg
 
     #"""
-    def random_mutation(self, sequence, target, mutation_rate):
+    def random_mutation(self, sequence, target, pos_mutation_rate, neg_mutation_rate):
         amino_acids = "ACDEFGHIKLMNPQRSTVWY"  # List of standard amino acids
         seq = Seq(sequence)
         seq_list = list(seq)
         # Get the mutable positions
         # print(target)
-        mutable_positions = [i for i, label in enumerate(target) if label == 0]
-        num_mutations = int(mutation_rate*len(mutable_positions))
-        if num_mutations > 0:
-            num_mutations = min(num_mutations, len(mutable_positions))
-            mutation_positions = random.sample(mutable_positions, num_mutations)
-            for pos in mutation_positions:
-                # Ensure the mutated amino acid is different from the original
-                new_aa = random.choice([aa for aa in amino_acids if aa != seq_list[pos]])
-                seq_list[pos] = new_aa
+        pos_mutable_positions = [i for i, label in enumerate(target) if label == 1]
+        if len(pos_mutable_positions) == 1:
+            num_pos_mutations = 1 if random.random() < pos_mutation_rate else 0
+        else:
+            num_pos_mutations = int(pos_mutation_rate * len(pos_mutable_positions))
+
+        neg_mutable_positions = [i for i, label in enumerate(target) if label == 0]
+        num_neg_mutations = int(neg_mutation_rate * len(neg_mutable_positions))
+        if num_pos_mutations > 0 or num_neg_mutations > 0:
+            if num_pos_mutations > 0:
+                num_pos_mutations = min(num_pos_mutations, len(pos_mutable_positions))
+                mutation_positions = random.sample(pos_mutable_positions, num_pos_mutations)
+                for pos in mutation_positions:
+                    # Ensure the mutated amino acid is different from the original
+                    new_aa = random.choice([aa for aa in amino_acids if aa != seq_list[pos]])
+                    seq_list[pos] = new_aa
+
+            if num_neg_mutations > 0:
+                num_neg_mutations = min(num_neg_mutations, len(neg_mutable_positions))
+                mutation_positions = random.sample(neg_mutable_positions, num_neg_mutations)
+                for pos in mutation_positions:
+                    # Ensure the mutated amino acid is different from the original
+                    new_aa = random.choice([aa for aa in amino_acids if aa != seq_list[pos]])
+                    seq_list[pos] = new_aa
 
             # Join the mutated amino acids back into a sequence
             mutated_sequence = ''.join(seq_list)
@@ -58,12 +73,13 @@ class LocalizationDataset(Dataset):
             # print(mutated_sequence)
             return mutated_sequence
         else:
-           return sequence
+            return sequence
     #"""
 
     def data_aug_train(self, samples, configs, class_weights):
         print("data aug on len of " + str(len(samples)))
         aug_samples = []
+        pos_mutation_rate, neg_mutation_rate = configs.train_settings.data_aug.pos_mutation_rate, configs.train_settings.data_aug.neg_mutation_rate
 
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             if configs.train_settings.data_aug.add_original:
@@ -158,7 +174,7 @@ class LocalizationDataset(Dataset):
 
                 aug_seq_frag_list = [
                     self.random_mutation(sequence, [int(max(set(column))) for column in zip(*target)][:len(sequence)],
-                                         configs.train_settings.data_aug.mutation_rate) for sequence, target in
+                                         pos_mutation_rate, neg_mutation_rate) for sequence, target in
                     zip(seq_frag_list, temp_target_frag_list)]
 
                 # aug_seq_frag_list = [
