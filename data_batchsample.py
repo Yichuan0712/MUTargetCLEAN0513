@@ -117,10 +117,10 @@ class LocalizationDataset(Dataset):
                         pass
 
                     if 1 in flattened_aug_target_frag_list[1]:
-                        # pass
-                        stop_left = flattened_aug_target_frag_list[1].tolist().index(1)
-                        flattened_aug_target_frag_list[1][stop_left + 1:] = [1] * \
-                                                                      (len(flattened_aug_target_frag_list[1]) - stop_left - 1)
+                        pass
+                        # stop_left = flattened_aug_target_frag_list[1].tolist().index(1)
+                        # flattened_aug_target_frag_list[1][stop_left + 1:] = [1] * \
+                        #                                               (len(flattened_aug_target_frag_list[1]) - stop_left - 1)
 
                     if 1 in flattened_aug_target_frag_list[2]:
                         # pass
