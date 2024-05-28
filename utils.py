@@ -229,6 +229,12 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
         
         customlog(logfilepath, "Model is loaded to resume training!\n")
     # Return the loaded model and the epoch to start training from.
+
+    """
+    这
+    """
+    print(net)
+    exit(0)
     return net, start_epoch
 
 def customlog(filepath, text):
