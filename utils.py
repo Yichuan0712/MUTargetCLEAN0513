@@ -233,6 +233,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     """
     这
     """
+    print(model_checkpoint['epoch'])
     print(net)
     # mdl = net.model
     for param in net.model.parameters():
