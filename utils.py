@@ -82,7 +82,8 @@ def load_configs(config,args=None):
         tree_config.train_settings.data_aug = defaultObject()
         tree_config.train_settings.data_aug.enable = False
         tree_config.train_settings.data_aug.per_times = 1
-        tree_config.train_settings.data_aug.mutation_rate = 0
+        tree_config.train_settings.data_aug.pos_mutation_rate = 0
+        tree_config.train_settings.data_aug.neg_mutation_rate = 0
         tree_config.train_settings.data_aug.add_original = True
     
     if not hasattr(tree_config.train_settings, "MLM"):
@@ -97,9 +98,9 @@ def load_configs(config,args=None):
            tree_config.decoder = None
            tree_config.decoder.type = "linear"
            tree_config.decoder.combine = False
-           
-    
-    tree_config.train_settings.data_aug.mutation_rate = float(tree_config.train_settings.data_aug.mutation_rate)
+
+    tree_config.train_settings.data_aug.pos_mutation_rate = float(tree_config.train_settings.data_aug.pos_mutation_rate)
+    tree_config.train_settings.data_aug.neg_mutation_rate = float(tree_config.train_settings.data_aug.neg_mutation_rate)
     return tree_config
 
 def prepare_saving_dir(configs,config_file_path):
