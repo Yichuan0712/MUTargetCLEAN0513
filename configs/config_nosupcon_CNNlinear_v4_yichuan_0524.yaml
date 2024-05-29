@@ -36,7 +36,7 @@ train_settings:
   additional_pos_weights: True
   loss_pos_weight_nucleus: 10
   loss_pos_weight_nucleus_export: 50
-  dataset: v4 # v2, v3
+  dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
