@@ -211,7 +211,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                           f"nucleus_export_position_loss(sum):{nucleus_export_position_loss.item()}")
                     # weighted_loss_sum = class_loss + position_loss_sum
                     if epoch >= configs.train_settings.weighted_loss_sum_epoch:  # yichuan 0529
-                        print("weighted loss sum in training:", configs.train_settings.weighted_loss_sum)
+                        print("weighted loss sum training:", configs.train_settings.weighted_loss_sum)
+                        customlog(tools["logfilepath"], "weighted loss sum training: " + str(configs.train_settings.weighted_loss_sum)+'\n')
                         weighted_loss_sum = class_loss * configs.train_settings.weighted_loss_sum[0] + position_loss_sum * configs.train_settings.weighted_loss_sum[1]
                     else:
                         weighted_loss_sum = class_loss + position_loss_sum
@@ -221,7 +222,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
                     # weighted_loss_sum = class_loss + position_loss
                     if epoch >= configs.train_settings.weighted_loss_sum_epoch:  # yichuan 0529
-                        print("weighted loss sum in training:", configs.train_settings.weighted_loss_sum)
+                        print("weighted loss sum training:", configs.train_settings.weighted_loss_sum)
+                        customlog(tools["logfilepath"], "weighted loss sum training: " + str(configs.train_settings.weighted_loss_sum) + '\n')
                         weighted_loss_sum = class_loss * configs.train_settings.weighted_loss_sum[0] + position_loss * configs.train_settings.weighted_loss_sum[1]
                     else:
                         weighted_loss_sum = class_loss + position_loss
