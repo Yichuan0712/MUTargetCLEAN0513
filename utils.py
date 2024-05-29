@@ -214,9 +214,9 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     """
     start_epoch = 1
     # If the 'resume' flag is True, load the saved model checkpoints.
-    print('load check point')
-    print(configs.resume.resume)
-    exit(0)
+    # print('load check point')
+    # print(configs.resume.resume)
+    # exit(0)
     if configs.resume.resume:
         model_checkpoint = torch.load(configs.resume.resume_path, map_location='cpu')
         customlog(logfilepath, f"load checkpoint from {configs.resume.resume_path}")
