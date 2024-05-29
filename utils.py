@@ -255,7 +255,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     # for param in net.model.parameters():
     #     print(param.requires_grad)
     # # exit(0)
-    print(model_checkpoint)
+    print(model_checkpoint.keys())
     exit(0)
     return net, start_epoch
 
