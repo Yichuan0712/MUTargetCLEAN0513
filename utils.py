@@ -231,9 +231,11 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
                 optimizer.load_state_dict(model_checkpoint['optimizer_state_dict'])
                 # logging.info('Optimizer is loaded to resume training!')
                 customlog(logfilepath, "Optimizer is loaded to resume training!\n")
+                print("Optimizer is loaded to resume training!\n")
                 scheduler.load_state_dict(model_checkpoint['scheduler_state_dict'])
                 # logging.info('Scheduler is loaded to resume training!')
                 customlog(logfilepath, "Scheduler is loaded to resume training!\n")
+                print("Scheduler is loaded to resume training!\n")
                 start_epoch = model_checkpoint['epoch'] + 1
         
         customlog(logfilepath, "Model is loaded to resume training!\n")
