@@ -255,6 +255,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     # print()
     # print()
     if configs.resume.frozen_esm:
+        print('load frozen esm')
         for param in net.model.parameters():
             param.requires_grad = False
     # for param in net.model.parameters():
