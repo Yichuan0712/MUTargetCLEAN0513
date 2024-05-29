@@ -233,8 +233,8 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     """
     这
     """
-    print(model_checkpoint.keys())
-    print(net)
+    # print(model_checkpoint.keys())
+    # print(net)
     # mdl = net.model
     for param in net.model.parameters():
         print(param.requires_grad)
