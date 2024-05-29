@@ -23,7 +23,6 @@ class LocalizationDataset(Dataset):
         self.n = configs.encoder.num_classes
         self.class_weights = calculate_class_weights(self.count_samples_by_class(self.n, self.original_samples))
         print(self.class_weights)
-        exit(0)
         if mode == "train" and configs.train_settings.data_aug.enable:
            self.data_aug = True
            samples = self.data_aug_train(samples,configs,self.class_weights)
