@@ -76,6 +76,7 @@ def load_configs(config,args=None):
         
         if args.resume_path:
             tree_config.resume.resume_path = args.resume_path
+            print("yes")
             exit(0)
     
     #set configs value to default if doesn't have the attr
