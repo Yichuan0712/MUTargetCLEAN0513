@@ -58,7 +58,7 @@ def make_buffer(id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tupl
     return id_frags_list, seq_frag_tuple, target_frag_pt, type_protein_pt
 
 
-def train_loop(tools, configs, warm_starting,train_writer):
+def train_loop(tools, configs, warm_starting, train_writer, epoch):
     # accuracy = torchmetrics.Accuracy(task="multiclass", num_classes=tools['num_classes'], average='macro')
     # f1_score = torchmetrics.F1Score(num_classes=tools['num_classes'], average='macro', task="multiclass")
     # accuracy.to(tools['train_device'])
@@ -209,12 +209,20 @@ def train_loop(tools, configs, warm_starting,train_writer):
                           f"position_loss_6(sum):{position_loss.item()}  " +
                           f"nucleus_position_loss(sum):{nucleus_position_loss.item()}  " +
                           f"nucleus_export_position_loss(sum):{nucleus_export_position_loss.item()}")
-                    weighted_loss_sum = class_loss + position_loss_sum
+                    # weighted_loss_sum = class_loss + position_loss_sum
+                    if epoch >= configs.train_settings.weighted_loss_sum_epoch:  # yichuan 0529
+                        weighted_loss_sum = class_loss * configs.train_settings.weighted_loss_sum[0] + position_loss_sum * configs.train_settings.weighted_loss_sum[1]
+                    else:
+                        weighted_loss_sum = class_loss + position_loss_sum
                 else:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
                     print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
-                    weighted_loss_sum = class_loss+position_loss
+                    # weighted_loss_sum = class_loss + position_loss
+                    if epoch >= configs.train_settings.weighted_loss_sum_epoch:  # yichuan 0529
+                        weighted_loss_sum = class_loss * configs.train_settings.weighted_loss_sum[0] + position_loss * configs.train_settings.weighted_loss_sum[1]
+                    else:
+                        weighted_loss_sum = class_loss + position_loss
             
             if configs.supcon.apply and configs.supcon.apply_supcon_loss: #configs.supcon.apply: # and warm_starting: calculate supcon loss no matter whether warm_starting or not.
                 supcon_loss = tools['loss_function_supcon'](
@@ -703,7 +711,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
             tools[net]
             hold on 再看看似乎可以直接resume
             """
-            train_loss = train_loop(tools, configs, warm_starting, train_writer)
+            train_loss = train_loop(tools, configs, warm_starting, train_writer, epoch)
             if configs.train_settings.dataloader != "clean":
                if configs.train_settings.data_aug.enable:
                    tools['train_loader'].dataset.samples = tools['train_loader'].dataset.data_aug_train(tools['train_loader'].dataset.original_samples,configs,tools['train_loader'].dataset.class_weights)
