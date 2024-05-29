@@ -76,6 +76,7 @@ def load_configs(config,args=None):
         
         if args.resume_path:
             tree_config.resume.resume_path = args.resume_path
+            exit(0)
     
     #set configs value to default if doesn't have the attr
     if not hasattr(tree_config.train_settings, "data_aug"):
@@ -246,7 +247,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
         param.requires_grad = False
     for param in net.model.parameters():
         print(param.requires_grad)
-    exit(0)
+    # exit(0)
     return net, start_epoch
 
 def customlog(filepath, text):
