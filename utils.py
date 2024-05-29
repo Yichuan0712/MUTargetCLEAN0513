@@ -241,20 +241,22 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     """
     这
     """
-    # print(model_checkpoint.keys())
-    # print(net)
-    # mdl = net.model
-    for param in net.model.parameters():
-        print(param.requires_grad)
-    print()
-    print()
-    print()
-    print()
-    for param in net.model.parameters():
-        param.requires_grad = False
-    for param in net.model.parameters():
-        print(param.requires_grad)
-    # exit(0)
+    # # print(model_checkpoint.keys())
+    # # print(net)
+    # # mdl = net.model
+    # for param in net.model.parameters():
+    #     print(param.requires_grad)
+    # print()
+    # print()
+    # print()
+    # print()
+    # for param in net.model.parameters():
+    #     param.requires_grad = False
+    # for param in net.model.parameters():
+    #     print(param.requires_grad)
+    # # exit(0)
+    print(model_checkpoint)
+    exit(0)
     return net, start_epoch
 
 def customlog(filepath, text):
