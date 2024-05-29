@@ -76,7 +76,7 @@ def load_configs(config,args=None):
         
         if args.resume_path:
             tree_config.resume.resume_path = args.resume_path
-            tree_config.resume.resume = True  # fix bug that cannot resume model to train - Yichuan
+            # tree_config.resume.resume = True  # resume model to train - Yichuan
             # print("load model")
 
             # print(tree_config.resume.resume_path)
