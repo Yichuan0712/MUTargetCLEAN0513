@@ -221,6 +221,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     # exit(0)
     if configs.resume.resume:
         model_checkpoint = torch.load(configs.resume.resume_path, map_location='cpu')
+        print(f"load checkpoint from {configs.resume.resume_path}")
         customlog(logfilepath, f"load checkpoint from {configs.resume.resume_path}")
         net.load_state_dict(model_checkpoint['model_state_dict'])
         # If the saved checkpoint contains the optimizer and scheduler states and the epoch number,
