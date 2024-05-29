@@ -28,6 +28,7 @@ class LocalizationDataset(Dataset):
         print(self.count_samples_by_class(self.n, self.samples))
         self.class_weights = calculate_class_weights(self.count_samples_by_class(self.n, self.samples))
         print(self.class_weights)
+        exit(0)
         self.apply_supcon = configs.supcon.apply
         self.mode = mode
         if self.apply_supcon:
