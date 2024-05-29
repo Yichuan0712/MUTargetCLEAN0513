@@ -243,6 +243,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
 
     """
     这
+    load checkpoint的时候可以选择是否frosen esm
     """
     # # print(model_checkpoint.keys())
     # # print(net)
@@ -253,8 +254,9 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
     # print()
     # print()
     # print()
-    # for param in net.model.parameters():
-    #     param.requires_grad = False
+    if configs.resume.frozen_esm:
+        for param in net.model.parameters():
+            param.requires_grad = False
     # for param in net.model.parameters():
     #     print(param.requires_grad)
     # # exit(0)
