@@ -47,7 +47,7 @@ train_settings:
     neg_mutation_rate: 0.3
     pos_mutation_rate: 0.1
   weighted_loss_sum_start_epoch: 1
-  loss_sum_weights: [1.5, 0.5]
+  loss_sum_weights: [2, 0]
 
 
 valid_settings:
