@@ -406,7 +406,7 @@ def get_data_dict(dataloader, tools):
                     encoded_seq[k] = encoded_seq[k].to(tools['valid_device'])
             else:
                 encoded_seq = encoded_seq.to(tools['valid_device'])
-            classification_head, motif_logits = tools['net'](encoded_seq, id_tuple, id_frags_list, seq_frag_tuple)
+            classification_head, motif_logits = tools['net'](encoded_seq, id_tuple, id_frags_list, seq_frag_tuple, None, False)
             m = torch.nn.Sigmoid()
             motif_logits = m(motif_logits)
             classification_head = m(classification_head)
