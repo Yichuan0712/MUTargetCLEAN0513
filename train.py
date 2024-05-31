@@ -948,6 +948,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         customlog(logfilepath, "Start training...\n")
         
         best_valid_loss = np.inf
+        best_valid_position_loss = np.inf
         global global_step
         global_step=0
         if configs.train_settings.dataloader=="clean":
@@ -964,6 +965,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         
             if epoch == configs.supcon.warm_start:
                 best_valid_loss = np.inf #reset best_valid_loss when warmend ends
+                best_valid_position_loss = np.inf
                 warm_starting = False
                 print('== Warm Start Finished ==')
                 customlog(logfilepath,f"== Warm Start Finished ==\n")
@@ -1026,6 +1028,14 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
                     model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
                     customlog(logfilepath, f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
                     save_checkpoint(epoch, model_path, tools)
+                  if valid_position_loss < best_valid_position_loss:
+                      customlog(logfilepath,
+                                f"Epoch {epoch}: valid position loss {valid_position_loss} smaller than best position loss {best_valid_position_loss}\n-------------------------------\n")
+                      best_valid_position_loss = valid_position_loss
+                      model_path = os.path.join(tools['checkpoint_path'], f'best_position_model.pth')
+                      customlog(logfilepath,
+                                f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
+                      save_checkpoint(epoch, model_path, tools)
 
             if epoch % configs.checkpoints_every == 0 and epoch != 0:
                 model_path_every = os.path.join(tools['checkpoint_path'], f'checkpoint_{epoch}.pth')
