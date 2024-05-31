@@ -83,7 +83,7 @@ class LocalizationDataset(Dataset):
 
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             if configs.train_settings.data_aug.add_original:
-                if type_protein[4] == 1:  # 0531 yichuan
+                # if type_protein[4] == 1:  # 0531 yichuan
                     aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
 
             class_positions = np.where(type_protein == 1)[0]

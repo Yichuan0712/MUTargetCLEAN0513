@@ -20,7 +20,7 @@ encoder:
 
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 decoder:
-  combine: False #combine classification and motif? 
+  combine: True #combine classification and motif?
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
   cnn_kernel: 7
@@ -42,7 +42,7 @@ train_settings:
   log_every: 30
   data_aug:
     enable: True
-    per_times: 5
+    per_times: 10
     add_original: False
     neg_mutation_rate: 0.3
     pos_mutation_rate: 0.1
