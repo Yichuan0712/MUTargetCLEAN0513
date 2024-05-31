@@ -7,11 +7,12 @@ resume:
   resume: False
   resume_path: path/to/checkpoints.pth
   restart_optimizer: True
+  frozen_esm: False
 
 encoder:
   composition: esm_v2 # esm_v2, promprot, both
   model_type: esm_v2 # esm_v2, t5
-  model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, esm2_t36_3B_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
+  model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
   max_len: 1024
   num_classes: 8
   prm4prmpro: ppi
@@ -36,7 +37,7 @@ train_settings:
   additional_pos_weights: True
   loss_pos_weight_nucleus: 10
   loss_pos_weight_nucleus_export: 50
-  dataset: v4 # v2, v3
+  dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
@@ -45,7 +46,8 @@ train_settings:
     add_original: False
     neg_mutation_rate: 0.3
     pos_mutation_rate: 0.1
-
+  weighted_loss_sum_start_epoch: 10000
+  loss_sum_weights: [1, 1]
 
 
 valid_settings:

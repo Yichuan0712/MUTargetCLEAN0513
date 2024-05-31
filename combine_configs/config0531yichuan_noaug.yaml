@@ -7,6 +7,7 @@ resume:
   resume: False
   resume_path: path/to/checkpoints.pth
   restart_optimizer: True
+  frozen_esm: False
 
 encoder:
   composition: esm_v2 # esm_v2, promprot, both
@@ -19,31 +20,34 @@ encoder:
 
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 decoder:
-  combine: False #combine classification and motif? 
+  combine: True #combine classification and motif?
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
   cnn_kernel: 7
-  droprate: 0.3
+  droprate: 0.15
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 20
+  num_epochs: 15
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
   grad_accumulation: 1
   loss_pos_weight: 35 #35
+  additional_pos_weights: False
+  loss_pos_weight_nucleus: 35
+  loss_pos_weight_nucleus_export: 35
   dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
-    enable: True
+    enable: False
     per_times: 5
-    add_original: True
-    mutation_rate: 0.1
-  MLM:
-    enable: True
-    mask_ratio: 0.1
+    add_original: False
+    neg_mutation_rate: 0.3
+    pos_mutation_rate: 0.1
+  weighted_loss_sum_start_epoch: 10000
+  loss_sum_weights: [1, 1]
 
 
 valid_settings:
@@ -72,7 +76,7 @@ optimizer:
     min_lr: 1e-5
     gamma: 0.2
     num_restarts: 1
-    first_cycle_steps: null  #null before
+    first_cycle_steps: 40500  #null before
   mode: cosine #skip, cosine
 
 supcon:
