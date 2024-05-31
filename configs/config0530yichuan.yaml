@@ -28,7 +28,7 @@ decoder:
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 1
+  num_epochs: 20
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
@@ -37,7 +37,7 @@ train_settings:
   additional_pos_weights: False
   loss_pos_weight_nucleus: 35
   loss_pos_weight_nucleus_export: 35
-  dataset: v4 # v2, v3
+  dataset: v2 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
