@@ -29,4 +29,5 @@ export HF_HOME=/home/yz3qt/data/transformers_cache/
 #--result_path ./result_nosupcon/0529/
 
 python train.py --config_path ./configs/config0529yichuan_resume.yaml \
---resume_path ./result_nosupcon/0529/2024-05-29__14-04-47/checkpoints/best_model.pth
+--resume_path ./result_nosupcon/0529/2024-05-29__14-04-47/checkpoints/best_model.pth \
+--result_path ./result_nosupcon/0530/
