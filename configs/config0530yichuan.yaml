@@ -23,12 +23,12 @@ decoder:
   combine: False #combine classification and motif? 
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
-  cnn_kernel: 5
+  cnn_kernel: 7
   droprate: 0.15
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 20
+  num_epochs: 15
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
@@ -74,7 +74,7 @@ optimizer:
   decay:
     warmup: 1024
     min_lr: 1e-5
-    gamma: 0.2
+    gamma: 0.9 #0.2
     num_restarts: 1
     first_cycle_steps: 40500  #null before
   mode: cosine #skip, cosine
