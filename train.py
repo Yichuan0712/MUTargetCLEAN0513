@@ -320,7 +320,8 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             else:
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
             
-            weighted_loss_sum=class_loss+position_loss
+            # weighted_loss_sum=class_loss+position_loss
+            weighted_loss_sum = position_loss  # yichuan 0602
             """
             if configs.supcon.apply and warm_starting:
                 supcon_loss = tools['loss_function_supcon'](
