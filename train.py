@@ -225,8 +225,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
                         weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
                     else:
-                        # weighted_loss_sum = class_loss + position_loss
-                        weighted_loss_sum = position_loss  # yichuan 0601
+                        weighted_loss_sum = class_loss + position_loss
+                        # weighted_loss_sum = position_loss  # yichuan 0601
             
             if configs.supcon.apply and configs.supcon.apply_supcon_loss: #configs.supcon.apply: # and warm_starting: calculate supcon loss no matter whether warm_starting or not.
                 supcon_loss = tools['loss_function_supcon'](
