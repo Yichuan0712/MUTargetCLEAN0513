@@ -263,8 +263,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     customlog(tools["logfilepath"],
                               f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss_sum.item():>7f}\n")
                 else:
-                    customlog(tools["logfilepath"], f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss.item():>7f}\n")
-            
+                    # customlog(tools["logfilepath"], f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss.item():>7f}\n")
+                    customlog(tools["logfilepath"], f"{global_step} class loss: {'NO':>7f} position_loss:{position_loss.item():>7f}\n")
+
             if weighted_supcon_loss !=-1:
                customlog(tools["logfilepath"], f"{global_step} supcon loss: {weighted_supcon_loss.item():>7f}\n")
         
