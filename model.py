@@ -539,12 +539,11 @@ class Encoder(nn.Module):
             """CASE D"""
             """这"""
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
-
-            # if self.combine:
-            #     classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
-            # else:
-            #     # print('emb_pro', emb_pro.shape)
-            #     classification_head = self.type_head(emb_pro)  # [sample, num_class]
+            if self.combine:
+                classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
+            else:
+                # print('emb_pro', emb_pro.shape)
+                classification_head = self.type_head(emb_pro)  # [sample, num_class]
                 # print(classification_head.shape)
                 # print(classification_head)
                 # exit(0)
@@ -554,7 +553,6 @@ class Encoder(nn.Module):
         #print(motif_logits[0,1,:])
         #maxvalues,_ = torch.max(motif_logits[0], dim=-1, keepdim=True)
         #print(maxvalues)
-        classification_head = None
         return classification_head, motif_logits, projection_head
 
 class Bothmodels(nn.Module):

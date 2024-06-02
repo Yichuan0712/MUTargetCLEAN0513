@@ -186,14 +186,14 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
-                # if configs.train_settings.data_aug.enable:
-                #     # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
-                #     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
-                #     # print(sample_weight_pt)
-                #     # exit(0)
-                # else:
-                #     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
-                class_loss = None
+                if configs.train_settings.data_aug.enable:
+                    # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
+                    # print(sample_weight_pt)
+                    # exit(0)
+                else:
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
+
                 if configs.train_settings.additional_pos_weights:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss_6', position_loss.item(), global_step=global_step)
@@ -218,15 +218,15 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     else:
                         weighted_loss_sum = class_loss + position_loss_sum
                 else:
-                    # train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
+                    train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
-                    # print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
+                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
                     # weighted_loss_sum = class_loss + position_loss
-                    # if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
-                    #     weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
-                    # else:
-                    #     weighted_loss_sum = class_loss + position_loss
-                    weighted_loss_sum = position_loss
+                    if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
+                        weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
+                    else:
+                        # weighted_loss_sum = class_loss + position_loss
+                        weighted_loss_sum = position_loss  # yichuan 0601
             
             if configs.supcon.apply and configs.supcon.apply_supcon_loss: #configs.supcon.apply: # and warm_starting: calculate supcon loss no matter whether warm_starting or not.
                 supcon_loss = tools['loss_function_supcon'](
@@ -263,8 +263,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     customlog(tools["logfilepath"],
                               f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss_sum.item():>7f}\n")
                 else:
-                    # customlog(tools["logfilepath"], f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss.item():>7f}\n")
-                    customlog(tools["logfilepath"], f"{global_step} class loss: {'NO':>7f} position_loss:{position_loss.item():>7f}\n")
+                    customlog(tools["logfilepath"], f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss.item():>7f}\n")
 
             if weighted_supcon_loss !=-1:
                customlog(tools["logfilepath"], f"{global_step} supcon loss: {weighted_supcon_loss.item():>7f}\n")
