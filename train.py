@@ -218,7 +218,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     else:
                         weighted_loss_sum = class_loss + position_loss_sum
                 else:
-                    train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
+                    # train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
                     print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
                     # weighted_loss_sum = class_loss + position_loss
