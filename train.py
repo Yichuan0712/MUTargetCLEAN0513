@@ -380,11 +380,12 @@ def frag2protein(data_dict, tools):
     return data_dict
 
 
-def get_data_dict(dataloader, tools):
+def get_data_dict(args, dataloader, tools):
     # Set the model to evaluation mode - important for batch normalization and dropout layers
     # Unnecessary in this situation but added for best practices
     # model.eval().cuda()
-    model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    # model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    model_path = args.resume_path
     model_checkpoint = torch.load(model_path, map_location='cpu')
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
     tools['net'].eval().to(tools["valid_device"])
@@ -1053,15 +1054,15 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     customlog(logfilepath, f"Fold {valid_batch_number} test\n-------------------------------\n")
     start_time = time()
     dataloader = tools["valid_loader"]
-    data_dict = get_data_dict(dataloader, tools)
+    data_dict = get_data_dict(args, dataloader, tools)
     opti_cutoffs_pro, opti_cutoffs_aa = evaluate_protein(data_dict, tools, False)
 
     dataloader = tools["test_loader"]
-    data_dict = get_data_dict(dataloader, tools)
+    data_dict = get_data_dict(args, dataloader, tools)
     test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, False)
 
     dataloader = tools["test_loader"]
-    data_dict = get_data_dict(dataloader, tools)
+    data_dict = get_data_dict(args, dataloader, tools)
     test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, True)
     train_writer.close()
     valid_writer.close()
