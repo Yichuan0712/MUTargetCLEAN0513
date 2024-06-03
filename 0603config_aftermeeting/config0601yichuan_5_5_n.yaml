@@ -48,6 +48,7 @@ train_settings:
     pos_mutation_rate: 0.1
   weighted_loss_sum_start_epoch: 10000
   loss_sum_weights: [1, 1]
+  predict_max: True  # False -> mean
 
 
 valid_settings:
