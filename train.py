@@ -390,6 +390,7 @@ def get_data_dict(args, dataloader, tools):
            model_path = args.resume_path
        else:
           model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    print('model_path:', model_path)
     model_checkpoint = torch.load(model_path, map_location='cpu')
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
     tools['net'].eval().to(tools["valid_device"])
