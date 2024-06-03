@@ -381,7 +381,8 @@ class Encoder(nn.Module):
         self.skip_esm = configs.supcon.skip_esm
         if self.skip_esm:
            self.protein_embeddings = torch.load("5283_esm2_t33_650M_UR50D.pt")
-        
+
+        self.predict_max = configs.train_settings.predict_max
         
         # mini tools for supcon
         #curdir_path = os.getcwd()
@@ -430,7 +431,7 @@ class Encoder(nn.Module):
         emb_pro_list=torch.stack(emb_pro_list, dim=0)
         return emb_pro_list
     
-    def get_pro_class(self, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
+    def get_pro_class(self, predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         #motif_logits_max, _ = torch.max(motif_logits, dim=-1, keepdim=True).squeeze(-1) #should be [batch,num_class]
         #print(motif_logits_max)
         motif_pro_list=[]
@@ -449,13 +450,15 @@ class Encoder(nn.Module):
                     motif_pro = torch.concatenate((motif_pro[:,:-overlap], overlap_motif, motif_logit[:,overlap:l]), axis=-1)
                 ind_frag+=1
                 id_frag = id_protein+"@"+str(ind_frag)
-            print('-before max', motif_pro.shape) #should be [num_class,length]
-            motif_pro, _ = torch.max(motif_pro, dim=-1)
-            print('-after max', motif_pro.shape) #should be [num_class]
 
-            print('-before mean', motif_pro.shape) #should be [num_class,length]
-            motif_pro = torch.mean(motif_pro, dim=-1)
-            print('-after mean', motif_pro.shape) #should be [num_class]
+            if predict_max:
+                print('-before max', motif_pro.shape) #should be [num_class,length]
+                motif_pro, _ = torch.max(motif_pro, dim=-1)
+                print('-after max', motif_pro.shape) #should be [num_class]
+            else:
+                print('-before mean', motif_pro.shape) #should be [num_class,length]
+                motif_pro = torch.mean(motif_pro, dim=-1)
+                print('-after mean', motif_pro.shape) #should be [num_class]
 
             motif_pro_list.append(motif_pro) #[batch,num_class]
         
@@ -530,7 +533,7 @@ class Encoder(nn.Module):
             if not warm_starting:
                 motif_logits = self.ParallelDecoders(last_hidden_state)
                 if self.combine:
-                     classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
+                     classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
                 else:
                      classification_head = self.type_head(emb_pro)  # [sample, num_class]
                 
@@ -545,7 +548,7 @@ class Encoder(nn.Module):
             """这"""
             motif_logits = self.ParallelDecoders(last_hidden_state) #list no shape # last_hidden_state=[batch, maxlen-2, dim]
             if self.combine:
-                classification_head = self.get_pro_class(id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
+                classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, self.overlap)
             else:
                 # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
