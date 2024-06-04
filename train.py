@@ -190,7 +190,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         raise 'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime'
 
                 else:
-                    position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
+                    position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
+                    # yichuan: 因为BCEloss已经修改成了none, 所以这里必须要加mean
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
                         # print(len(id_frags_list), len(sample_weight_tuple))
