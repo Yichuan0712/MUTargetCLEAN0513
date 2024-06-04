@@ -205,7 +205,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         # print(len(new_sample_weight_tuple))
                         # print(new_sample_weight_tuple)
                         new_sample_weight_pt = torch.from_numpy(np.array(new_sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
-
+                        print(sample_weight_pt)
+                        print(new_sample_weight_pt)
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * new_sample_weight_pt.unsqueeze(1))
 
 
