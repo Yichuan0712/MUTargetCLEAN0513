@@ -185,9 +185,10 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
                     # print(position_loss * sample_weight_pt)
                     # print((position_loss * sample_weight_pt).shape)
-                    sample_weight_pt_expanded = sample_weight_pt.unsqueeze(1)
-                    print(position_loss.shape)
-                    print((position_loss*sample_weight_pt_expanded).shape)
+                    # sample_weight_pt_expanded = sample_weight_pt.unsqueeze(1)
+                    # print(position_loss.shape)
+                    # print((position_loss*sample_weight_pt_expanded).shape)
+                    position_loss_ = position_loss.mean(dim=2)
                     print(torch.mean(position_loss))
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
@@ -195,7 +196,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 if configs.train_settings.data_aug.enable:
                     # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
-                    print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])))
+                    # print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])))
                     print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])).shape)
                     print(sample_weight_pt.shape)
                     exit(0)
