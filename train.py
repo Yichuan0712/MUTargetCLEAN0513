@@ -189,7 +189,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     # print(position_loss.shape)
                     # print((position_loss*sample_weight_pt_expanded).shape)
                     position_loss_ = position_loss.mean(dim=2)
-                    print(torch.mean(position_loss))
+                    print(torch.mean(position_loss_))
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
