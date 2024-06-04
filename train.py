@@ -1151,12 +1151,20 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
 
     customlog(logfilepath, f"\n\n\n\nComparable Test Data\n-------------------------------\n")
 
-    filter_list = ['Q9LPZ4', 'P15330', 'P35869', 'P51587', 'P70278', 'Q80UP3', 'Q8BMI0', 'Q9HC62', 'Q9UK80',
-                   'Q8LH59', 'P19484', 'P25963', 'P35123', 'Q6NVF4', 'Q8NG08', 'Q9BVS4', 'Q9NRA0', 'Q9NUL5', 'Q9UBP0', 'P78953',
-                   'A8MR65', 'Q8S4Q6', 'Q3U0V2', 'Q96D46', 'Q9NYA1', 'Q9ULX6', 'Q9WTL8', 'Q9WTZ9',
-                   'P35922', 'P46934', 'P81299', 'Q13148', 'Q6ICB0', 'Q7TPV4', 'Q8N884', 'Q99LG4', 'Q9Z207',
-                   'O00571', 'O35973', 'O54943', 'P52306', 'Q13015', 'Q13568', 'Q5TAQ9', 'Q8NAG6', 'Q9BZ23', 'Q9BZS1', 'Q9GZX7',
-                   ]  # 1, 2, 3, 4, 0
+    # filter_list = ['Q9LPZ4', 'P15330', 'P35869', 'P51587', 'P70278', 'Q80UP3', 'Q8BMI0', 'Q9HC62', 'Q9UK80',
+    #                'Q8LH59', 'P19484', 'P25963', 'P35123', 'Q6NVF4', 'Q8NG08', 'Q9BVS4', 'Q9NRA0', 'Q9NUL5', 'Q9UBP0', 'P78953',
+    #                'A8MR65', 'Q8S4Q6', 'Q3U0V2', 'Q96D46', 'Q9NYA1', 'Q9ULX6', 'Q9WTL8', 'Q9WTZ9',
+    #                'P35922', 'P46934', 'P81299', 'Q13148', 'Q6ICB0', 'Q7TPV4', 'Q8N884', 'Q99LG4', 'Q9Z207',
+    #                'O00571', 'O35973', 'O54943', 'P52306', 'Q13015', 'Q13568', 'Q5TAQ9', 'Q8NAG6', 'Q9BZ23', 'Q9BZS1', 'Q9GZX7',
+    #                ]  # 1, 2, 3, 4, 0
+
+    filter_list = [
+        'Q9LPZ4', 'P15330', 'P35869', 'P70278', 'Q80UP3',
+        'Q8LH59', 'P19484', 'P35123', 'Q6NVF4', 'Q8NG08', 'Q9BVS4', 'Q9NRA0', 'Q9NUL5', 'Q9UBP0', 'P78953',
+        'A8MR65', 'Q8S4Q6', 'Q3U0V2', 'Q96D46', 'Q9NYA1', 'Q9ULX6', 'Q9WTL8',
+        'P35922', 'P46934', 'P81299', 'Q13148', 'Q6ICB0', 'Q7TPV4', 'Q8N884', 'Q99LG4', 'Q9Z207',
+        'O00571', 'P52306', 'Q13015', 'Q13568', 'Q5TAQ9', 'Q8NAG6', 'Q9BZ23', 'Q9BZS1',
+    ]
 
     dataloader = tools["test_loader"]
     data_dict = get_data_dict(args, dataloader, tools)
