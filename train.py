@@ -193,16 +193,21 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
                         position_loss = position_loss.mean(dim=2)
-                        print(torch.mean(position_loss))
+                        # print(torch.mean(position_loss))
                         position_loss = torch.mean(position_loss * sample_weight_pt)
-                        print(position_loss)
-                        exit(0)
+                        # print(position_loss)
+                        # exit(0)
 
                 
                 if configs.train_settings.data_aug.enable:
                     # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
-                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
-
+                    # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
+                    if configs.train_settings.add_sample_weight_when_data_aug:
+                        class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(
+                            tools['valid_device'])) * sample_weight_pt)  # yichuan
+                    else:
+                        class_loss = torch.mean(
+                            tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
                 else:
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
 
@@ -330,8 +335,10 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             
             if configs.train_settings.data_aug.enable:
                 # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
-                class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)  # yichuan
-
+                if configs.train_settings.add_sample_weight_when_data_aug:
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)  # yichuan
+                else:
+                    class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
             else:
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
             

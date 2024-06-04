@@ -50,7 +50,7 @@ train_settings:
   loss_sum_weights: [1, 1]
   predict_max: False  # False -> mean
   add_sample_weight_to_position_loss: False
-
+  add_sample_weight_when_data_aug: True
 
 valid_settings:
   do_every: 1
