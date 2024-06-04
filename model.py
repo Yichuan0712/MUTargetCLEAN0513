@@ -479,13 +479,13 @@ class Encoder(nn.Module):
                 id_frag = id_protein + "@" + str(ind_frag)
 
             if predict_max:
-                print('-before max', motif_pro.shape)  # should be [num_class,length]
+                # print('-before max', motif_pro.shape)  # should be [num_class,length]
                 motif_pro, _ = torch.max(motif_pro, dim=-1)
-                print('-after max', motif_pro.shape)  # should be [num_class]
+                # print('-after max', motif_pro.shape)  # should be [num_class]
             else:
-                print('-before mean', motif_pro.shape)  # should be [num_class,length]
+                # print('-before mean', motif_pro.shape)  # should be [num_class,length]
                 motif_pro = torch.mean(motif_pro, dim=-1)
-                print('-after mean', motif_pro.shape)  # should be [num_class]
+                # print('-after mean', motif_pro.shape)  # should be [num_class]
 
             motif_pro_list.append(motif_pro)  # [batch,num_class]
 
