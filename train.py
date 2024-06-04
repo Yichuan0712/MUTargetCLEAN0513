@@ -639,12 +639,38 @@ def get_scores(tools, cutoff_pro, cutoff_aa, n, data_dict, constrain):
         # print(target)
         # print(pred)
         # print(cutoff_pro[head])
-        result_pro[head, 0] = roc_auc_score(target, pred)
-        result_pro[head, 1] = average_precision_score(target, pred)
-        result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff_pro[head])
-        result_pro[head, 3] = recall_score(target, pred >= cutoff_pro[head])
-        result_pro[head, 4] = precision_score(target, pred >= cutoff_pro[head])
-        result_pro[head, 5] = f1_score(target, pred >= cutoff_pro[head])
+
+        # result_pro[head, 0] = roc_auc_score(target, pred)
+        # result_pro[head, 1] = average_precision_score(target, pred)
+        # result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff_pro[head])
+        # result_pro[head, 3] = recall_score(target, pred >= cutoff_pro[head])
+        # result_pro[head, 4] = precision_score(target, pred >= cutoff_pro[head])
+        # result_pro[head, 5] = f1_score(target, pred >= cutoff_pro[head])
+
+        try:
+            result_pro[head, 0] = roc_auc_score(target, pred)
+        except ValueError:
+            result_pro[head, 0] = np.nan
+        try:
+            result_pro[head, 1] = average_precision_score(target, pred)
+        except ValueError:
+            result_pro[head, 1] = np.nan
+        try:
+            result_pro[head, 2] = matthews_corrcoef(target, pred >= cutoff_pro[head])
+        except ValueError:
+            result_pro[head, 2] = np.nan
+        try:
+            result_pro[head, 3] = recall_score(target, pred >= cutoff_pro[head])
+        except ValueError:
+            result_pro[head, 3] = np.nan
+        try:
+            result_pro[head, 4] = precision_score(target, pred >= cutoff_pro[head])
+        except ValueError:
+            result_pro[head, 4] = np.nan
+        try:
+            result_pro[head, 5] = f1_score(target, pred >= cutoff_pro[head])
+        except ValueError:
+            result_pro[head, 5] = np.nan
 
     scores = {"IoU_pro": IoU_pro,  # [n]
               "result_pro": result_pro,  # [n, 6]
