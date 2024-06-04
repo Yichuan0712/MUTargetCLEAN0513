@@ -325,6 +325,7 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['valid_device']).unsqueeze(1)
             position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['valid_device']))
             if configs.train_settings.add_sample_weight_to_position_loss:
+                print(len(id_frags_list), len*sample_weight_tuple)
                 position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(
                     tools['train_device'])) * sample_weight_pt.unsqueeze(1))
 
