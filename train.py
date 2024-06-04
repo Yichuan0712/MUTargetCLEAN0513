@@ -183,8 +183,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
-                    # print(position_loss.shape)
-                    # exit(0)
+                    print(position_loss.shape)
+                    exit(0)
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
@@ -1093,7 +1093,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     data_dict = get_data_dict(args, dataloader, tools)
     test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, True)
 
-    customlog(logfilepath, f"Comparable Test Data\n-------------------------------\n")
+    customlog(logfilepath, f"\n\n\n\nComparable Test Data\n-------------------------------\n")
 
     filter_list = ['Q9LPZ4', 'P15330', 'P35869', 'P51587', 'P70278', 'Q80UP3', 'Q8BMI0', 'Q9HC62', 'Q9UK80',
                    'Q8LH59', 'P19484', 'P25963', 'P35123', 'Q6NVF4', 'Q8NG08', 'Q9BVS4', 'Q9NRA0', 'Q9NUL5', 'Q9UBP0', 'P78953',
