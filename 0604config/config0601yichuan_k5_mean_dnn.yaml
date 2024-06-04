@@ -1,13 +1,13 @@
 fix_seed: 0
 checkpoints_every: 16
-result_path: ./results_resume
+result_path: ./results_supcon
 config_path: ./config.yaml
 
 resume:
-  resume: True
+  resume: False
   resume_path: path/to/checkpoints.pth
   restart_optimizer: True
-  frozen_esm: True
+  frozen_esm: False
 
 encoder:
   composition: esm_v2 # esm_v2, promprot, both
@@ -21,7 +21,7 @@ encoder:
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 decoder:
   combine: True #combine classification and motif?
-  combine_DNN: False
+  combine_DNN: True
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
   cnn_kernel: 5
@@ -49,10 +49,10 @@ train_settings:
     pos_mutation_rate: 0.1
   weighted_loss_sum_start_epoch: 10000
   loss_sum_weights: [1, 1]
-  predict_max: True  # False -> mean
+  predict_max: False  # False -> mean
   add_sample_weight_to_position_loss: False
   add_sample_weight_to_class_loss_when_data_aug: True
-  only_use_position_loss: True  # check combine_DNN
+  only_use_position_loss: False  # check combine_DNN
 
 valid_settings:
   do_every: 1

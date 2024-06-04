@@ -21,9 +21,7 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-#python train0520.py --config_path ./configs/config_supcon_onlysampling.yaml \
-#--resume_path /cluster/pixstor/xudong-lab/duolin/MUTargetCLEAN/results_supcon_hardTrue_onlysampling/b10_p2_n4/2024-03-28__11-36-17/checkpoints//best_model.pth \
-#--result_path ./results_supcon_hardTrue_onlysampling/b10_p2_n4/run2
-
-python train.py --config_path ./configs/config_nosupcon_CNN_v4_yichuan_0528.yaml \
---result_path ./result_nosupcon/0528/CNN
+python train.py --config_path ./0604config/config0601yichuan_k5_max_dnn.yaml --result_path ./result_nosupcon/0604_dnn/  || true
+python train.py --config_path ./0604config/config0601yichuan_k7_max_dnn.yaml --result_path ./result_nosupcon/0604_dnn/  || true
+python train.py --config_path ./0604config/config0601yichuan_k5_mean_dnn.yaml --result_path ./result_nosupcon/0604_dnn/  || true
+python train.py --config_path ./0604config/config0601yichuan_k7_mean_dnn.yaml --result_path ./result_nosupcon/0604_dnn/  || true
