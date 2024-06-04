@@ -192,11 +192,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
-                        position_loss = position_loss.mean(dim=2)
-                        # print(torch.mean(position_loss))
-                        position_loss = torch.mean(position_loss * sample_weight_pt)
-                        # print(position_loss)
-                        # exit(0)
+                        position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * sample_weight_pt.unsqueeze(1))
+
 
                 
                 if configs.train_settings.data_aug.enable:
@@ -328,10 +325,9 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['valid_device']).unsqueeze(1)
             position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['valid_device']))
             if configs.train_settings.add_sample_weight_to_position_loss:
-                position_loss = position_loss.mean(dim=2)
-                position_loss = torch.mean(position_loss * sample_weight_pt)
-            #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
-            #position_loss = torch.mean(position_loss * class_weights.to(tools['valid_device']))
+                position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(
+                    tools['train_device'])) * sample_weight_pt.unsqueeze(1))
+
             
             if configs.train_settings.data_aug.enable:
                 # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
