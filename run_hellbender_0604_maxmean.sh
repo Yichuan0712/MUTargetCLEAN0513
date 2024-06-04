@@ -25,3 +25,8 @@ python train.py --predict 1 --config_path ./0604config/config0601yichuan_k5_mean
 python train.py --predict 1 --config_path ./0604config/config0601yichuan_k7_mean.yaml --resume_path ./k7.pth --result_path ./result_nosupcon/0604_maxmean/  || true
 python train.py --predict 1 --config_path ./0604config/config0601yichuan_k5_max.yaml --resume_path ./k5.pth --result_path ./result_nosupcon/0604_maxmean/  || true
 python train.py --predict 1 --config_path ./0604config/config0601yichuan_k7_max.yaml --resume_path ./k7.pth --result_path ./result_nosupcon/0604_maxmean/  || true
+
+python train.py --config_path ./0604config/config0601yichuan_k5_max_wt.yaml --result_path ./result_nosupcon/0604_maxmean_wt/  || true
+python train.py --config_path ./0604config/config0601yichuan_k7_max_wt.yaml --result_path ./result_nosupcon/0604_maxmean_wt/  || true
+python train.py --config_path ./0604config/config0601yichuan_k5_mean_wt.yaml --result_path ./result_nosupcon/0604_maxmean_wt/  || true
+python train.py --config_path ./0604config/config0601yichuan_k7_mean_wt.yaml --result_path ./result_nosupcon/0604_maxmean_wt/  || true
