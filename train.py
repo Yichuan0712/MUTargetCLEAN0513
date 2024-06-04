@@ -205,8 +205,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         # print(len(new_sample_weight_tuple))
                         # print(new_sample_weight_tuple)
                         new_sample_weight_pt = torch.from_numpy(np.array(new_sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
-                        print(sample_weight_pt)
-                        print(new_sample_weight_pt)
+                        # print(sample_weight_pt)
+                        # print(new_sample_weight_pt)
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * new_sample_weight_pt.unsqueeze(1))
 
 
@@ -340,11 +340,25 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['valid_device']).unsqueeze(1)
             position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['valid_device']))
             if configs.train_settings.add_sample_weight_to_position_loss:
-                print(len(id_frags_list), len*sample_weight_tuple)
+                # print(len(id_frags_list), len(sample_weight_tuple))
+                # print(id_frags_list)
+                # print(sample_weight_tuple)
+                new_id_frags_list = [id_frag for id_frag in id_frags_list if id_frag.endswith('@0')]
+                id_to_weight = {id_frag.split('@')[0]: weight for id_frag, weight in
+                                zip(new_id_frags_list, sample_weight_tuple)}
+                # print(id_to_weight)
+                new_sample_weight_list = [id_to_weight.get(id_frag.split('@')[0], 0.0) for id_frag in
+                                          id_frags_list]
+                new_sample_weight_tuple = tuple(new_sample_weight_list)
+                # print(len(new_sample_weight_tuple))
+                # print(new_sample_weight_tuple)
+                new_sample_weight_pt = torch.from_numpy(np.array(new_sample_weight_tuple)).to(
+                    tools['valid_device']).unsqueeze(1)
+                # print(sample_weight_pt)
+                # print(new_sample_weight_pt)
                 position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(
-                    tools['train_device'])) * sample_weight_pt.unsqueeze(1))
+                    tools['valid_device'])) * new_sample_weight_pt.unsqueeze(1))
 
-            
             if configs.train_settings.data_aug.enable:
                 # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
                 if configs.train_settings.add_sample_weight_when_data_aug:
@@ -994,6 +1008,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         # 'loss_function': torch.nn.CrossEntropyLoss(reduction="none"),
         # 'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
         'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="none"),
+        # yichuan: loss_function的BCEWithLogitsLoss原来是mean, 被我改成none, 我在代码中加入了torch.mean
         'loss_function_6': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="sum"),
         'loss_function_nucleus': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus, reduction="sum"),
         'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="sum"),
