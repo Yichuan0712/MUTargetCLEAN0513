@@ -585,11 +585,10 @@ class Encoder(nn.Module):
             if self.combine:
                 classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
                                                          motif_logits, self.overlap)
-                print('classification_head', classification_head.shape)
+                # print('classification_head', classification_head.shape)
                 if self.combine_DNN:
                     classification_head = self.DNN_head(classification_head)
-                    print('classification_head', classification_head.shape)
-                    exit(0)
+                    # print('classification_head', classification_head.shape)
             else:
                 # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
