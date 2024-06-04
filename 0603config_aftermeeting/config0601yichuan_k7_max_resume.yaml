@@ -1,6 +1,6 @@
 fix_seed: 0
 checkpoints_every: 16
-result_path: ./results_supcon
+result_path: ./results_resume
 config_path: ./config.yaml
 
 resume:
