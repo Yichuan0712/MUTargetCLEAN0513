@@ -183,7 +183,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
-                    print(position_loss.shape)
+                    print(position_loss)
                     exit(0)
                     # 这
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
