@@ -241,10 +241,10 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
         customlog(logfilepath, "Model is loaded to resume training!\n")
     # Return the loaded model and the epoch to start training from.
 
-        # if configs.resume.frozen_esm:  # yichuan 0529
-        #     print('load frozen esm')
-        #     for param in net.model.parameters():
-        #         param.requires_grad = False
+        if configs.resume.frozen_esm:  # yichuan 0529
+            print('load frozen esm')
+            for param in net.model.parameters():
+                param.requires_grad = False
 
     return net, start_epoch
 
