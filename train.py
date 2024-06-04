@@ -196,7 +196,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         print(id_frags_list)
                         print(sample_weight_tuple)
                         new_id_frags_list = [id_frag for id_frag in id_frags_list if id_frag.endswith('@0')]
-                        id_to_weight = {id_frag: weight for id_frag, weight in
+                        id_to_weight = {id_frag.split('@')[0]: weight for id_frag, weight in
                                         zip(new_id_frags_list, sample_weight_tuple)}
                         print(id_to_weight)
                         new_sample_weight_list = [id_to_weight.get(id_frag.split('@')[0], 0.0) for id_frag in
