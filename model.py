@@ -579,11 +579,11 @@ class Encoder(nn.Module):
                 classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
                                                          motif_logits, self.overlap)
             else:
-                # print('emb_pro', emb_pro.shape)
+                print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
-                # print(classification_head.shape)
+                print('classification_head', classification_head.shape)
                 # print(classification_head)
-                # exit(0)
+                exit(0)
 
         # print(motif_logits[0,0,:])
         # print(motif_logits.shape)
