@@ -50,7 +50,7 @@ train_settings:
   loss_sum_weights: [1, 1]
   predict_max: True  # False -> mean
   add_sample_weight_to_position_loss: False
-  add_sample_weight_when_data_aug: True
+  add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: True  # check combine_DNN
 
 valid_settings:
