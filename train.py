@@ -193,7 +193,14 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
                         print(len(id_frags_list), len(sample_weight_tuple))
-                        print(id_tuple)
+                        print(id_frags_list)
+                        print(sample_weight_tuple)
+
+                        sample_weight_pt_fixed = sample_weight_pt.copy()
+                        for i in range(len(id_frags_list)):
+                            if id_frags_list[i].split('@')[1]!='0':
+                                pass
+
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * sample_weight_pt.unsqueeze(1))
 
 
