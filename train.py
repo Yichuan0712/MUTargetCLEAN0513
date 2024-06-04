@@ -182,20 +182,19 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         (motif_logits_nucleus_export, target_frag_nucleus_export.to(tools['train_device']))
 
                     """
-                    add_position_loss 
+                    add_position_loss & add_sample_weight_to_position_loss
                     """
+                    if configs.train_settings.add_sample_weight_to_position_loss:
+                        print('add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime')
+                        customlog(tools["logfilepath"], f'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime\n')
 
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
-                    # print(position_loss * sample_weight_pt)
-                    # print((position_loss * sample_weight_pt).shape)
-                    # sample_weight_pt_expanded = sample_weight_pt.unsqueeze(1)
-                    # print(position_loss.shape)
-                    # print((position_loss*sample_weight_pt_expanded).shape)
-                    position_loss_ = position_loss.mean(dim=2)
-                    print(torch.mean(position_loss_ * sample_weight_pt))
-                #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
-                #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
+
+                    if configs.train_settings.add_sample_weight_to_position_loss:
+                        position_loss = position_loss.mean(dim=2)
+                        position_loss = torch.mean(position_loss * sample_weight_pt)
+
                 
                 if configs.train_settings.data_aug.enable:
                     # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
@@ -323,6 +322,9 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
             motif_logits, target_frag = loss_fix(id_frags_list, motif_logits, target_frag_pt, tools)
             sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['valid_device']).unsqueeze(1)
             position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['valid_device']))
+            if configs.train_settings.add_sample_weight_to_position_loss:
+                position_loss = position_loss.mean(dim=2)
+                position_loss = torch.mean(position_loss * sample_weight_pt)
             #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
             #position_loss = torch.mean(position_loss * class_weights.to(tools['valid_device']))
             
