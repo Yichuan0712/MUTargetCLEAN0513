@@ -246,7 +246,10 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
                         weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss_sum * configs.train_settings.loss_sum_weights[1]
                     else:
-                        weighted_loss_sum = class_loss + position_loss_sum
+                        if configs.train_settings.only_use_position_loss:
+                            weighted_loss_sum = position_loss  # yichuan 0601
+                        else:
+                            weighted_loss_sum = class_loss + position_loss
                 else:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
                     train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
@@ -255,8 +258,10 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
                         weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
                     else:
-                        # weighted_loss_sum = class_loss + position_loss
-                        weighted_loss_sum = position_loss  # yichuan 0601
+                        if configs.train_settings.only_use_position_loss:
+                            weighted_loss_sum = position_loss  # yichuan 0601
+                        else:
+                            weighted_loss_sum = class_loss + position_loss
             
             if configs.supcon.apply and configs.supcon.apply_supcon_loss: #configs.supcon.apply: # and warm_starting: calculate supcon loss no matter whether warm_starting or not.
                 supcon_loss = tools['loss_function_supcon'](
@@ -368,9 +373,11 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])))
             else:
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
-            
-            # weighted_loss_sum=class_loss+position_loss
-            weighted_loss_sum = position_loss  # yichuan 0602
+
+            if configs.train_settings.only_use_position_loss:
+                weighted_loss_sum = position_loss  # yichuan 0601
+            else:
+                weighted_loss_sum = class_loss + position_loss
             """
             if configs.supcon.apply and warm_starting:
                 supcon_loss = tools['loss_function_supcon'](

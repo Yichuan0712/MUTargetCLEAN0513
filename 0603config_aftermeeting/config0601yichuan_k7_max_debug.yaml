@@ -52,6 +52,7 @@ train_settings:
   predict_max: True  # False -> mean
   add_sample_weight_to_position_loss: True
   add_sample_weight_when_data_aug: True
+  only_use_position_loss: False  # check combine_DNN
 
 valid_settings:
   do_every: 1
