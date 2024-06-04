@@ -982,12 +982,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
                customlog(logfilepath, f"Fold {valid_batch_number} Epoch {epoch} train...\n-------------------------------\n")
             
             start_time = time()
-            """
-            在这里froze模型
-            encoder.model
-            tools[net]
-            hold on 再看看似乎可以直接resume
-            """
+
             train_loss = train_loop(tools, configs, warm_starting, train_writer, epoch)
             if configs.train_settings.dataloader != "clean":
                if configs.train_settings.data_aug.enable:
