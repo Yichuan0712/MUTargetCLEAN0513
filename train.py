@@ -181,6 +181,10 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     nucleus_export_position_loss = tools['loss_function_nucleus_export']\
                         (motif_logits_nucleus_export, target_frag_nucleus_export.to(tools['train_device']))
 
+                    """
+                    add_position_loss 
+                    """
+
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
                     # print(position_loss * sample_weight_pt)
@@ -189,7 +193,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     # print(position_loss.shape)
                     # print((position_loss*sample_weight_pt_expanded).shape)
                     position_loss_ = position_loss.mean(dim=2)
-                    print(torch.mean(position_loss_))
+                    print(torch.mean(position_loss_ * sample_weight_pt))
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
