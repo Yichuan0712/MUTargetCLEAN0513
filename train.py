@@ -1059,6 +1059,8 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     customlog(logfilepath, f"Fold {valid_batch_number} test\n-------------------------------\n")
     start_time = time()
     dataloader = tools["valid_loader"]
+    print(dataloader)
+    exit(0)
     data_dict = get_data_dict(args, dataloader, tools)
     opti_cutoffs_pro, opti_cutoffs_aa = evaluate_protein(data_dict, tools, False)
 
@@ -1069,9 +1071,6 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     dataloader = tools["test_loader"]
     data_dict = get_data_dict(args, dataloader, tools)
     test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, True)
-
-    print(dataloader)
-    exit(0)
 
     train_writer.close()
     valid_writer.close()
