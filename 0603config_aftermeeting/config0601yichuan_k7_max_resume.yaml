@@ -6,7 +6,7 @@ config_path: ./config.yaml
 resume:
   resume: True
   resume_path: path/to/checkpoints.pth
-  restart_optimizer: False
+  restart_optimizer: True
   frozen_esm: True
 
 encoder:
