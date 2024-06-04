@@ -193,6 +193,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
                         position_loss = position_loss.mean(dim=2)
+                        print(torch.mean(position_loss))
                         position_loss = torch.mean(position_loss * sample_weight_pt)
                         print(position_loss)
                         exit(0)
