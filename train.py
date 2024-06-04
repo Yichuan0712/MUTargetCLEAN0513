@@ -192,22 +192,21 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
 
                     if configs.train_settings.add_sample_weight_to_position_loss:
-                        print(len(id_frags_list), len(sample_weight_tuple))
-                        print(id_frags_list)
-                        print(sample_weight_tuple)
+                        # print(len(id_frags_list), len(sample_weight_tuple))
+                        # print(id_frags_list)
+                        # print(sample_weight_tuple)
                         new_id_frags_list = [id_frag for id_frag in id_frags_list if id_frag.endswith('@0')]
                         id_to_weight = {id_frag.split('@')[0]: weight for id_frag, weight in
                                         zip(new_id_frags_list, sample_weight_tuple)}
-                        print(id_to_weight)
+                        # print(id_to_weight)
                         new_sample_weight_list = [id_to_weight.get(id_frag.split('@')[0], 0.0) for id_frag in
                                                   id_frags_list]
                         new_sample_weight_tuple = tuple(new_sample_weight_list)
+                        # print(len(new_sample_weight_tuple))
+                        # print(new_sample_weight_tuple)
+                        new_sample_weight_pt = torch.from_numpy(np.array(new_sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
 
-                        print(len(new_sample_weight_tuple))
-                        print(new_sample_weight_tuple)
-                        # exit(0)
-
-                        position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * sample_weight_pt.unsqueeze(1))
+                        position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * new_sample_weight_pt.unsqueeze(1))
 
 
                 
