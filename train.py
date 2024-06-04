@@ -187,6 +187,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     if configs.train_settings.add_sample_weight_to_position_loss:
                         print('add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime')
                         customlog(tools["logfilepath"], f'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime\n')
+                        raise 'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime'
 
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))

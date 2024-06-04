@@ -369,6 +369,7 @@ class Encoder(nn.Module):
             self.model = prepare_esm_model(model_name, configs)
         # self.pooling_layer = nn.AdaptiveAvgPool2d((None, 1))
         self.combine = configs.decoder.combine
+        self.combine_DNN = configs.decoder.combine_DNN
         self.pooling_layer = nn.AdaptiveAvgPool1d(1)
         if configs.decoder.type == "linear":
             self.ParallelDecoders = ParallelLinearDecoders(input_size=self.model.config.hidden_size,
@@ -391,6 +392,12 @@ class Encoder(nn.Module):
                                                                 )
         if not self.combine:  # only need type_head if combine is False
             self.type_head = nn.Linear(self.model.embeddings.position_embeddings.embedding_dim,
+                                       configs.encoder.num_classes)
+        if self.combine == False and self.combine_DNN == True:
+            print('combine and combine_DNN must be both True')
+            raise 'combine and combine_DNN must be both True'
+        if self.combine and self.combine_DNN:
+            self.DNN_head = nn.Linear(configs.encoder.num_classes,
                                        configs.encoder.num_classes)
 
         self.overlap = configs.encoder.frag_overlap
@@ -579,13 +586,14 @@ class Encoder(nn.Module):
                 classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
                                                          motif_logits, self.overlap)
                 print('classification_head', classification_head.shape)
-                exit(0)
+                if self.combine_DNN:
+                    classification_head = self.DNN_head(classification_head)
+                    print('classification_head', classification_head.shape)
+                    exit(0)
             else:
-                print('emb_pro', emb_pro.shape)
+                # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
-                print('classification_head', classification_head.shape)
-                # print(classification_head)
-                exit(0)
+                # print('classification_head', classification_head.shape)
 
         # print(motif_logits[0,0,:])
         # print(motif_logits.shape)
