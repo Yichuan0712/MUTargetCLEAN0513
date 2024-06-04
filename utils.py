@@ -228,6 +228,7 @@ def load_checkpoints(configs, optimizer, scheduler, logfilepath, net):
         # resume training from the last saved epoch.
         if 'optimizer_state_dict' in model_checkpoint and 'scheduler_state_dict' in model_checkpoint and 'epoch' in model_checkpoint:
             if not configs.resume.restart_optimizer:
+                # 这段代码有bug, 一部分张量没有被放到cuda上
                 optimizer.load_state_dict(model_checkpoint['optimizer_state_dict'])
                 # logging.info('Optimizer is loaded to resume training!')
                 customlog(logfilepath, "Optimizer is loaded to resume training!\n")
