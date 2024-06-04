@@ -195,11 +195,16 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         print(len(id_frags_list), len(sample_weight_tuple))
                         print(id_frags_list)
                         print(sample_weight_tuple)
+                        new_id_frags_list = [id_frag for id_frag in id_frags_list if id_frag.endswith('@0')]
+                        id_to_weight = {id_frag: weight for id_frag, weight in
+                                        zip(new_id_frags_list, sample_weight_tuple)}
+                        new_sample_weight_list = [id_to_weight.get(id_frag.split('@')[0], 0.0) for id_frag in
+                                                  id_frags_list]
+                        new_sample_weight_tuple = tuple(new_sample_weight_list)
 
-                        # sample_weight_pt_fixed = sample_weight_pt.copy()
-                        for i in range(len(id_frags_list)):
-                            if id_frags_list[i].split('@')[1]!='0':
-                                pass
+                        print(len(new_sample_weight_tuple))
+                        print(new_sample_weight_tuple)
+                        exit(0)
 
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * sample_weight_pt.unsqueeze(1))
 
