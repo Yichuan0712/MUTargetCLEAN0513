@@ -960,7 +960,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'valid_batch_size': configs.valid_settings.batch_size,
         'optimizer': optimizer,
         # 'loss_function': torch.nn.CrossEntropyLoss(reduction="none"),
-        'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
+        'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="none"),
         'loss_function_6': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="sum"),
         'loss_function_nucleus': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus, reduction="sum"),
         'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="sum"),
