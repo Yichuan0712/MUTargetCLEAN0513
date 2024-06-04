@@ -209,8 +209,6 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         # print(sample_weight_pt)
                         # print(new_sample_weight_pt)
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * new_sample_weight_pt.unsqueeze(1))
-                        print(position_loss)
-                        exit(0)
 
                 
                 if configs.train_settings.data_aug.enable:
@@ -253,7 +251,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                             weighted_loss_sum = class_loss + position_loss
                 else:
                     train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
-                    train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
+                    print(position_loss.shape)
+                    exit(0)
+                    # train_writer.add_scalar('step position_loss', position_loss.item(), global_step=global_step)
                     print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss.item()}")
                     # weighted_loss_sum = class_loss + position_loss
                     if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
