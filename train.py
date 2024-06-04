@@ -195,7 +195,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
                     print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])))
                     print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])).shape)
-                    print(sample_weight_pt)
+                    print(sample_weight_pt.shape)
                     exit(0)
                 else:
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
