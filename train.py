@@ -1081,17 +1081,17 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
     customlog(logfilepath, f"Fold {valid_batch_number} test\n-------------------------------\n")
     start_time = time()
-    dataloader = tools["valid_loader"]
-    data_dict = get_data_dict(args, dataloader, tools)
-    opti_cutoffs_pro, opti_cutoffs_aa = evaluate_protein(data_dict, tools, False)
-
-    dataloader = tools["test_loader"]
-    data_dict = get_data_dict(args, dataloader, tools)
-    test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, False)
-
-    dataloader = tools["test_loader"]
-    data_dict = get_data_dict(args, dataloader, tools)
-    test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, True)
+    # dataloader = tools["valid_loader"]
+    # data_dict = get_data_dict(args, dataloader, tools)
+    # opti_cutoffs_pro, opti_cutoffs_aa = evaluate_protein(data_dict, tools, False)
+    #
+    # dataloader = tools["test_loader"]
+    # data_dict = get_data_dict(args, dataloader, tools)
+    # test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, False)
+    #
+    # dataloader = tools["test_loader"]
+    # data_dict = get_data_dict(args, dataloader, tools)
+    # test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, True)
 
     customlog(logfilepath, f"Comparable Test Data\n-------------------------------\n")
 
