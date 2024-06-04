@@ -196,7 +196,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         print(id_frags_list)
                         print(sample_weight_tuple)
 
-                        sample_weight_pt_fixed = sample_weight_pt.copy()
+                        # sample_weight_pt_fixed = sample_weight_pt.copy()
                         for i in range(len(id_frags_list)):
                             if id_frags_list[i].split('@')[1]!='0':
                                 pass
