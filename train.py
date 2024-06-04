@@ -184,7 +184,6 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 else:
                     position_loss = tools['loss_function'](motif_logits, target_frag.to(tools['train_device']))
                     print(position_loss)
-                    print(position_loss.shape)
                 #class_weights = target_frag * (tools['pos_weight'] - 1) + 1 
                 #position_loss = torch.mean(position_loss * class_weights.to(tools['train_device']))
                 
@@ -192,7 +191,6 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     # class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device']))) #remove sample_weight_pt
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)  # - yichuan 0526
                     print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])))
-                    print(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])).shape)
                     print(sample_weight_pt)
                     exit(0)
                 else:
@@ -962,7 +960,8 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'valid_batch_size': configs.valid_settings.batch_size,
         'optimizer': optimizer,
         # 'loss_function': torch.nn.CrossEntropyLoss(reduction="none"),
-        'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="none"),
+        # 'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
+        'loss_function': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="mean"),
         'loss_function_6': torch.nn.BCEWithLogitsLoss(pos_weight=w, reduction="sum"),
         'loss_function_nucleus': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus, reduction="sum"),
         'loss_function_nucleus_export': torch.nn.BCEWithLogitsLoss(pos_weight=w_nucleus_export, reduction="sum"),
