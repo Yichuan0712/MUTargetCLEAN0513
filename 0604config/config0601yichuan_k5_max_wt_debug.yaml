@@ -21,15 +21,15 @@ encoder:
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 decoder:
   combine: True #combine classification and motif?
-  combine_DNN: True
+  combine_DNN: False
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
-  cnn_kernel: 7
+  cnn_kernel: 5
   droprate: 0.15
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 15
+  num_epochs: 1
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
@@ -50,9 +50,9 @@ train_settings:
   weighted_loss_sum_start_epoch: 10000
   loss_sum_weights: [1, 1]
   predict_max: True  # False -> mean
-  add_sample_weight_to_position_loss: False
+  add_sample_weight_to_position_loss: True
   add_sample_weight_to_class_loss_when_data_aug: True
-  only_use_position_loss: False  # check combine_DNN
+  only_use_position_loss: True  # check combine_DNN
 
 valid_settings:
   do_every: 1
