@@ -491,7 +491,10 @@ class Encoder(nn.Module):
                 # print('-after max', motif_pro.shape)  # should be [num_class]
             else:
                 # print('-before mean', motif_pro.shape)  # should be [num_class,length]
-                motif_pro = torch.mean(motif_pro, dim=-1)
+                # motif_pro = torch.mean(motif_pro, dim=-1)
+                motif_pro = torch.mean(motif_pro.copy(), dim=-1)  # yichuan 0605
+                # RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation
+                # 只在特定版本pytorch上出现此错误
                 # print('-after mean', motif_pro.shape)  # should be [num_class]
 
             motif_pro_list.append(motif_pro)  # [batch,num_class]
