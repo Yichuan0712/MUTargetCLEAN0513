@@ -442,12 +442,9 @@ def get_data_dict(args, dataloader, tools):
     # Set the model to evaluation mode - important for batch normalization and dropout layers
     # Unnecessary in this situation but added for best practices
     # model.eval().cuda()
-    # model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
-    if args.predict == 1:
-       if os.path.exists(args.resume_path):
-           model_path = args.resume_path
-       else:
-          model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    model_path = os.path.join(tools['checkpoint_path'], f'best_model.pth')
+    if args.predict == 1 and os.path.exists(args.resume_path):
+        model_path = args.resume_path
     print('model_path:', model_path)
     model_checkpoint = torch.load(model_path, map_location='cpu')
     tools['net'].load_state_dict(model_checkpoint['model_state_dict'])
