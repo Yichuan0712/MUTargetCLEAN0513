@@ -21,5 +21,5 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-python train.py --config_path ./configs_yaml/0606config/config0606yichuan_k5_max_dnn.yaml --result_path ./result_0606test/  || true
-python train.py --config_path ./configs_yaml/0606config/config0606yichuan_k7_max_dnn.yaml --result_path ./result_0606test/  || true
+python train.py --config_path ./configs_yaml/0606config/config0606yichuan_k5_max.yaml --result_path ./result_0606test/  || true
+python train.py --config_path ./configs_yaml/0606config/config0606yichuan_k7_max.yaml --result_path ./result_0606test/  || true
