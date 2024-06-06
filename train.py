@@ -21,7 +21,7 @@ from data_clean import prepare_dataloaders as prepare_dataloader_clean
 from data_batchsample import prepare_dataloaders as prepare_dataloader_batchsample
 from model import MaskedLMDataCollator
 
-torch.autograd.set_detect_anomaly(True)
+# torch.autograd.set_detect_anomaly(True)
 
 def loss_fix(id_frag, motif_logits, target_frag, tools):
     #id_frag [batch]
