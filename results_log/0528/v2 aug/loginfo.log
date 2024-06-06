@@ -1,0 +1,1305 @@
+use k-fold index: 0
+
+Done Loading data
+
+number of steps for training data: 405
+
+number of steps for valid data: 67
+
+number of steps for test data: 67
+
+Done initialize tokenizer
+
+trainable params: 39960718 || all params: 652959779 || trainable%: 6.119935604793201
+
+Done initialize model
+
+preparing optimizer is done
+
+number of train steps per epoch: 405
+
+Start training...
+
+Fold 0 Epoch 1 train...
+-------------------------------
+
+0 loss: 1.445124  [   16/ 6483]
+
+0 class loss: 0.701216 position_loss:0.743909
+
+30 loss: 1.364714  [  496/ 6483]
+
+30 class loss: 0.670509 position_loss:0.694205
+
+60 loss: 1.163778  [  976/ 6483]
+
+60 class loss: 0.569164 position_loss:0.594614
+
+90 loss: 0.825863  [ 1456/ 6483]
+
+90 class loss: 0.413867 position_loss:0.411996
+
+120 loss: 0.557720  [ 1936/ 6483]
+
+120 class loss: 0.302287 position_loss:0.255432
+
+150 loss: 0.352653  [ 2416/ 6483]
+
+150 class loss: 0.269289 position_loss:0.083365
+
+180 loss: 0.311423  [ 2896/ 6483]
+
+180 class loss: 0.226285 position_loss:0.085138
+
+210 loss: 0.289835  [ 3376/ 6483]
+
+210 class loss: 0.229096 position_loss:0.060739
+
+240 loss: 0.192536  [ 3856/ 6483]
+
+240 class loss: 0.150563 position_loss:0.041974
+
+270 loss: 0.157566  [ 4336/ 6483]
+
+270 class loss: 0.116948 position_loss:0.040618
+
+300 loss: 0.158850  [ 4816/ 6483]
+
+300 class loss: 0.120581 position_loss:0.038268
+
+330 loss: 0.134824  [ 5296/ 6483]
+
+330 class loss: 0.099291 position_loss:0.035533
+
+360 loss: 0.133592  [ 5776/ 6483]
+
+360 class loss: 0.109605 position_loss:0.023987
+
+390 loss: 0.139765  [ 6256/ 6483]
+
+390 class loss: 0.118398 position_loss:0.021367
+
+Epoch 1: train loss: 0.491545
+
+Fold 0 Epoch 1 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 1: valid loss:0.123449
+
+Epoch 1: valid_class_loss:0.096212	valid_position_loss:0.027237
+
+Epoch 1: valid loss 0.12344880676777865 smaller than best loss inf
+-------------------------------
+
+Epoch 1: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 2 train...
+-------------------------------
+
+405 loss: 0.103007  [   16/ 6483]
+
+405 class loss: 0.061997 position_loss:0.041010
+
+435 loss: 0.139462  [  496/ 6483]
+
+435 class loss: 0.111155 position_loss:0.028307
+
+465 loss: 0.071563  [  976/ 6483]
+
+465 class loss: 0.045876 position_loss:0.025687
+
+495 loss: 0.086563  [ 1456/ 6483]
+
+495 class loss: 0.070788 position_loss:0.015776
+
+525 loss: 0.072885  [ 1936/ 6483]
+
+525 class loss: 0.048876 position_loss:0.024009
+
+555 loss: 0.100468  [ 2416/ 6483]
+
+555 class loss: 0.076859 position_loss:0.023609
+
+585 loss: 0.046835  [ 2896/ 6483]
+
+585 class loss: 0.037546 position_loss:0.009289
+
+615 loss: 0.042819  [ 3376/ 6483]
+
+615 class loss: 0.033077 position_loss:0.009742
+
+645 loss: 0.062753  [ 3856/ 6483]
+
+645 class loss: 0.051349 position_loss:0.011404
+
+675 loss: 0.056354  [ 4336/ 6483]
+
+675 class loss: 0.043949 position_loss:0.012405
+
+705 loss: 0.050213  [ 4816/ 6483]
+
+705 class loss: 0.031288 position_loss:0.018925
+
+735 loss: 0.092713  [ 5296/ 6483]
+
+735 class loss: 0.074071 position_loss:0.018642
+
+765 loss: 0.064632  [ 5776/ 6483]
+
+765 class loss: 0.048991 position_loss:0.015641
+
+795 loss: 0.059273  [ 6256/ 6483]
+
+795 class loss: 0.044946 position_loss:0.014327
+
+Epoch 2: train loss: 0.078301
+
+Fold 0 Epoch 2 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 2: valid loss:0.081673
+
+Epoch 2: valid_class_loss:0.065227	valid_position_loss:0.016446
+
+Epoch 2: valid loss 0.08167321600611793 smaller than best loss 0.12344880676777865
+-------------------------------
+
+Epoch 2: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 3 train...
+-------------------------------
+
+810 loss: 0.043692  [   16/ 6483]
+
+810 class loss: 0.035268 position_loss:0.008425
+
+840 loss: 0.038026  [  496/ 6483]
+
+840 class loss: 0.029283 position_loss:0.008743
+
+870 loss: 0.063329  [  976/ 6483]
+
+870 class loss: 0.044265 position_loss:0.019064
+
+900 loss: 0.032370  [ 1456/ 6483]
+
+900 class loss: 0.021853 position_loss:0.010517
+
+930 loss: 0.028281  [ 1936/ 6483]
+
+930 class loss: 0.020677 position_loss:0.007604
+
+960 loss: 0.034821  [ 2416/ 6483]
+
+960 class loss: 0.025528 position_loss:0.009292
+
+990 loss: 0.029874  [ 2896/ 6483]
+
+990 class loss: 0.019842 position_loss:0.010032
+
+1020 loss: 0.048771  [ 3376/ 6483]
+
+1020 class loss: 0.039864 position_loss:0.008908
+
+1050 loss: 0.046528  [ 3856/ 6483]
+
+1050 class loss: 0.038179 position_loss:0.008349
+
+1080 loss: 0.027100  [ 4336/ 6483]
+
+1080 class loss: 0.021172 position_loss:0.005928
+
+1110 loss: 0.057927  [ 4816/ 6483]
+
+1110 class loss: 0.046561 position_loss:0.011366
+
+1140 loss: 0.022461  [ 5296/ 6483]
+
+1140 class loss: 0.013534 position_loss:0.008927
+
+1170 loss: 0.020534  [ 5776/ 6483]
+
+1170 class loss: 0.014734 position_loss:0.005800
+
+1200 loss: 0.044604  [ 6256/ 6483]
+
+1200 class loss: 0.039946 position_loss:0.004657
+
+Epoch 3: train loss: 0.042672
+
+Fold 0 Epoch 3 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 3: valid loss:0.073908
+
+Epoch 3: valid_class_loss:0.058448	valid_position_loss:0.015460
+
+Epoch 3: valid loss 0.07390791396767245 smaller than best loss 0.08167321600611793
+-------------------------------
+
+Epoch 3: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 4 train...
+-------------------------------
+
+1215 loss: 0.018726  [   16/ 6483]
+
+1215 class loss: 0.012055 position_loss:0.006671
+
+1245 loss: 0.020512  [  496/ 6483]
+
+1245 class loss: 0.014534 position_loss:0.005978
+
+1275 loss: 0.035238  [  976/ 6483]
+
+1275 class loss: 0.024199 position_loss:0.011039
+
+1305 loss: 0.011561  [ 1456/ 6483]
+
+1305 class loss: 0.005717 position_loss:0.005845
+
+1335 loss: 0.012756  [ 1936/ 6483]
+
+1335 class loss: 0.009408 position_loss:0.003348
+
+1365 loss: 0.028992  [ 2416/ 6483]
+
+1365 class loss: 0.016464 position_loss:0.012528
+
+1395 loss: 0.046105  [ 2896/ 6483]
+
+1395 class loss: 0.039452 position_loss:0.006653
+
+1425 loss: 0.029578  [ 3376/ 6483]
+
+1425 class loss: 0.018269 position_loss:0.011309
+
+1455 loss: 0.023425  [ 3856/ 6483]
+
+1455 class loss: 0.018056 position_loss:0.005370
+
+1485 loss: 0.108584  [ 4336/ 6483]
+
+1485 class loss: 0.080166 position_loss:0.028418
+
+1515 loss: 0.045282  [ 4816/ 6483]
+
+1515 class loss: 0.028308 position_loss:0.016975
+
+1545 loss: 0.013808  [ 5296/ 6483]
+
+1545 class loss: 0.009036 position_loss:0.004772
+
+1575 loss: 0.100239  [ 5776/ 6483]
+
+1575 class loss: 0.086609 position_loss:0.013629
+
+1605 loss: 0.029897  [ 6256/ 6483]
+
+1605 class loss: 0.021313 position_loss:0.008584
+
+Epoch 4: train loss: 0.029385
+
+Fold 0 Epoch 4 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 4: valid loss:0.071381
+
+Epoch 4: valid_class_loss:0.052440	valid_position_loss:0.018941
+
+Epoch 4: valid loss 0.07138080611485034 smaller than best loss 0.07390791396767245
+-------------------------------
+
+Epoch 4: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 5 train...
+-------------------------------
+
+1620 loss: 0.016280  [   16/ 6483]
+
+1620 class loss: 0.011148 position_loss:0.005131
+
+1650 loss: 0.022340  [  496/ 6483]
+
+1650 class loss: 0.016082 position_loss:0.006258
+
+1680 loss: 0.020713  [  976/ 6483]
+
+1680 class loss: 0.014488 position_loss:0.006225
+
+1710 loss: 0.022285  [ 1456/ 6483]
+
+1710 class loss: 0.012989 position_loss:0.009296
+
+1740 loss: 0.013211  [ 1936/ 6483]
+
+1740 class loss: 0.007404 position_loss:0.005807
+
+1770 loss: 0.019317  [ 2416/ 6483]
+
+1770 class loss: 0.012630 position_loss:0.006687
+
+1800 loss: 0.015501  [ 2896/ 6483]
+
+1800 class loss: 0.005865 position_loss:0.009636
+
+1830 loss: 0.031025  [ 3376/ 6483]
+
+1830 class loss: 0.026013 position_loss:0.005012
+
+1860 loss: 0.008870  [ 3856/ 6483]
+
+1860 class loss: 0.005623 position_loss:0.003247
+
+1890 loss: 0.031571  [ 4336/ 6483]
+
+1890 class loss: 0.022954 position_loss:0.008617
+
+1920 loss: 0.015224  [ 4816/ 6483]
+
+1920 class loss: 0.009551 position_loss:0.005674
+
+1950 loss: 0.011698  [ 5296/ 6483]
+
+1950 class loss: 0.007229 position_loss:0.004470
+
+1980 loss: 0.010887  [ 5776/ 6483]
+
+1980 class loss: 0.005685 position_loss:0.005203
+
+2010 loss: 0.020928  [ 6256/ 6483]
+
+2010 class loss: 0.016401 position_loss:0.004527
+
+Epoch 5: train loss: 0.020506
+
+Fold 0 Epoch 5 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 5: valid loss:0.068325
+
+Epoch 5: valid_class_loss:0.052419	valid_position_loss:0.015906
+
+Epoch 5: valid loss 0.06832467806376376 smaller than best loss 0.07138080611485034
+-------------------------------
+
+Epoch 5: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 6 train...
+-------------------------------
+
+2025 loss: 0.005262  [   16/ 6483]
+
+2025 class loss: 0.002697 position_loss:0.002565
+
+2055 loss: 0.025841  [  496/ 6483]
+
+2055 class loss: 0.018690 position_loss:0.007151
+
+2085 loss: 0.020322  [  976/ 6483]
+
+2085 class loss: 0.016354 position_loss:0.003967
+
+2115 loss: 0.009179  [ 1456/ 6483]
+
+2115 class loss: 0.005764 position_loss:0.003414
+
+2145 loss: 0.034795  [ 1936/ 6483]
+
+2145 class loss: 0.027328 position_loss:0.007467
+
+2175 loss: 0.024697  [ 2416/ 6483]
+
+2175 class loss: 0.014222 position_loss:0.010474
+
+2205 loss: 0.011787  [ 2896/ 6483]
+
+2205 class loss: 0.007464 position_loss:0.004322
+
+2235 loss: 0.007925  [ 3376/ 6483]
+
+2235 class loss: 0.004477 position_loss:0.003448
+
+2265 loss: 0.030735  [ 3856/ 6483]
+
+2265 class loss: 0.023682 position_loss:0.007053
+
+2295 loss: 0.012421  [ 4336/ 6483]
+
+2295 class loss: 0.008505 position_loss:0.003917
+
+2325 loss: 0.044913  [ 4816/ 6483]
+
+2325 class loss: 0.032900 position_loss:0.012013
+
+2355 loss: 0.005428  [ 5296/ 6483]
+
+2355 class loss: 0.002440 position_loss:0.002989
+
+2385 loss: 0.012903  [ 5776/ 6483]
+
+2385 class loss: 0.007578 position_loss:0.005325
+
+2415 loss: 0.014893  [ 6256/ 6483]
+
+2415 class loss: 0.011041 position_loss:0.003852
+
+Epoch 6: train loss: 0.016118
+
+Fold 0 Epoch 6 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 6: valid loss:0.067983
+
+Epoch 6: valid_class_loss:0.049569	valid_position_loss:0.018414
+
+Epoch 6: valid loss 0.06798302325340114 smaller than best loss 0.06832467806376376
+-------------------------------
+
+Epoch 6: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 7 train...
+-------------------------------
+
+2430 loss: 0.004609  [   16/ 6483]
+
+2430 class loss: 0.002391 position_loss:0.002218
+
+2460 loss: 0.021973  [  496/ 6483]
+
+2460 class loss: 0.015726 position_loss:0.006247
+
+2490 loss: 0.010309  [  976/ 6483]
+
+2490 class loss: 0.005915 position_loss:0.004394
+
+2520 loss: 0.035204  [ 1456/ 6483]
+
+2520 class loss: 0.029492 position_loss:0.005712
+
+2550 loss: 0.009089  [ 1936/ 6483]
+
+2550 class loss: 0.003644 position_loss:0.005445
+
+2580 loss: 0.005110  [ 2416/ 6483]
+
+2580 class loss: 0.003804 position_loss:0.001306
+
+2610 loss: 0.007313  [ 2896/ 6483]
+
+2610 class loss: 0.003480 position_loss:0.003833
+
+2640 loss: 0.009704  [ 3376/ 6483]
+
+2640 class loss: 0.005559 position_loss:0.004145
+
+2670 loss: 0.039806  [ 3856/ 6483]
+
+2670 class loss: 0.034455 position_loss:0.005351
+
+2700 loss: 0.008054  [ 4336/ 6483]
+
+2700 class loss: 0.005467 position_loss:0.002586
+
+2730 loss: 0.007285  [ 4816/ 6483]
+
+2730 class loss: 0.005286 position_loss:0.001999
+
+2760 loss: 0.036226  [ 5296/ 6483]
+
+2760 class loss: 0.029357 position_loss:0.006869
+
+2790 loss: 0.017079  [ 5776/ 6483]
+
+2790 class loss: 0.013574 position_loss:0.003504
+
+2820 loss: 0.004204  [ 6256/ 6483]
+
+2820 class loss: 0.002685 position_loss:0.001519
+
+Epoch 7: train loss: 0.012815
+
+Fold 0 Epoch 7 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 7: valid loss:0.066291
+
+Epoch 7: valid_class_loss:0.047705	valid_position_loss:0.018586
+
+Epoch 7: valid loss 0.06629122752643483 smaller than best loss 0.06798302325340114
+-------------------------------
+
+Epoch 7: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 8 train...
+-------------------------------
+
+2835 loss: 0.008057  [   16/ 6483]
+
+2835 class loss: 0.004374 position_loss:0.003683
+
+2865 loss: 0.006858  [  496/ 6483]
+
+2865 class loss: 0.004456 position_loss:0.002402
+
+2895 loss: 0.007466  [  976/ 6483]
+
+2895 class loss: 0.002123 position_loss:0.005343
+
+2925 loss: 0.008209  [ 1456/ 6483]
+
+2925 class loss: 0.004467 position_loss:0.003742
+
+2955 loss: 0.005673  [ 1936/ 6483]
+
+2955 class loss: 0.001956 position_loss:0.003717
+
+2985 loss: 0.011465  [ 2416/ 6483]
+
+2985 class loss: 0.006614 position_loss:0.004851
+
+3015 loss: 0.014147  [ 2896/ 6483]
+
+3015 class loss: 0.005646 position_loss:0.008501
+
+3045 loss: 0.008011  [ 3376/ 6483]
+
+3045 class loss: 0.004863 position_loss:0.003148
+
+3075 loss: 0.006116  [ 3856/ 6483]
+
+3075 class loss: 0.003170 position_loss:0.002947
+
+3105 loss: 0.008637  [ 4336/ 6483]
+
+3105 class loss: 0.004239 position_loss:0.004398
+
+3135 loss: 0.015700  [ 4816/ 6483]
+
+3135 class loss: 0.010886 position_loss:0.004814
+
+3165 loss: 0.012938  [ 5296/ 6483]
+
+3165 class loss: 0.003456 position_loss:0.009482
+
+3195 loss: 0.008280  [ 5776/ 6483]
+
+3195 class loss: 0.003690 position_loss:0.004590
+
+3225 loss: 0.004546  [ 6256/ 6483]
+
+3225 class loss: 0.002902 position_loss:0.001644
+
+Epoch 8: train loss: 0.010493
+
+Fold 0 Epoch 8 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 8: valid loss:0.072614
+
+Epoch 8: valid_class_loss:0.056763	valid_position_loss:0.015850
+
+Fold 0 Epoch 9 train...
+-------------------------------
+
+3240 loss: 0.063404  [   16/ 6483]
+
+3240 class loss: 0.058063 position_loss:0.005341
+
+3270 loss: 0.006316  [  496/ 6483]
+
+3270 class loss: 0.004151 position_loss:0.002165
+
+3300 loss: 0.011341  [  976/ 6483]
+
+3300 class loss: 0.007012 position_loss:0.004329
+
+3330 loss: 0.008869  [ 1456/ 6483]
+
+3330 class loss: 0.005828 position_loss:0.003041
+
+3360 loss: 0.008062  [ 1936/ 6483]
+
+3360 class loss: 0.004959 position_loss:0.003103
+
+3390 loss: 0.026880  [ 2416/ 6483]
+
+3390 class loss: 0.024582 position_loss:0.002298
+
+3420 loss: 0.013735  [ 2896/ 6483]
+
+3420 class loss: 0.010436 position_loss:0.003299
+
+3450 loss: 0.015980  [ 3376/ 6483]
+
+3450 class loss: 0.010873 position_loss:0.005107
+
+3480 loss: 0.003909  [ 3856/ 6483]
+
+3480 class loss: 0.002173 position_loss:0.001735
+
+3510 loss: 0.009358  [ 4336/ 6483]
+
+3510 class loss: 0.004837 position_loss:0.004521
+
+3540 loss: 0.007881  [ 4816/ 6483]
+
+3540 class loss: 0.002698 position_loss:0.005183
+
+3570 loss: 0.006682  [ 5296/ 6483]
+
+3570 class loss: 0.001984 position_loss:0.004698
+
+3600 loss: 0.008221  [ 5776/ 6483]
+
+3600 class loss: 0.001365 position_loss:0.006855
+
+3630 loss: 0.010976  [ 6256/ 6483]
+
+3630 class loss: 0.008119 position_loss:0.002856
+
+Epoch 9: train loss: 0.009030
+
+Fold 0 Epoch 9 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 9: valid loss:0.072514
+
+Epoch 9: valid_class_loss:0.052025	valid_position_loss:0.020489
+
+Fold 0 Epoch 10 train...
+-------------------------------
+
+3645 loss: 0.003988  [   16/ 6483]
+
+3645 class loss: 0.002157 position_loss:0.001830
+
+3675 loss: 0.005205  [  496/ 6483]
+
+3675 class loss: 0.001712 position_loss:0.003493
+
+3705 loss: 0.009207  [  976/ 6483]
+
+3705 class loss: 0.003333 position_loss:0.005874
+
+3735 loss: 0.005545  [ 1456/ 6483]
+
+3735 class loss: 0.003410 position_loss:0.002134
+
+3765 loss: 0.013650  [ 1936/ 6483]
+
+3765 class loss: 0.010752 position_loss:0.002897
+
+3795 loss: 0.003374  [ 2416/ 6483]
+
+3795 class loss: 0.001442 position_loss:0.001932
+
+3825 loss: 0.002612  [ 2896/ 6483]
+
+3825 class loss: 0.001195 position_loss:0.001417
+
+3855 loss: 0.004297  [ 3376/ 6483]
+
+3855 class loss: 0.001687 position_loss:0.002611
+
+3885 loss: 0.007035  [ 3856/ 6483]
+
+3885 class loss: 0.001697 position_loss:0.005338
+
+3915 loss: 0.009015  [ 4336/ 6483]
+
+3915 class loss: 0.002235 position_loss:0.006781
+
+3945 loss: 0.014838  [ 4816/ 6483]
+
+3945 class loss: 0.012351 position_loss:0.002487
+
+3975 loss: 0.004152  [ 5296/ 6483]
+
+3975 class loss: 0.001624 position_loss:0.002528
+
+4005 loss: 0.009025  [ 5776/ 6483]
+
+4005 class loss: 0.004447 position_loss:0.004578
+
+4035 loss: 0.013953  [ 6256/ 6483]
+
+4035 class loss: 0.008552 position_loss:0.005401
+
+Epoch 10: train loss: 0.008135
+
+Fold 0 Epoch 10 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 10: valid loss:0.071271
+
+Epoch 10: valid_class_loss:0.051882	valid_position_loss:0.019389
+
+Fold 0 Epoch 11 train...
+-------------------------------
+
+4050 loss: 0.005148  [   16/ 6483]
+
+4050 class loss: 0.002253 position_loss:0.002896
+
+4080 loss: 0.007060  [  496/ 6483]
+
+4080 class loss: 0.003331 position_loss:0.003729
+
+4110 loss: 0.014110  [  976/ 6483]
+
+4110 class loss: 0.010210 position_loss:0.003900
+
+4140 loss: 0.004063  [ 1456/ 6483]
+
+4140 class loss: 0.001551 position_loss:0.002512
+
+4170 loss: 0.007296  [ 1936/ 6483]
+
+4170 class loss: 0.003928 position_loss:0.003368
+
+4200 loss: 0.007693  [ 2416/ 6483]
+
+4200 class loss: 0.005530 position_loss:0.002164
+
+4230 loss: 0.005591  [ 2896/ 6483]
+
+4230 class loss: 0.001964 position_loss:0.003627
+
+4260 loss: 0.008151  [ 3376/ 6483]
+
+4260 class loss: 0.003062 position_loss:0.005088
+
+4290 loss: 0.004215  [ 3856/ 6483]
+
+4290 class loss: 0.002439 position_loss:0.001776
+
+4320 loss: 0.002764  [ 4336/ 6483]
+
+4320 class loss: 0.001457 position_loss:0.001307
+
+4350 loss: 0.002506  [ 4816/ 6483]
+
+4350 class loss: 0.001063 position_loss:0.001443
+
+4380 loss: 0.008479  [ 5296/ 6483]
+
+4380 class loss: 0.004784 position_loss:0.003695
+
+4410 loss: 0.004937  [ 5776/ 6483]
+
+4410 class loss: 0.002502 position_loss:0.002435
+
+4440 loss: 0.009168  [ 6256/ 6483]
+
+4440 class loss: 0.005751 position_loss:0.003417
+
+Epoch 11: train loss: 0.008082
+
+Fold 0 Epoch 11 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 11: valid loss:0.077343
+
+Epoch 11: valid_class_loss:0.054790	valid_position_loss:0.022554
+
+Fold 0 Epoch 12 train...
+-------------------------------
+
+4455 loss: 0.004024  [   16/ 6483]
+
+4455 class loss: 0.002236 position_loss:0.001788
+
+4485 loss: 0.002743  [  496/ 6483]
+
+4485 class loss: 0.000793 position_loss:0.001950
+
+4515 loss: 0.004280  [  976/ 6483]
+
+4515 class loss: 0.002871 position_loss:0.001409
+
+4545 loss: 0.003375  [ 1456/ 6483]
+
+4545 class loss: 0.001057 position_loss:0.002318
+
+4575 loss: 0.005879  [ 1936/ 6483]
+
+4575 class loss: 0.004052 position_loss:0.001826
+
+4605 loss: 0.010551  [ 2416/ 6483]
+
+4605 class loss: 0.005071 position_loss:0.005480
+
+4635 loss: 0.002913  [ 2896/ 6483]
+
+4635 class loss: 0.001103 position_loss:0.001810
+
+4665 loss: 0.004731  [ 3376/ 6483]
+
+4665 class loss: 0.002941 position_loss:0.001791
+
+4695 loss: 0.002465  [ 3856/ 6483]
+
+4695 class loss: 0.001087 position_loss:0.001378
+
+4725 loss: 0.004990  [ 4336/ 6483]
+
+4725 class loss: 0.001566 position_loss:0.003424
+
+4755 loss: 0.002959  [ 4816/ 6483]
+
+4755 class loss: 0.001280 position_loss:0.001678
+
+4785 loss: 0.004764  [ 5296/ 6483]
+
+4785 class loss: 0.002933 position_loss:0.001831
+
+4815 loss: 0.002370  [ 5776/ 6483]
+
+4815 class loss: 0.000891 position_loss:0.001479
+
+4845 loss: 0.005532  [ 6256/ 6483]
+
+4845 class loss: 0.003114 position_loss:0.002418
+
+Epoch 12: train loss: 0.007218
+
+Fold 0 Epoch 12 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 12: valid loss:0.074046
+
+Epoch 12: valid_class_loss:0.050159	valid_position_loss:0.023887
+
+Fold 0 Epoch 13 train...
+-------------------------------
+
+4860 loss: 0.011288  [   16/ 6483]
+
+4860 class loss: 0.007245 position_loss:0.004043
+
+4890 loss: 0.006123  [  496/ 6483]
+
+4890 class loss: 0.002760 position_loss:0.003362
+
+4920 loss: 0.004961  [  976/ 6483]
+
+4920 class loss: 0.002355 position_loss:0.002606
+
+4950 loss: 0.002563  [ 1456/ 6483]
+
+4950 class loss: 0.001755 position_loss:0.000808
+
+4980 loss: 0.002992  [ 1936/ 6483]
+
+4980 class loss: 0.001188 position_loss:0.001804
+
+5010 loss: 0.004618  [ 2416/ 6483]
+
+5010 class loss: 0.002042 position_loss:0.002576
+
+5040 loss: 0.006780  [ 2896/ 6483]
+
+5040 class loss: 0.004965 position_loss:0.001815
+
+5070 loss: 0.005662  [ 3376/ 6483]
+
+5070 class loss: 0.002912 position_loss:0.002751
+
+5100 loss: 0.004888  [ 3856/ 6483]
+
+5100 class loss: 0.001884 position_loss:0.003004
+
+5130 loss: 0.001982  [ 4336/ 6483]
+
+5130 class loss: 0.000623 position_loss:0.001359
+
+5160 loss: 0.004545  [ 4816/ 6483]
+
+5160 class loss: 0.001289 position_loss:0.003256
+
+5190 loss: 0.004078  [ 5296/ 6483]
+
+5190 class loss: 0.002115 position_loss:0.001963
+
+5220 loss: 0.092569  [ 5776/ 6483]
+
+5220 class loss: 0.090420 position_loss:0.002149
+
+5250 loss: 0.003408  [ 6256/ 6483]
+
+5250 class loss: 0.001530 position_loss:0.001878
+
+Epoch 13: train loss: 0.006597
+
+Fold 0 Epoch 13 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 13: valid loss:0.077587
+
+Epoch 13: valid_class_loss:0.053463	valid_position_loss:0.024124
+
+Fold 0 Epoch 14 train...
+-------------------------------
+
+5265 loss: 0.005965  [   16/ 6483]
+
+5265 class loss: 0.003287 position_loss:0.002678
+
+5295 loss: 0.004195  [  496/ 6483]
+
+5295 class loss: 0.002652 position_loss:0.001543
+
+5325 loss: 0.003183  [  976/ 6483]
+
+5325 class loss: 0.002048 position_loss:0.001136
+
+5355 loss: 0.003296  [ 1456/ 6483]
+
+5355 class loss: 0.001267 position_loss:0.002029
+
+5385 loss: 0.004308  [ 1936/ 6483]
+
+5385 class loss: 0.002153 position_loss:0.002154
+
+5415 loss: 0.001833  [ 2416/ 6483]
+
+5415 class loss: 0.000733 position_loss:0.001100
+
+5445 loss: 0.003375  [ 2896/ 6483]
+
+5445 class loss: 0.001507 position_loss:0.001868
+
+5475 loss: 0.002785  [ 3376/ 6483]
+
+5475 class loss: 0.000838 position_loss:0.001948
+
+5505 loss: 0.002546  [ 3856/ 6483]
+
+5505 class loss: 0.001160 position_loss:0.001386
+
+5535 loss: 0.005040  [ 4336/ 6483]
+
+5535 class loss: 0.002482 position_loss:0.002558
+
+5565 loss: 0.050577  [ 4816/ 6483]
+
+5565 class loss: 0.032391 position_loss:0.018185
+
+5595 loss: 0.002997  [ 5296/ 6483]
+
+5595 class loss: 0.001725 position_loss:0.001272
+
+5625 loss: 0.006649  [ 5776/ 6483]
+
+5625 class loss: 0.004862 position_loss:0.001787
+
+5655 loss: 0.005225  [ 6256/ 6483]
+
+5655 class loss: 0.002164 position_loss:0.003061
+
+Epoch 14: train loss: 0.006641
+
+Fold 0 Epoch 14 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 14: valid loss:0.076966
+
+Epoch 14: valid_class_loss:0.053665	valid_position_loss:0.023301
+
+Fold 0 Epoch 15 train...
+-------------------------------
+
+5670 loss: 0.003144  [   16/ 6483]
+
+5670 class loss: 0.001724 position_loss:0.001420
+
+5700 loss: 0.002858  [  496/ 6483]
+
+5700 class loss: 0.001011 position_loss:0.001847
+
+5730 loss: 0.032044  [  976/ 6483]
+
+5730 class loss: 0.030091 position_loss:0.001953
+
+5760 loss: 0.003224  [ 1456/ 6483]
+
+5760 class loss: 0.001659 position_loss:0.001565
+
+5790 loss: 0.003619  [ 1936/ 6483]
+
+5790 class loss: 0.001361 position_loss:0.002257
+
+5820 loss: 0.003792  [ 2416/ 6483]
+
+5820 class loss: 0.002131 position_loss:0.001661
+
+5850 loss: 0.002442  [ 2896/ 6483]
+
+5850 class loss: 0.001045 position_loss:0.001396
+
+5880 loss: 0.005009  [ 3376/ 6483]
+
+5880 class loss: 0.002624 position_loss:0.002385
+
+5910 loss: 0.002836  [ 3856/ 6483]
+
+5910 class loss: 0.001073 position_loss:0.001763
+
+5940 loss: 0.012656  [ 4336/ 6483]
+
+5940 class loss: 0.009872 position_loss:0.002784
+
+5970 loss: 0.004902  [ 4816/ 6483]
+
+5970 class loss: 0.001968 position_loss:0.002934
+
+6000 loss: 0.007144  [ 5296/ 6483]
+
+6000 class loss: 0.001696 position_loss:0.005448
+
+6030 loss: 0.003300  [ 5776/ 6483]
+
+6030 class loss: 0.001183 position_loss:0.002116
+
+6060 loss: 0.018567  [ 6256/ 6483]
+
+6060 class loss: 0.004105 position_loss:0.014462
+
+Epoch 15: train loss: 0.005826
+
+Fold 0 Epoch 15 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 15: valid loss:0.076479
+
+Epoch 15: valid_class_loss:0.051750	valid_position_loss:0.024729
+
+Loading checkpoint from /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_nosupcon/0527/2024-05-28__10-41-02/checkpoints/best_model.pth
+
+Fold 0 test
+-------------------------------
+
+number of evaluateion steps: 67
+
+===========================================
+
+ Jaccard Index (protein): 
+
+                     0.1       0.2       0.3       0.4       0.5       0.6  \
+Nucleus         0.621737  0.587639  0.571305  0.554398  0.541756  0.531076   
+ER              0.826946  0.689567  0.689620  0.689620  0.620658  0.517215   
+Peroxisome      0.917837  0.843191  0.614629  0.384573  0.384573  0.307658   
+Mitochondrion   0.870400  0.834728  0.794763  0.747108  0.729989  0.719296   
+Nucleus_export  0.156481  0.157467  0.155820  0.147840  0.143899  0.137520   
+SIGNAL          0.962934  0.961246  0.955496  0.948438  0.940721  0.937013   
+chloroplast     0.841973  0.748705  0.670731  0.645135  0.632725  0.633572   
+Thylakoid       0.770840  0.776027  0.777387  0.777387  0.777387  0.777387   
+
+                     0.7       0.8       0.9  
+Nucleus         0.502821  0.468179  0.414496  
+ER              0.379291  0.275862  0.034483  
+Peroxisome      0.153846  0.000000  0.000000  
+Mitochondrion   0.670328  0.583402  0.427351  
+Nucleus_export  0.135590  0.129030  0.120090  
+SIGNAL          0.928315  0.922566  0.898012  
+chloroplast     0.593467  0.484783  0.280339  
+Thylakoid       0.777387  0.555276  0.222166  
+===========================================
+
+ cs acc: 
+
+                     0.1       0.2       0.3       0.4       0.5       0.6  \
+Nucleus         0.008264  0.008264  0.008264  0.008264  0.008264  0.008264   
+ER              0.793103  0.793103  0.793103  0.793103  0.793103  0.793103   
+Peroxisome      0.692308  0.692308  0.692308  0.692308  0.692308  0.692308   
+Mitochondrion   0.528302  0.528302  0.528302  0.528302  0.528302  0.528302   
+Nucleus_export  0.000000  0.000000  0.000000  0.000000  0.000000  0.000000   
+SIGNAL          0.892523  0.892523  0.892523  0.892523  0.892523  0.892523   
+chloroplast     0.438356  0.438356  0.438356  0.438356  0.438356  0.438356   
+Thylakoid       0.777778  0.777778  0.777778  0.777778  0.777778  0.777778   
+
+                     0.7       0.8       0.9  
+Nucleus         0.008264  0.008264  0.008264  
+ER              0.793103  0.793103  0.793103  
+Peroxisome      0.692308  0.692308  0.692308  
+Mitochondrion   0.528302  0.528302  0.528302  
+Nucleus_export  0.000000  0.000000  0.000000  
+SIGNAL          0.892523  0.892523  0.892523  
+chloroplast     0.438356  0.438356  0.438356  
+Thylakoid       0.777778  0.777778  0.777778  
+===========================================
+
+ Class prediction performance (Nucleus): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.992521  0.992521  0.992521  0.992521  0.992521   
+average_precision_score  0.911620  0.911620  0.911620  0.911620  0.911620   
+matthews_corrcoef        0.878645  0.883784  0.886656  0.894804  0.894804   
+recall_score             0.950413  0.933884  0.925620  0.925620  0.925620   
+precision_score          0.839416  0.862595  0.875000  0.888889  0.888889   
+f1_score                 0.891473  0.896825  0.899598  0.906883  0.906883   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.992521  0.992521  0.992521  0.992521  
+average_precision_score  0.911620  0.911620  0.911620  0.911620  
+matthews_corrcoef        0.889746  0.884670  0.874468  0.859031  
+recall_score             0.917355  0.909091  0.892562  0.867769  
+precision_score          0.888000  0.887097  0.885246  0.882353  
+f1_score                 0.902439  0.897959  0.888889  0.875000  
+ Class prediction performance (ER): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.992285  0.992285  0.992285  0.992285  0.992285   
+average_precision_score  0.748159  0.748159  0.748159  0.748159  0.748159   
+matthews_corrcoef        0.595825  0.506739  0.506739  0.506739  0.474011   
+recall_score             0.448276  0.344828  0.344828  0.344828  0.310345   
+precision_score          0.812500  0.769231  0.769231  0.769231  0.750000   
+f1_score                 0.577778  0.476190  0.476190  0.476190  0.439024   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.992285  0.992285  0.992285  0.992285  
+average_precision_score  0.748159  0.748159  0.748159  0.748159  
+matthews_corrcoef        0.386290  0.295673  0.241646  0.183217  
+recall_score             0.206897  0.137931  0.103448  0.034483  
+precision_score          0.750000  0.666667  0.600000  1.000000  
+f1_score                 0.324324  0.228571  0.176471  0.066667  
+ Class prediction performance (Peroxisome): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            1.000000  1.000000  1.000000  1.000000  1.000000   
+average_precision_score  1.000000  1.000000  1.000000  1.000000  1.000000   
+matthews_corrcoef        0.748200  0.847799  0.900092  0.963162  0.963162   
+recall_score             1.000000  1.000000  1.000000  1.000000  1.000000   
+precision_score          0.565217  0.722222  0.812500  0.928571  0.928571   
+f1_score                 0.722222  0.838710  0.896552  0.962963  0.962963   
+
+                         0.6  0.7       0.8       0.9  
+roc_auc_score            1.0  1.0  1.000000  1.000000  
+average_precision_score  1.0  1.0  1.000000  1.000000  
+matthews_corrcoef        1.0  1.0  0.960309  0.918986  
+recall_score             1.0  1.0  0.923077  0.846154  
+precision_score          1.0  1.0  1.000000  1.000000  
+f1_score                 1.0  1.0  0.960000  0.916667  
+ Class prediction performance (Mitochondrion): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.996211  0.996211  0.996211  0.996211  0.996211   
+average_precision_score  0.989767  0.989767  0.989767  0.989767  0.989767   
+matthews_corrcoef        0.977791  0.974029  0.973948  0.981423  0.977690   
+recall_score             0.981132  0.974843  0.968553  0.968553  0.962264   
+precision_score          0.981132  0.981013  0.987179  1.000000  1.000000   
+f1_score                 0.981132  0.977918  0.977778  0.984026  0.980769   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.996211  0.996211  0.996211  0.996211  
+average_precision_score  0.989767  0.989767  0.989767  0.989767  
+matthews_corrcoef        0.970206  0.958934  0.951386  0.940014  
+recall_score             0.949686  0.930818  0.918239  0.899371  
+precision_score          1.000000  1.000000  1.000000  1.000000  
+f1_score                 0.974194  0.964169  0.957377  0.947020  
+ Class prediction performance (Nucleus_export): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.974380  0.974380  0.974380  0.974380  0.974380   
+average_precision_score  0.458443  0.458443  0.458443  0.458443  0.458443   
+matthews_corrcoef        0.425517  0.439609  0.434522  0.392127  0.345580   
+recall_score             0.360000  0.360000  0.320000  0.240000  0.200000   
+precision_score          0.529412  0.562500  0.615385  0.666667  0.625000   
+f1_score                 0.428571  0.439024  0.421053  0.352941  0.303030   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.974380  0.974380  0.974380  0.974380  
+average_precision_score  0.458443  0.458443  0.458443  0.458443  
+matthews_corrcoef        0.352208  0.294595  0.294595  0.000000  
+recall_score             0.160000  0.120000  0.120000  0.000000  
+precision_score          0.800000  0.750000  0.750000  0.000000  
+f1_score                 0.266667  0.206897  0.206897  0.000000  
+ Class prediction performance (SIGNAL): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.999178  0.999178  0.999178  0.999178  0.999178   
+average_precision_score  0.999476  0.999476  0.999476  0.999476  0.999476   
+matthews_corrcoef        0.945122  0.950928  0.952867  0.958696  0.960643   
+recall_score             0.998442  0.998442  0.998442  0.998442  0.998442   
+precision_score          0.959581  0.963910  0.965361  0.969743  0.971212   
+f1_score                 0.978626  0.980872  0.981623  0.983883  0.984639   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.999178  0.999178  0.999178  0.999178  
+average_precision_score  0.999476  0.999476  0.999476  0.999476  
+matthews_corrcoef        0.954511  0.954511  0.958378  0.960348  
+recall_score             0.993769  0.993769  0.992212  0.992212  
+precision_score          0.971081  0.971081  0.975498  0.976994  
+f1_score                 0.982294  0.982294  0.983784  0.984544  
+ Class prediction performance (chloroplast): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.999220  0.999220  0.999220  0.999220  0.999220   
+average_precision_score  0.988982  0.988982  0.988982  0.988982  0.988982   
+matthews_corrcoef        0.956509  0.948195  0.940489  0.940489  0.932735   
+recall_score             0.972603  0.945205  0.931507  0.931507  0.917808   
+precision_score          0.946667  0.958333  0.957746  0.957746  0.957143   
+f1_score                 0.959459  0.951724  0.944444  0.944444  0.937063   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.999220  0.999220  0.999220  0.999220  
+average_precision_score  0.988982  0.988982  0.988982  0.988982  
+matthews_corrcoef        0.909176  0.901220  0.877021  0.868258  
+recall_score             0.876712  0.863014  0.821918  0.780822  
+precision_score          0.955224  0.954545  0.952381  0.982759  
+f1_score                 0.914286  0.906475  0.882353  0.870229  
+ Class prediction performance (Thylakoid): 
+
+                              0.1       0.2       0.3       0.4       0.5  \
+roc_auc_score            0.995865  0.995865  0.995865  0.995865  0.995865   
+average_precision_score  0.555045  0.555045  0.555045  0.555045  0.555045   
+matthews_corrcoef        0.724824  0.724824  0.685321  0.685321  0.643616   
+recall_score             1.000000  1.000000  0.888889  0.888889  0.777778   
+precision_score          0.529412  0.529412  0.533333  0.533333  0.538462   
+f1_score                 0.692308  0.692308  0.666667  0.666667  0.636364   
+
+                              0.6       0.7       0.8       0.9  
+roc_auc_score            0.995865  0.995865  0.995865  0.995865  
+average_precision_score  0.555045  0.555045  0.555045  0.555045  
+matthews_corrcoef        0.522770  0.439673  0.348327  0.497384  
+recall_score             0.555556  0.444444  0.333333  0.333333  
+precision_score          0.500000  0.444444  0.375000  0.750000  
+f1_score                 0.526316  0.444444  0.352941  0.461538  

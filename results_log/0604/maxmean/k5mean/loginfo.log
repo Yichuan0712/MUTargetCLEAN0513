@@ -1,0 +1,330 @@
+use k-fold index: 0
+
+Done Loading data
+
+number of steps for training data: 221
+
+number of steps for valid data: 67
+
+number of steps for test data: 67
+
+Done initialize tokenizer
+
+trainable params: 39782534 || all params: 652781595 || trainable%: 6.094309996592352
+
+Done initialize model
+
+preparing optimizer is done
+
+Loading checkpoint from ./k5.pth
+
+Fold 0 test
+-------------------------------
+
+===================Evaluate protein results========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.1  0.1         0.1            0.1             0.1     0.1   
+cutoffs_aa       0.6  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.1        0.1  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.794772
+ER              0.896388
+Peroxisome      0.381544
+Mitochondrion   0.876082
+Nucleus_export  0.612886
+SIGNAL          0.951697
+chloroplast     0.821067
+Thylakoid       0.881624
+===========================================
+
+ cs acc: 
+
+                       0
+Nucleus         0.015625
+ER              0.866667
+Peroxisome      0.307692
+Mitochondrion   0.587500
+Nucleus_export  0.000000
+SIGNAL          0.870968
+chloroplast     0.526316
+Thylakoid       0.700000
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.973816                 0.752150           0.323830   
+ER                   0.484255                 0.026003           0.000000   
+Peroxisome           0.750220                 0.027533           0.000000   
+Mitochondrion        0.794138                 0.305350           0.000000   
+Nucleus_export       0.959305                 0.304579           0.324403   
+SIGNAL               0.261039                 0.475376           0.024375   
+chloroplast          0.767339                 0.132522           0.000000   
+Thylakoid            0.765271                 0.020224           0.000000   
+
+                recall_score  precision_score  f1_score  
+Nucleus             0.179688         0.718750  0.287500  
+ER                  0.000000         0.000000  0.000000  
+Peroxisome          0.000000         0.000000  0.000000  
+Mitochondrion       0.000000         0.000000  0.000000  
+Nucleus_export      0.200000         0.555556  0.294118  
+SIGNAL              0.001536         1.000000  0.003067  
+chloroplast         0.000000         0.000000  0.000000  
+Thylakoid           0.000000         0.000000  0.000000  
+===================Test protein results constrain: False========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.1  0.1         0.1            0.1             0.1     0.1   
+cutoffs_aa       0.6  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.1        0.1  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.661005
+ER              0.962305
+Peroxisome      0.918195
+Mitochondrion   0.856990
+Nucleus_export  0.210385
+SIGNAL          0.960546
+chloroplast     0.854377
+Thylakoid       0.877135
+===========================================
+
+ cs acc: 
+
+                       0
+Nucleus         0.016529
+ER              0.965517
+Peroxisome      0.923077
+Mitochondrion   0.572327
+Nucleus_export  0.000000
+SIGNAL          0.892523
+chloroplast     0.369863
+Thylakoid       0.777778
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.983144                 0.859618           0.512548   
+ER                   0.574064                 0.030484           0.000000   
+Peroxisome           0.747790                 0.025060           0.000000   
+Mitochondrion        0.749268                 0.247368           0.000000   
+Nucleus_export       0.935116                 0.171499          -0.018032   
+SIGNAL               0.313332                 0.495832           0.000000   
+chloroplast          0.830827                 0.178230           0.000000   
+Thylakoid            0.705259                 0.014916           0.000000   
+
+                recall_score  precision_score  f1_score  
+Nucleus              0.31405         0.926829  0.469136  
+ER                   0.00000         0.000000  0.000000  
+Peroxisome           0.00000         0.000000  0.000000  
+Mitochondrion        0.00000         0.000000  0.000000  
+Nucleus_export       0.00000         0.000000  0.000000  
+SIGNAL               0.00000         0.000000  0.000000  
+chloroplast          0.00000         0.000000  0.000000  
+Thylakoid            0.00000         0.000000  0.000000  
+===================Test protein results constrain: True========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.1  0.1         0.1            0.1             0.1     0.1   
+cutoffs_aa       0.6  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.1        0.1  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.173439
+ER              0.000000
+Peroxisome      0.000000
+Mitochondrion   0.000000
+Nucleus_export  0.000000
+SIGNAL          0.000000
+chloroplast     0.000000
+Thylakoid       0.000000
+===========================================
+
+ cs acc: 
+
+                       0
+Nucleus         0.052632
+ER                   NaN
+Peroxisome           NaN
+Mitochondrion        NaN
+Nucleus_export       NaN
+SIGNAL               NaN
+chloroplast          NaN
+Thylakoid            NaN
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.983144                 0.859618           0.512548   
+ER                   0.574064                 0.030484           0.000000   
+Peroxisome           0.747790                 0.025060           0.000000   
+Mitochondrion        0.749268                 0.247368           0.000000   
+Nucleus_export       0.935116                 0.171499          -0.018032   
+SIGNAL               0.313332                 0.495832           0.000000   
+chloroplast          0.830827                 0.178230           0.000000   
+Thylakoid            0.705259                 0.014916           0.000000   
+
+                recall_score  precision_score  f1_score  
+Nucleus              0.31405         0.926829  0.469136  
+ER                   0.00000         0.000000  0.000000  
+Peroxisome           0.00000         0.000000  0.000000  
+Mitochondrion        0.00000         0.000000  0.000000  
+Nucleus_export       0.00000         0.000000  0.000000  
+SIGNAL               0.00000         0.000000  0.000000  
+chloroplast          0.00000         0.000000  0.000000  
+Thylakoid            0.00000         0.000000  0.000000  
+
+
+
+
+Comparable Test Data
+-------------------------------
+
+===================Test protein results constrain: False========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.1  0.1         0.1            0.1             0.1     0.1   
+cutoffs_aa       0.6  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.1        0.1  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.958269
+ER                   NaN
+Peroxisome           NaN
+Mitochondrion        NaN
+Nucleus_export  0.166387
+SIGNAL               NaN
+chloroplast          NaN
+Thylakoid            NaN
+===========================================
+
+ cs acc: 
+
+                  0
+Nucleus         0.0
+ER              NaN
+Peroxisome      NaN
+Mitochondrion   NaN
+Nucleus_export  0.0
+SIGNAL          NaN
+chloroplast     NaN
+Thylakoid       NaN
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus                   0.0                    0.325          -0.408248   
+ER                        NaN                   -0.000           0.000000   
+Peroxisome                NaN                   -0.000           0.000000   
+Mitochondrion             NaN                   -0.000           0.000000   
+Nucleus_export            NaN                    1.000           0.000000   
+SIGNAL                    NaN                   -0.000           0.000000   
+chloroplast               NaN                   -0.000           0.000000   
+Thylakoid                 NaN                   -0.000           0.000000   
+
+                recall_score  precision_score  f1_score  
+Nucleus                  0.0              0.0       0.0  
+ER                       0.0              0.0       0.0  
+Peroxisome               0.0              0.0       0.0  
+Mitochondrion            0.0              0.0       0.0  
+Nucleus_export           0.0              0.0       0.0  
+SIGNAL                   0.0              0.0       0.0  
+chloroplast              0.0              0.0       0.0  
+Thylakoid                0.0              0.0       0.0  
+===================Test protein results constrain: True========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.1  0.1         0.1            0.1             0.1     0.1   
+cutoffs_aa       0.6  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.1        0.1  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                  0
+Nucleus         0.0
+ER              NaN
+Peroxisome      NaN
+Mitochondrion   NaN
+Nucleus_export  0.0
+SIGNAL          NaN
+chloroplast     NaN
+Thylakoid       NaN
+===========================================
+
+ cs acc: 
+
+                 0
+Nucleus        NaN
+ER             NaN
+Peroxisome     NaN
+Mitochondrion  NaN
+Nucleus_export NaN
+SIGNAL         NaN
+chloroplast    NaN
+Thylakoid      NaN
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus                   0.0                    0.325          -0.408248   
+ER                        NaN                   -0.000           0.000000   
+Peroxisome                NaN                   -0.000           0.000000   
+Mitochondrion             NaN                   -0.000           0.000000   
+Nucleus_export            NaN                    1.000           0.000000   
+SIGNAL                    NaN                   -0.000           0.000000   
+chloroplast               NaN                   -0.000           0.000000   
+Thylakoid                 NaN                   -0.000           0.000000   
+
+                recall_score  precision_score  f1_score  
+Nucleus                  0.0              0.0       0.0  
+ER                       0.0              0.0       0.0  
+Peroxisome               0.0              0.0       0.0  
+Mitochondrion            0.0              0.0       0.0  
+Nucleus_export           0.0              0.0       0.0  
+SIGNAL                   0.0              0.0       0.0  
+chloroplast              0.0              0.0       0.0  
+Thylakoid                0.0              0.0       0.0  
