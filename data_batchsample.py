@@ -504,7 +504,7 @@ def prepare_dataloaders(configs, valid_batch_number, test_batch_number):
 
 
 if __name__ == '__main__':
-    config_path = '././configs/config_nosupcon.yaml'
+    config_path = '0530config/config_nosupcon.yaml'
     with open(config_path) as file:
         configs_dict = yaml.full_load(file)
 
