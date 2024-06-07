@@ -80,7 +80,7 @@ optimizer:
     min_lr: 1e-7
     gamma: 0.2
     num_restarts: 1
-    first_cycle_steps: none # 40500  #null before
+    first_cycle_steps: 40500  #null before
   mode: cosine #skip, cosine
 
 supcon:
