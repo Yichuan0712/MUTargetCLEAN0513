@@ -50,10 +50,10 @@ train_settings:
   weighted_loss_sum_start_epoch: 10000
   loss_sum_weights: [1, 1]
   predict_max: True  # False -> mean
-  add_sample_weight_to_position_loss: False
+  add_sample_weight_to_position_loss: True
   add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: True  # check combine_DNN
-  only_use_position_loss_T: 0.1
+  position_loss_T: 0.1
 
 valid_settings:
   do_every: 1

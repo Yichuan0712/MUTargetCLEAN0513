@@ -249,8 +249,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss_sum * configs.train_settings.loss_sum_weights[1]
                     else:
                         if configs.train_settings.only_use_position_loss:
-                            if configs.train_settings.only_use_position_loss_T != 1:
-                                weighted_loss_sum = position_loss / configs.train_settings.only_use_position_loss_T
+                            if configs.train_settings.position_loss_T != 1:
+                                weighted_loss_sum = position_loss / configs.train_settings.position_loss_T
                                 # yichuan 0610
                             else:
                                 weighted_loss_sum = position_loss  # yichuan 0601
@@ -265,8 +265,8 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
                     else:
                         if configs.train_settings.only_use_position_loss:
-                            if configs.train_settings.only_use_position_loss_T != 1:
-                                weighted_loss_sum = position_loss / configs.train_settings.only_use_position_loss_T
+                            if configs.train_settings.position_loss_T != 1:
+                                weighted_loss_sum = position_loss / configs.train_settings.position_loss_T
                                 # yichuan 0610
                             else:
                                 weighted_loss_sum = position_loss  # yichuan 0601
@@ -387,8 +387,8 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
 
             if configs.train_settings.only_use_position_loss:
-                if configs.train_settings.only_use_position_loss_T != 1:
-                    weighted_loss_sum = position_loss / configs.train_settings.only_use_position_loss_T
+                if configs.train_settings.position_loss_T != 1:
+                    weighted_loss_sum = position_loss / configs.train_settings.position_loss_T
                     # yichuan 0610
                 else:
                     weighted_loss_sum = position_loss  # yichuan 0601
