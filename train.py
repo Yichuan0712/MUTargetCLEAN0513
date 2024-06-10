@@ -135,20 +135,13 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
         with autocast():
             # Compute prediction and loss
             encoded_seq=tokenize(tools, seq_frag_tuple)
-            #print(encoded_seq['input_ids'])
-            if configs.train_settings.MLM.enable:
-                encoded_seq['input_ids'], _ = tools['masked_lm_data_collator'].mask_tokens(encoded_seq['input_ids'])
-            
-            #print(encoded_seq['input_ids'])
-            #print(_)
+
             if type(encoded_seq)==dict:
                 for k in encoded_seq.keys():
                     encoded_seq[k]=encoded_seq[k].to(tools['train_device'])
             else:
                 encoded_seq=encoded_seq.to(tools['train_device'])
-            
-            #print(id_tuple)
-            # 这
+
             classification_head, motif_logits, projection_head = tools['net'](
                                  encoded_seq, 
                                  id_tuple, 
