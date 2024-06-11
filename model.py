@@ -110,6 +110,16 @@ def tokenize(tools, seq):
                                               )
         # encoded_sequence['input_ids'] = torch.squeeze(encoded_sequence['input_ids'])
         # encoded_sequence['attention_mask'] = torch.squeeze(encoded_sequence['attention_mask'])
+    elif tools['composition']=="official_esm_v2":
+        # data = [("", one_seq) for one_seq in seq]
+
+        data = []
+        for one_seq in seq:
+            if len(one_seq) < tools['max_len']:
+                one_seq = one_seq + "<pad>" * (tools['max_len'] - len(one_seq) - 2)
+            data.append(("", one_seq))
+
+        _, _, encoded_sequence = tools["tokenizer"](data)
     elif tools['composition'] == "promprot":
         if tools['prm4prmpro'] == 'seq':
             prompts = ['<seq>']
