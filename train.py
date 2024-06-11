@@ -768,28 +768,51 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
     print(f'number of steps for training data: {len(dataloaders_dict["train"])}\n')
     print(f'number of steps for valid data: {len(dataloaders_dict["valid"])}\n')
     print(f'number of steps for test data: {len(dataloaders_dict["test"])}\n')
-    #debug_dataloader(dataloaders_dict["train"]) #981
-    tokenizer = prepare_tokenizer(configs, curdir_path)
-    customlog(logfilepath, "Done initialize tokenizer\n")
-    #debug_dataloader(dataloaders_dict["train"]) #981
-    if hasattr(configs.train_settings,"MLM") and configs.train_settings.MLM.enable:
-       masked_lm_data_collator = MaskedLMDataCollator(tokenizer, mlm_probability=configs.train_settings.MLM.mask_ratio)
+    # #debug_dataloader(dataloaders_dict["train"]) #981
+    # tokenizer = prepare_tokenizer(configs, curdir_path)
+    # customlog(logfilepath, "Done initialize tokenizer\n")
+    # #debug_dataloader(dataloaders_dict["train"]) #981
+    # if hasattr(configs.train_settings,"MLM") and configs.train_settings.MLM.enable:
+    #    masked_lm_data_collator = MaskedLMDataCollator(tokenizer, mlm_probability=configs.train_settings.MLM.mask_ratio)
+    # else:
+    #    masked_lm_data_collator=None
+    #
+    # """
+    # #for debug
+    # config_path = "/data/duolin/MUTargetCLEAN/MUTarget-main/config.yaml"
+    # with open(config_path) as file:
+    #     config_dict = yaml.full_load(file)
+    #
+    # configs = load_configs(config_dict)
+    # #debug_dataloader(dataloaders_dict["train"]) #981 after prepare_models become 936
+    # """
+    # encoder = prepare_models(configs, logfilepath, curdir_path)
+    # #debug_dataloader(dataloaders_dict["train"]) #936 after prepare_models become 936 , if use same config, 1575!
+    # print("Done initialize model\n")
+    # customlog(logfilepath, "Done initialize model\n")
+
+    """adapter 0611 begin"""
+    if configs.encoder.composition=="official_esm_v2":
+        encoder=prepare_models(configs,logfilepath, curdir_path)
+        customlog(logfilepath, "Done initialize model\n")
+        print("Done initialize model\n")
+
+        alphabet = encoder.model.alphabet
+        tokenizer = alphabet.get_batch_converter(
+            truncation_seq_length=configs.encoder.max_len
+        )
+        customlog(logfilepath, "Done initialize tokenizer\n")
+        print("Done initialize tokenizer\n")
     else:
-       masked_lm_data_collator=None
-    
-    """
-    #for debug
-    config_path = "/data/duolin/MUTargetCLEAN/MUTarget-main/config.yaml"
-    with open(config_path) as file:
-        config_dict = yaml.full_load(file)
-    
-    configs = load_configs(config_dict)
-    #debug_dataloader(dataloaders_dict["train"]) #981 after prepare_models become 936
-    """
-    encoder = prepare_models(configs, logfilepath, curdir_path)
-    #debug_dataloader(dataloaders_dict["train"]) #936 after prepare_models become 936 , if use same config, 1575!
-    print("Done initialize model\n")
-    customlog(logfilepath, "Done initialize model\n")
+        tokenizer=prepare_tokenizer(configs, curdir_path)
+        customlog(logfilepath, "Done initialize tokenizer\n")
+        print("Done initialize tokenizer\n")
+
+        encoder=prepare_models(configs,logfilepath, curdir_path)
+        customlog(logfilepath, "Done initialize model\n")
+        print("Done initialize model\n")
+    """adapter 0611 end"""
+
     optimizer, scheduler = prepare_optimizer(encoder, configs, len(dataloaders_dict["train"]), logfilepath)
     if configs.optimizer.mode == 'skip':
         scheduler = optimizer
