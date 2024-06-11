@@ -645,7 +645,6 @@ class Bothmodels(nn.Module):
 
         return classification_head, cs_pred
 
-
 def prepare_models(configs, logfilepath, curdir_path):
     if configs.encoder.composition == "esm_v2":
         encoder = Encoder(model_name=configs.encoder.model_name,
@@ -746,6 +745,124 @@ class MaskedLMDataCollator:
 
         # The rest of the time (10% of the time) we keep the masked input tokens unchanged
         return inputs, labels
+
+"""
+2024 06 11 adapter addition
+"""
+# from Jiang, ParallelLinearDecoders
+class ParallelLinear(nn.Module):
+    def __init__(self, input_size, output_sizes):
+        super(ParallelLinear, self).__init__()
+        self.linear_decoders = nn.ModuleList([
+            nn.Linear(input_size, output_size) for output_size in output_sizes
+        ])
+
+    def forward(self, x):
+        decoder_outputs = [decoder(x) for decoder in self.linear_decoders]
+        return decoder_outputs
+
+import torch.nn.functional as F
+class ProteinCNN(nn.Module):
+    def __init__(self, input_dim, num_filters, filter_size):
+        super(ProteinCNN, self).__init__()
+        # Convolutional layer
+        self.conv = nn.Conv1d(in_channels=input_dim, out_channels=num_filters, kernel_size=filter_size, padding='same')
+        # Linear layer to transform the output to [batch, seq_length]
+        self.linear = nn.Linear(num_filters, 1)
+
+    def forward(self, x):
+        x = x.permute(0, 2, 1)
+        x = self.conv(x)
+        x = F.relu(x)
+        x = x.permute(0, 2, 1)
+        x = self.linear(x)
+        x = x.squeeze(-1)
+        return x
+
+import esm_utilities
+class OfficialEsmEncoder(nn.Module):
+    def __init__(self, configs, model_name='esm2_t33_650M_UR50D', model_type='esm_v2'):
+        super().__init__()
+        self.model_type = model_type
+        if model_type == 'official_esm_v2':
+            self.model = esm_utilities.load_model(
+                model_architecture=configs.encoder.model_name,
+                num_end_adapter_layers=configs.encoder.adapter_lr_num)
+
+            for param in self.model.parameters():
+                param.requires_grad = False
+
+            if configs.PEFT == "Adapter":
+                for name, param in self.model.named_parameters():
+                    if "adapter_layer" in name:
+                        param.requires_grad = True
+
+            if configs.PEFT == "Adapter_PFT":
+                for p in self.model.layers[configs.train_settings.fine_tune_lr:].parameters():
+                    p.requires_grad = True
+                for name, param in self.model.named_parameters():
+                    if "adapter_layer" in name:
+                        param.requires_grad = True
+
+        # self.pooling_layer = nn.AdaptiveAvgPool2d((None, 1))
+        self.pooling_layer = nn.AdaptiveAvgPool1d(1)
+        self.ParallelLinearDecoders = ParallelLinear(input_size=self.model.embed_dim,
+                                                             output_sizes=[1] * (configs.encoder.num_classes - 2))
+        self.CNN_Nuc = ProteinCNN(input_dim=self.model.embed_dim, num_filters=configs.encoder.cnn_filter_num,
+                                  filter_size=configs.encoder.cnn_filter_size)
+        self.CNN_Nuc_exp = ProteinCNN(input_dim=self.model.embed_dim, num_filters=configs.encoder.cnn_filter_num,
+                                      filter_size=configs.encoder.cnn_filter_size)
+
+        self.type_head = nn.Linear(self.model.embed_dim, configs.encoder.num_classes)
+        self.overlap = configs.encoder.frag_overlap
+
+        self.num_layers = self.model.num_layers
+
+    def get_pro_emb(self, id, id_frags_list, seq_frag_tuple, emb_frags, overlap):
+        emb_pro_list = []
+        for id_protein in id:
+            ind_frag = 0
+            id_frag = id_protein + "@" + str(ind_frag)
+            while id_frag in id_frags_list:
+                ind = id_frags_list.index(id_frag)
+                emb_frag = emb_frags[ind]  # [maxlen-2, dim]
+                seq_frag = seq_frag_tuple[ind]
+                l = len(seq_frag)
+                if ind_frag == 0:
+                    emb_pro = emb_frag[:l]
+                else:
+                    overlap_emb = (emb_pro[-overlap:] + emb_frag[:overlap]) / 2
+                    emb_pro = torch.concatenate((emb_pro[:-overlap], overlap_emb, emb_frag[overlap:l]), axis=0)
+                ind_frag += 1
+                id_frag = id_protein + "@" + str(ind_frag)
+            emb_pro = torch.mean(emb_pro, dim=0)
+            emb_pro_list.append(emb_pro)
+        return emb_pro_list
+
+    def forward(self, encoded_sequence, id, id_frags_list, seq_frag_tuple):
+        features = self.model(
+            tokens=encoded_sequence,
+            repr_layers=[self.num_layers])["representations"][self.num_layers]
+
+        last_hidden_state = features[:, 1:-1]  # [batch, maxlen-2, dim]
+
+        motif_logits_6clas = self.ParallelLinearDecoders(last_hidden_state)
+        motif_logits_6clas = torch.stack(motif_logits_6clas, dim=1).squeeze(-1)  # [batch, num_class-2, maxlen-2]
+        motif_logits_nuc = self.CNN_Nuc(last_hidden_state).unsqueeze(1)  # [batch, 1, maxlen-2]
+        motif_logits_nuc_exp = self.CNN_Nuc_exp(last_hidden_state).unsqueeze(1)  # [batch, 1, maxlen-2]
+        tensor_6clas_part1 = motif_logits_6clas[:, :4,
+                             :]  # the first part of the 6 class tensor [batch, 3, maxlen-2], nuc_exp will be insert at index 4
+        tensor_6clas_part2 = motif_logits_6clas[:, 4:, :]  # the second part of the 6 class tensor [batch, 3, maxlen-2]
+        motif_logits = torch.cat((motif_logits_nuc, tensor_6clas_part1, motif_logits_nuc_exp, tensor_6clas_part2),
+                                 dim=1)  # [batch, num_class, maxlen-2]
+
+        emb_pro_list = self.get_pro_emb(id, id_frags_list, seq_frag_tuple, last_hidden_state, self.overlap)
+        emb_pro = torch.stack(emb_pro_list, dim=0)  # [sample, dim]
+        # transposed_feature = emb_pro.transpose(1, 2)
+        # pooled_features = self.pooling_layer(transposed_feature).squeeze(2) #[sample, dim]
+        classification_head = self.type_head(emb_pro)  # [sample, num_class]
+
+        return classification_head, motif_logits, None
 
 # if __name__ == '__main__':
 
