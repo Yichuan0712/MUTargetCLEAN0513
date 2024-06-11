@@ -19,6 +19,10 @@ encoder:
   prm4prmpro: ppi
   frag_overlap: 200
 
+  cnn_filter_num: 10
+  cnn_filter_size: 5
+  adapter_lr_num: 5
+
 PEFT: Adapter_PFT # FT, PFT, frozen, lora, PromT, Adapter, lora_PFT, Adapter_PFT
 
 decoder:
