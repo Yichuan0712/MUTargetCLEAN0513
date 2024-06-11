@@ -98,6 +98,8 @@ def prepare_tokenizer(configs, curdir_path):
         model, dictionary = openprotein_promptprotein(os.path.join(curdir_path, "PromptProtein", "PromptProtein.pt"))
         tokenizer_promprot = PromptConverter(dictionary)
         tokenizer = {"tokenizer_esm": tokenizer_esm, "tokenizer_promprot": tokenizer_promprot}
+    else:
+        tokenizer = None  # for adapter
     return tokenizer
 
 
