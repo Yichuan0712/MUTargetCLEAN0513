@@ -21,6 +21,6 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-python train.py --config_path ./configs_yaml/0611config/config0611_15_T0.1.yaml --result_path ./result_0611/  || true
-python train.py --config_path ./configs_yaml/0611config/config0611_15_T0.2.yaml --result_path ./result_0611/  || true
+python train.py --config_path ./configs_yaml/0611config/config0611_15_T0.1_adapter.yaml --result_path ./result_0611/  || true
+python train.py --config_path ./configs_yaml/0611config/config0611_15_T0.2_adapter.yaml --result_path ./result_0611/  || true
 
