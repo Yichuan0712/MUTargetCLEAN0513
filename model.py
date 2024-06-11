@@ -652,6 +652,11 @@ def prepare_models(configs, logfilepath, curdir_path):
                           model_type=configs.encoder.model_type,
                           configs=configs
                           )
+    if configs.encoder.composition=="official_esm_v2":
+        encoder = OfficialEsmEncoder(model_name=configs.encoder.model_name,
+                            model_type=configs.encoder.model_type,
+                            configs=configs
+                            )
     elif configs.encoder.composition == "promprot":
         encoder = CustomPromptModel(configs=configs,
                                     pretrain_loc=os.path.join(curdir_path, "PromptProtein", "PromptProtein.pt"),
