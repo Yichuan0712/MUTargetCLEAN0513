@@ -779,7 +779,9 @@ class ProteinCNN(nn.Module):
         x = x.squeeze(-1)
         return x
 
+
 import esm_utilities
+
 class OfficialEsmEncoder(nn.Module):
     def __init__(self, configs, model_name='esm2_t33_650M_UR50D', model_type='esm_v2'):
         super().__init__()
