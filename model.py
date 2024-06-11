@@ -843,7 +843,7 @@ class OfficialEsmEncoder(nn.Module):
             emb_pro_list.append(emb_pro)
         return emb_pro_list
 
-    def forward(self, encoded_sequence, id, id_frags_list, seq_frag_tuple):
+    def forward(self, encoded_sequence, id, id_frags_list, seq_frag_tuple, placeholder1, placeholder2):
         features = self.model(
             tokens=encoded_sequence,
             repr_layers=[self.num_layers])["representations"][self.num_layers]
