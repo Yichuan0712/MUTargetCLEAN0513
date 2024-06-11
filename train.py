@@ -861,7 +861,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'checkpoint_path': checkpoint_path,
         'logfilepath': logfilepath,
         'num_classes': configs.encoder.num_classes,
-        'masked_lm_data_collator': masked_lm_data_collator,
+        # 'masked_lm_data_collator': masked_lm_data_collator,
     }
     if args.predict !=1:
         customlog(logfilepath, f'number of train steps per epoch: {len(tools["train_loader"])}\n')
