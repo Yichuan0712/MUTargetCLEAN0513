@@ -571,6 +571,7 @@ def evaluate_protein(data_dict, tools, constrain):
     cs_acc_difcut = np.zeros([n])
     scores = get_scores(tools, opti_cutoffs_pro, opti_cutoffs_aa, n, data_dict, constrain)
     IoU_pro_difcut = scores['IoU_pro']
+    TPR_FPR_FNR_difcut = scores['TPR_FPR_FNR']
     cs_acc_difcut = scores['cs_acc']
     result_pro_difcut = scores['result_pro']
 
@@ -584,6 +585,11 @@ def evaluate_protein(data_dict, tools, constrain):
     customlog(tools["logfilepath"], f" Jaccard Index (protein): \n")
     IoU_pro_difcut = pd.DataFrame(IoU_pro_difcut, index=classname)
     customlog(tools["logfilepath"], IoU_pro_difcut.__repr__())
+
+    customlog(tools["logfilepath"], f"===========================================\n")
+    customlog(tools["logfilepath"], f" (TPR, FPR, FNR) (protein): \n")
+    TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
+    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
@@ -613,6 +619,7 @@ def test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, constrain)
     cs_acc_difcut = np.zeros([n])
     scores = get_scores(tools, opti_cutoffs_pro, opti_cutoffs_aa, n, data_dict, constrain)
     IoU_pro_difcut = scores['IoU_pro']
+    TPR_FPR_FNR_difcut = scores['TPR_FPR_FNR']
     cs_acc_difcut = scores['cs_acc']
     result_pro_difcut = scores['result_pro']
 
@@ -627,6 +634,11 @@ def test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, constrain)
     customlog(tools["logfilepath"], f" Jaccard Index (protein): \n")
     IoU_pro_difcut = pd.DataFrame(IoU_pro_difcut, index=classname)
     customlog(tools["logfilepath"], IoU_pro_difcut.__repr__())
+
+    customlog(tools["logfilepath"], f"===========================================\n")
+    customlog(tools["logfilepath"], f" (TPR, FPR, FNR) (protein): \n")
+    TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
+    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
@@ -652,10 +664,14 @@ def get_scores(tools, cutoff_pro, cutoff_aa, n, data_dict, constrain):
     # Negtive_detect_num=0
     # Negtive_num=0
 
-    TPR_pro = np.zeros(n)
-    FPR_pro = np.zeros(n)
-    FNR_pro = np.zeros(n)
+    # Yichuan 0612
+    TPR_pro_avg = np.zeros(n)
+    FPR_pro_avg = np.zeros(n)
+    FNR_pro_avg = np.zeros(n)
+    TPR_FPR_FNR_pro_avg = [None] * n
+
     IoU_pro = np.zeros(n)
+
     # Negtive_detect_pro=0
     # Negtive_pro=0
     result_pro = np.zeros([n, 6])
@@ -682,12 +698,20 @@ def get_scores(tools, cutoff_pro, cutoff_aa, n, data_dict, constrain):
                 # x_list.append(np.max(x))
                 # y_list.append(np.max(y))
                 IoU_pro[head] += TPR_pro / (TPR_pro + FPR_pro + FNR_pro)
+                TPR_pro_avg[head] += TPR_pro
+                FPR_pro_avg[head] += FPR_pro
+                FNR_pro_avg[head] += FNR_pro
 
                 cs_num[head] += np.sum(y_frag == 1) > 0
                 if np.sum(y_frag == 1) > 0:
                     cs_correct[head] += (np.argmax(x_frag) == np.argmax(y_frag))
 
         # IoU_pro[head] = TPR_pro[head] / (TPR_pro[head] + FPR_pro[head] + FNR_pro[head])
+        TPR_pro_avg[head] = TPR_pro_avg[head] / sum(y_list)
+        FPR_pro_avg[head] = FPR_pro_avg[head] / sum(y_list)
+        FNR_pro_avg[head] = FNR_pro_avg[head] / sum(y_list)
+        TPR_FPR_FNR_pro_avg[head] = (TPR_pro_avg[head], FPR_pro_avg[head], FNR_pro_avg[head])
+
         IoU_pro[head] = IoU_pro[head] / sum(y_list)
         cs_acc[head] = cs_correct[head] / cs_num[head]
 
@@ -731,7 +755,8 @@ def get_scores(tools, cutoff_pro, cutoff_aa, n, data_dict, constrain):
 
     scores = {"IoU_pro": IoU_pro,  # [n]
               "result_pro": result_pro,  # [n, 6]
-              "cs_acc": cs_acc}  # [n]
+              "cs_acc": cs_acc,  # [n]
+              "TPR_FPR_FNR": TPR_FPR_FNR_pro_avg}
     return scores
 
 
