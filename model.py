@@ -501,7 +501,7 @@ class Encoder(nn.Module):
                 # print('-before max', motif_pro.shape)  # should be [num_class,length]
                 motif_pro, _ = torch.max(motif_pro, dim=-1)
                 # print('-after max', motif_pro.shape)  # should be [num_class]
-                print(motif_pro)
+                # print(motif_pro)
             else:
                 # print('-before mean', motif_pro.shape)  # should be [num_class,length]
                 # motif_pro = torch.mean(motif_pro, dim=-1)
