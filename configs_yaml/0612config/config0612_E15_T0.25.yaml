@@ -10,9 +10,9 @@ resume:
   frozen_esm: False
 
 encoder:
-  composition: official_esm_v2 # esm_v2, promprot, both, official_esm_v2
-  model_type: official_esm_v2 # esm_v2, t5, official_esm_v2
-  model_name:  esm2_t33_650M_UR50D # esm2_t33_650M_UR50D, esm2_t30_150M_UR50D, esm2_t12_35M_UR50D, esm2_t6_8M_UR50D, prot_t5_base_mt_uniref50
+  composition: esm_v2 # esm_v2, promprot, both
+  model_type: esm_v2 # esm_v2, t5
+  model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
   #  model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
   max_len: 1024
   num_classes: 8
@@ -23,7 +23,7 @@ encoder:
   cnn_filter_size: 5
   adapter_lr_num: 5
 
-PEFT: Adapter_PFT # FT, PFT, frozen, lora, PromT, Adapter, lora_PFT, Adapter_PFT
+PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 
 decoder:
   combine: True #combine classification and motif?
@@ -59,7 +59,7 @@ train_settings:
   add_sample_weight_to_position_loss: True
   add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: True  # check combine_DNN
-  position_loss_T: 0.2
+  position_loss_T: 0.25
 
 valid_settings:
   do_every: 1

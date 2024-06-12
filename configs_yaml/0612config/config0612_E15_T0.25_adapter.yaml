@@ -59,7 +59,7 @@ train_settings:
   add_sample_weight_to_position_loss: True
   add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: True  # check combine_DNN
-  position_loss_T: 0.2
+  position_loss_T: 0.25
 
 valid_settings:
   do_every: 1
