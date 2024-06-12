@@ -13,12 +13,18 @@ encoder:
   composition: esm_v2 # esm_v2, promprot, both
   model_type: esm_v2 # esm_v2, t5
   model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
+  #  model_name:  facebook/esm2_t33_650M_UR50D # facebook/esm2_t33_650M_UR50D, facebook/esm2_t30_150M_UR50D, facebook/esm2_t12_35M_UR50D, facebook/esm2_t6_8M_UR50D, Rostlab/prot_t5_base_mt_uniref50
   max_len: 1024
   num_classes: 8
   prm4prmpro: ppi
   frag_overlap: 200
 
+  cnn_filter_num: 10
+  cnn_filter_size: 5
+  adapter_lr_num: 5
+
 PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
+
 decoder:
   combine: True #combine classification and motif?
   combine_DNN: False
