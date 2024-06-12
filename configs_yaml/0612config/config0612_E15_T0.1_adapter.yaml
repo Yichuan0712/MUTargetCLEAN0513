@@ -24,7 +24,6 @@ encoder:
   adapter_lr_num: 5
 
 PEFT: Adapter_PFT # FT, PFT, frozen, lora, PromT, Adapter, lora_PFT, Adapter_PFT
-
 decoder:
   combine: True #combine classification and motif?
   combine_DNN: False
