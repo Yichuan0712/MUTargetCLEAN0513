@@ -602,6 +602,7 @@ class Encoder(nn.Module):
                 classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
                                                          motif_logits, self.overlap)
                 # print('classification_head', classification_head.shape)
+                print(motif_logits.shape)
                 if self.combine_DNN:
                     classification_head = self.DNN_head(classification_head)
                     # print('classification_head', classification_head.shape)
