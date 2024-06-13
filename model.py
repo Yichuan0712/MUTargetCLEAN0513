@@ -381,7 +381,7 @@ class Encoder(nn.Module):
             self.model = prepare_esm_model(model_name, configs)
         # self.pooling_layer = nn.AdaptiveAvgPool2d((None, 1))
         self.combine = configs.decoder.combine
-        self.combine_DNN = configs.decoder.combine_DNN
+        self.apply_DNN = configs.decoder.apply_DNN
         self.pooling_layer = nn.AdaptiveAvgPool1d(1)
         if configs.decoder.type == "linear":
             self.ParallelDecoders = ParallelLinearDecoders(input_size=self.model.config.hidden_size,
@@ -405,10 +405,10 @@ class Encoder(nn.Module):
         if not self.combine:  # only need type_head if combine is False
             self.type_head = nn.Linear(self.model.embeddings.position_embeddings.embedding_dim,
                                        configs.encoder.num_classes)
-        if self.combine == False and self.combine_DNN == True:
-            print('combine and combine_DNN must be both True')
-            raise 'combine and combine_DNN must be both True'
-        if self.combine and self.combine_DNN:
+        if self.combine == False and self.apply_DNN == True:
+            print('combine and apply_DNN must be both True')
+            raise 'combine and apply_DNN must be both True'
+        if self.combine and self.apply_DNN:
             self.DNN_head = nn.Linear(configs.encoder.num_classes,
                                        configs.encoder.num_classes)
 
@@ -511,13 +511,42 @@ class Encoder(nn.Module):
                 # 只在特定版本pytorch上出现此错误
                 # print('-after mean', motif_pro.shape)  # should be [num_class]
 
-            motif_pro_list_dnn.append(motif_pro)
+            # motif_pro_list_dnn.append(motif_pro)
             motif_pro_list.append(_motif_pro)  # [batch,num_class]
 
         motif_pro_list = torch.stack(motif_pro_list, dim=0)
         # motif_pro_list_dnn = torch.stack(motif_pro_list_dnn, dim=0)
-        print('motif_pro_list', motif_pro_list.shape)
-        print('motif_pro_list_dnn', motif_pro_list_dnn)
+        # print('motif_pro_list', motif_pro_list.shape)
+        # print('motif_pro_list_dnn', motif_pro_list_dnn)
+        return motif_pro_list
+    def get_pro_class_dnn(self, predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
+        motif_pro_list = []
+        motif_pro_list_dnn = []
+        for id_protein in id:
+            ind_frag = 0
+            id_frag = id_protein + "@" + str(ind_frag)
+            while id_frag in id_frags_list:
+                ind = id_frags_list.index(id_frag)
+                motif_logit = motif_logits[ind]  # [num_class,max_len]
+                seq_frag = seq_frag_tuple[ind]
+                l = len(seq_frag)
+                if ind_frag == 0:
+                    motif_pro = motif_logit[:, :l]  # [num_class,length]
+                else:
+                    overlap_motif = (motif_pro[:, -overlap:] + motif_logit[:, :overlap]) / 2
+                    motif_pro = torch.concatenate((motif_pro[:, :-overlap], overlap_motif, motif_logit[:, overlap:l]),
+                                                  axis=-1)
+                ind_frag += 1
+                id_frag = id_protein + "@" + str(ind_frag)
+
+            if predict_max:
+                _motif_pro, _ = torch.max(motif_pro, dim=-1)
+            else:
+                _motif_pro = torch.mean(motif_pro.clone(), dim=-1)
+
+            motif_pro_list.append(_motif_pro)  # [batch,num_class]
+
+        motif_pro_list = torch.stack(motif_pro_list, dim=0)
         return motif_pro_list
 
     def reorganize_emb_pro(self, emb_pro):
@@ -563,11 +592,12 @@ class Encoder(nn.Module):
         motif_logits = None
         projection_head = None
         if self.skip_esm:
-            emb_pro_list = []
-            for i in id:
-                emb_pro_list.append(self.protein_embeddings[i])
-
-            emb_pro = torch.stack(emb_pro_list, dim=0)
+            pass
+            # emb_pro_list = []
+            # for i in id:
+            #     emb_pro_list.append(self.protein_embeddings[i])
+            # 
+            # emb_pro = torch.stack(emb_pro_list, dim=0)
         else:
             # print(encoded_sequence['attention_mask'].shape)
             # print(encoded_sequence['attention_mask'])
@@ -584,20 +614,21 @@ class Encoder(nn.Module):
                 emb_pro = self.get_pro_emb(id, id_frags_list, seq_frag_tuple, last_hidden_state, self.overlap)
 
         if self.apply_supcon:
-            if not warm_starting:
-                motif_logits = self.ParallelDecoders(last_hidden_state)
-                if self.combine:
-                    classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
-                                                             motif_logits, self.overlap)
-                else:
-                    classification_head = self.type_head(emb_pro)  # [sample, num_class]
-
-                if pos_neg is not None:
-                    """CASE B, when this if condition is skipped, CASE A"""
-                    projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
-            else:
-                """CASE C"""
-                projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
+            pass
+            # if not warm_starting:
+            #     motif_logits = self.ParallelDecoders(last_hidden_state)
+            #     if self.combine:
+            #         classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
+            #                                                  motif_logits, self.overlap)
+            #     else:
+            #         classification_head = self.type_head(emb_pro)  # [sample, num_class]
+            # 
+            #     if pos_neg is not None:
+            #         """CASE B, when this if condition is skipped, CASE A"""
+            #         projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
+            # else:
+            #     """CASE C"""
+            #     projection_head = self.projection_head(self.reorganize_emb_pro(emb_pro))
         else:
             """CASE D"""
             """这"""
@@ -608,7 +639,7 @@ class Encoder(nn.Module):
                                                          motif_logits, self.overlap)
                 print('classification_head before', classification_head.shape)
                 print(motif_logits.shape)
-                if self.combine_DNN:
+                if self.apply_DNN:
                     classification_head = self.DNN_head(classification_head)
                     # print('classification_head', classification_head.shape)
                 print('classification_head after', classification_head.shape)

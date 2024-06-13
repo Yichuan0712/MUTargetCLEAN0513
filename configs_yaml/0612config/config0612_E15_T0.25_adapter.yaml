@@ -27,7 +27,7 @@ PEFT: Adapter_PFT # FT, PFT, frozen, lora, PromT, Adapter, lora_PFT, Adapter_PFT
 
 decoder:
   combine: True #combine classification and motif?
-  combine_DNN: False
+  apply_DNN: False
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
   cnn_kernel: 7
@@ -58,7 +58,7 @@ train_settings:
   predict_max: True  # False -> mean
   add_sample_weight_to_position_loss: True
   add_sample_weight_to_class_loss_when_data_aug: True
-  only_use_position_loss: True  # check combine_DNN
+  only_use_position_loss: True  # check apply_DNN
   position_loss_T: 0.25
 
 valid_settings:
