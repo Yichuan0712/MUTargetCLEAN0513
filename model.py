@@ -522,6 +522,7 @@ class Encoder(nn.Module):
     def get_pro_class_dnn(self, predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         motif_pro_list = []
         motif_pro_list_dnn = []
+        print(len(id))
         for id_protein in id:
             ind_frag = 0
             id_frag = id_protein + "@" + str(ind_frag)
@@ -635,14 +636,13 @@ class Encoder(nn.Module):
             motif_logits = self.ParallelDecoders(
                 last_hidden_state)  # list no shape # last_hidden_state=[batch, maxlen-2, dim]
             if self.combine:
-                classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
-                                                         motif_logits, self.overlap)
-                print('classification_head before', classification_head.shape)
-                print(motif_logits.shape)
                 if self.apply_DNN:
-                    classification_head = self.DNN_head(classification_head)
-                    # print('classification_head', classification_head.shape)
-                print('classification_head after', classification_head.shape)
+                    classification_head = self.get_pro_class_dnn(self.predict_max, id, id_frags_list, seq_frag_tuple,
+                                                             motif_logits, self.overlap)
+                else:
+                    classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
+                                                             motif_logits, self.overlap)
+
             else:
                 # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
