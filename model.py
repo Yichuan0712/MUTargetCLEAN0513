@@ -517,7 +517,7 @@ class Encoder(nn.Module):
         motif_pro_list = torch.stack(motif_pro_list, dim=0)
         # motif_pro_list_dnn = torch.stack(motif_pro_list_dnn, dim=0)
         print('motif_pro_list', motif_pro_list.shape)
-        print('motif_pro_list_dnn', motif_pro_list_dnn.shape)
+        print('motif_pro_list_dnn', motif_pro_list_dnn)
         return motif_pro_list
 
     def reorganize_emb_pro(self, emb_pro):
