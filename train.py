@@ -584,10 +584,11 @@ def evaluate_protein(data_dict, tools, constrain):
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" Jaccard Index (protein): \n")
     IoU_pro_difcut = pd.DataFrame(IoU_pro_difcut, index=classname)
-    customlog(tools["logfilepath"], IoU_pro_difcut.__repr__())
+    IoU_pro_difcut_selected_rows = IoU_pro_difcut.iloc[[0, 4]]
+    customlog(tools["logfilepath"], IoU_pro_difcut_selected_rows.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
-    customlog(tools["logfilepath"], f" TPR, FPR, FNR (protein): \n")
+    customlog(tools["logfilepath"], f" TPR, FPR, FNR: \n")
     TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
     TPR_FPR_FNR_difcut_selected_rows = TPR_FPR_FNR_difcut.iloc[[0, 4]]
     customlog(tools["logfilepath"], TPR_FPR_FNR_difcut_selected_rows.__repr__())
@@ -595,7 +596,9 @@ def evaluate_protein(data_dict, tools, constrain):
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
     cs_acc_difcut = pd.DataFrame(cs_acc_difcut, index=classname)
-    customlog(tools["logfilepath"], cs_acc_difcut.__repr__())
+    rows_to_exclude = [0, 4]
+    filtered_df = cs_acc_difcut.drop(cs_acc_difcut.index[rows_to_exclude])
+    customlog(tools["logfilepath"], filtered_df.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" Class prediction performance: \n")
@@ -634,10 +637,11 @@ def test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, constrain)
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" Jaccard Index (protein): \n")
     IoU_pro_difcut = pd.DataFrame(IoU_pro_difcut, index=classname)
-    customlog(tools["logfilepath"], IoU_pro_difcut.__repr__())
+    IoU_pro_difcut_selected_rows = IoU_pro_difcut.iloc[[0, 4]]
+    customlog(tools["logfilepath"], IoU_pro_difcut_selected_rows.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
-    customlog(tools["logfilepath"], f" TPR, FPR, FNR (protein): \n")
+    customlog(tools["logfilepath"], f" TPR, FPR, FNR: \n")
     TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
     TPR_FPR_FNR_difcut_selected_rows = TPR_FPR_FNR_difcut.iloc[[0, 4]]
     customlog(tools["logfilepath"], TPR_FPR_FNR_difcut_selected_rows.__repr__())
@@ -645,7 +649,9 @@ def test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, constrain)
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
     cs_acc_difcut = pd.DataFrame(cs_acc_difcut, index=classname)
-    customlog(tools["logfilepath"], cs_acc_difcut.__repr__())
+    rows_to_exclude = [0, 4]
+    filtered_df = cs_acc_difcut.drop(cs_acc_difcut.index[rows_to_exclude])
+    customlog(tools["logfilepath"], filtered_df.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" Class prediction performance: \n")
