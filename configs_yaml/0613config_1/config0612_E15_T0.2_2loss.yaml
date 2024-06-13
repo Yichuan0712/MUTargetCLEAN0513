@@ -27,7 +27,7 @@ PEFT: PFT #lora # FT, PFT, frozen, lora, PromT
 
 decoder:
   combine: True #combine classification and motif?
-  apply_DNN: True
+  apply_DNN: False
   type: "cnn-linear" #"cnn" "linear" "cnn-linear"
   cnn_channel: 32
   cnn_kernel: 7
