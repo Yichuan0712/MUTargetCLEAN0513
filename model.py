@@ -479,7 +479,7 @@ class Encoder(nn.Module):
     def get_pro_class(self, predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         # motif_logits_max, _ = torch.max(motif_logits, dim=-1, keepdim=True).squeeze(-1) #should be [batch,num_class]
         # print(motif_logits_max)
-        motif_pro_list = []
+        _motif_pro_list = []
         for id_protein in id:
             ind_frag = 0
             id_frag = id_protein + "@" + str(ind_frag)
@@ -499,22 +499,22 @@ class Encoder(nn.Module):
 
             if predict_max:
                 # print('-before max', motif_pro.shape)  # should be [num_class,length]
-                motif_pro, _ = torch.max(motif_pro, dim=-1)
+                _motif_pro, _ = torch.max(motif_pro, dim=-1)
                 # print('-after max', motif_pro.shape)  # should be [num_class]
                 # print(motif_pro)
             else:
                 # print('-before mean', motif_pro.shape)  # should be [num_class,length]
                 # motif_pro = torch.mean(motif_pro, dim=-1)
-                motif_pro = torch.mean(motif_pro.clone(), dim=-1)  # yichuan 0605
+                _motif_pro = torch.mean(motif_pro.clone(), dim=-1)  # yichuan 0605
                 # RuntimeError: one of the variables needed for gradient computation has been modified by an inplace operation
                 # 只在特定版本pytorch上出现此错误
                 # print('-after mean', motif_pro.shape)  # should be [num_class]
 
-            motif_pro_list.append(motif_pro)  # [batch,num_class]
+            _motif_pro_list.append(_motif_pro)  # [batch,num_class]
 
-        motif_pro_list = torch.stack(motif_pro_list, dim=0)
+        _motif_pro_list = torch.stack(_motif_pro_list, dim=0)
         print('motif_pro_list', motif_pro_list)
-        return motif_pro_list
+        return _motif_pro_list
 
     def reorganize_emb_pro(self, emb_pro):
         n_batch = int(emb_pro.shape[0] / (1 + self.n_pos + self.n_neg))
