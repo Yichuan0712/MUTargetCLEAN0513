@@ -537,6 +537,7 @@ class Encoder(nn.Module):
                     overlap_motif = (motif_pro[:, -overlap:] + motif_logit[:, :overlap]) / 2
                     motif_pro = torch.concatenate((motif_pro[:, :-overlap], overlap_motif, motif_logit[:, overlap:l]),
                                                   axis=-1)
+                    print(motif_pro.shape)
                 ind_frag += 1
                 id_frag = id_protein + "@" + str(ind_frag)
 
