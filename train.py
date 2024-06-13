@@ -362,7 +362,7 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
                 # print(new_sample_weight_tuple)
                 new_sample_weight_pt = torch.from_numpy(np.array(new_sample_weight_tuple)).to(
                     tools['valid_device']).unsqueeze(1)
-                # print(sample_weight_pt)
+                print(new_sample_weight_pt.shape)
                 print(new_sample_weight_pt)
                 position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(
                     tools['valid_device'])) * new_sample_weight_pt.unsqueeze(1))
