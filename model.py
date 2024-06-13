@@ -637,12 +637,18 @@ class Encoder(nn.Module):
             motif_logits = self.ParallelDecoders(
                 last_hidden_state)  # list no shape # last_hidden_state=[batch, maxlen-2, dim]
             if self.combine:
+                classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
+                                                         motif_logits, self.overlap)
+                # print('classification_head', classification_head.shape)
                 if self.apply_DNN:
-                    classification_head = self.get_pro_class_dnn(self.predict_max, id, id_frags_list, seq_frag_tuple,
-                                                             motif_logits, self.overlap)
-                else:
-                    classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
-                                                             motif_logits, self.overlap)
+                    classification_head = self.DNN_head(classification_head)
+                    # print('classification_head', classification_head.shape)
+                # if self.apply_DNN:
+                #     classification_head = self.get_pro_class_dnn(self.predict_max, id, id_frags_list, seq_frag_tuple,
+                #                                              motif_logits, self.overlap)
+                # else:
+                #     classification_head = self.get_pro_class(self.predict_max, id, id_frags_list, seq_frag_tuple,
+                #                                              motif_logits, self.overlap)
 
             else:
                 # print('emb_pro', emb_pro.shape)
