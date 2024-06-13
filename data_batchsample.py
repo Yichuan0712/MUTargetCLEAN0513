@@ -190,8 +190,8 @@ class LocalizationDataset(Dataset):
         for label in labels:
             weights.append(self.class_weights[label])
         sample_weight = max(weights)
-        print(self.class_weights)
-        exit(0)
+        # print(self.class_weights)
+        # exit(0) 0613 check
         # labels=np.where(np.max(target_frags, axis=1)==1)[0]
         # weights=[]
         # for label in labels:
