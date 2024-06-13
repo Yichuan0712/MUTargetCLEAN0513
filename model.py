@@ -513,6 +513,7 @@ class Encoder(nn.Module):
             motif_pro_list.append(motif_pro)  # [batch,num_class]
 
         motif_pro_list = torch.stack(motif_pro_list, dim=0)
+        print('motif_pro_list', motif_pro_list)
         return motif_pro_list
 
     def reorganize_emb_pro(self, emb_pro):
