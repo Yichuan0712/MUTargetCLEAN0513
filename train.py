@@ -589,7 +589,8 @@ def evaluate_protein(data_dict, tools, constrain):
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" TPR, FPR, FNR (protein): \n")
     TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
-    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut.__repr__())
+    TPR_FPR_FNR_difcut_selected_rows = TPR_FPR_FNR_difcut.iloc[[0, 4]]
+    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut_selected_rows.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
@@ -638,7 +639,8 @@ def test_protein(data_dict, tools, opti_cutoffs_pro, opti_cutoffs_aa, constrain)
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" TPR, FPR, FNR (protein): \n")
     TPR_FPR_FNR_difcut = pd.DataFrame(TPR_FPR_FNR_difcut, index=classname)
-    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut.__repr__())
+    TPR_FPR_FNR_difcut_selected_rows = TPR_FPR_FNR_difcut.iloc[[0, 4]]
+    customlog(tools["logfilepath"], TPR_FPR_FNR_difcut_selected_rows.__repr__())
 
     customlog(tools["logfilepath"], f"===========================================\n")
     customlog(tools["logfilepath"], f" cs acc: \n")
