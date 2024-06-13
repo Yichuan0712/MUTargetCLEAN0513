@@ -522,7 +522,7 @@ class Encoder(nn.Module):
     def get_pro_class_dnn(self, predict_max, id, id_frags_list, seq_frag_tuple, motif_logits, overlap):
         motif_pro_list = []
         motif_pro_list_dnn = []
-        print(len(id))
+        print(len(id), len(id_frags_list))
         for id_protein in id:
             ind_frag = 0
             id_frag = id_protein + "@" + str(ind_frag)
