@@ -242,11 +242,32 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     #     weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss_sum * configs.train_settings.loss_sum_weights[1]
                     # else:
                     # Simplified code for weighted loss calculation
-                    position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
-                    if configs.train_settings.only_use_position_loss:
-                        weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+                    # position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
+                    # if configs.train_settings.only_use_position_loss:
+                    #     weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+                    # else:
+                    #     weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+
+                    # Determine the weighted position loss based on a configurable threshold.
+                    if configs.train_settings.position_loss_T != 1:
+                        position_loss_weighted = position_loss / configs.train_settings.position_loss_T
                     else:
-                        weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+                        position_loss_weighted = position_loss
+
+                    # Determine the weighted class loss based on a configurable threshold.
+                    if configs.train_settings.class_loss_T != 1:
+                        class_loss_weighted = class_loss / configs.train_settings.class_loss_T
+                    else:
+                        class_loss_weighted = class_loss
+
+                    # Calculate the weighted sum of losses.
+                    if configs.train_settings.only_use_position_loss:
+                        # If configured to only use position loss, ignore class loss.
+                        weighted_loss_sum = position_loss_weighted
+                    else:
+                        # Otherwise, sum class loss and weighted position loss.
+                        weighted_loss_sum = class_loss_weighted + position_loss_weighted
+
 
 
                 else:
@@ -258,12 +279,31 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     #     weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss * configs.train_settings.loss_sum_weights[1]
                     # else:
                     # Simplified code for weighted loss calculation
-                    position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
-                    if configs.train_settings.only_use_position_loss:
-                        weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
-                    else:
-                        weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+                    # position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
+                    # if configs.train_settings.only_use_position_loss:
+                    #     weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+                    # else:
+                    #     weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
 
+                    # Determine the weighted position loss based on a configurable threshold.
+                    if configs.train_settings.position_loss_T != 1:
+                        position_loss_weighted = position_loss / configs.train_settings.position_loss_T
+                    else:
+                        position_loss_weighted = position_loss
+
+                    # Determine the weighted class loss based on a configurable threshold.
+                    if configs.train_settings.class_loss_T != 1:
+                        class_loss_weighted = class_loss / configs.train_settings.class_loss_T
+                    else:
+                        class_loss_weighted = class_loss
+
+                    # Calculate the weighted sum of losses.
+                    if configs.train_settings.only_use_position_loss:
+                        # If configured to only use position loss, ignore class loss.
+                        weighted_loss_sum = position_loss_weighted
+                    else:
+                        # Otherwise, sum class loss and weighted position loss.
+                        weighted_loss_sum = class_loss_weighted + position_loss_weighted
 
             if configs.supcon.apply and configs.supcon.apply_supcon_loss: #configs.supcon.apply: # and warm_starting: calculate supcon loss no matter whether warm_starting or not.
                 supcon_loss = tools['loss_function_supcon'](
@@ -379,11 +419,30 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
                 class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['valid_device'])) * sample_weight_pt)
 
             # Simplified code for weighted loss calculation
-            position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
-            if configs.train_settings.only_use_position_loss:
-                weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+            # position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
+            # if configs.train_settings.only_use_position_loss:
+            #     weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+            # else:
+            #     weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+            # Determine the weighted position loss based on a configurable threshold.
+            if configs.train_settings.position_loss_T != 1:
+                position_loss_weighted = position_loss / configs.train_settings.position_loss_T
             else:
-                weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+                position_loss_weighted = position_loss
+
+            # Determine the weighted class loss based on a configurable threshold.
+            if configs.train_settings.class_loss_T != 1:
+                class_loss_weighted = class_loss / configs.train_settings.class_loss_T
+            else:
+                class_loss_weighted = class_loss
+
+            # Calculate the weighted sum of losses.
+            if configs.train_settings.only_use_position_loss:
+                # If configured to only use position loss, ignore class loss.
+                weighted_loss_sum = position_loss_weighted
+            else:
+                # Otherwise, sum class loss and weighted position loss.
+                weighted_loss_sum = class_loss_weighted + position_loss_weighted
 
             """
             if configs.supcon.apply and warm_starting:
