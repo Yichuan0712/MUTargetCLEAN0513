@@ -61,7 +61,7 @@ def make_buffer(id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tupl
 
 
 def train_loop(tools, configs, warm_starting, train_writer, epoch):
-    exit(0)
+    # exit(0)
     # if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:
     #     print("loss sum weights: ", configs.train_settings.loss_sum_weights)
     #     customlog(tools["logfilepath"],
