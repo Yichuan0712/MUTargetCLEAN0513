@@ -60,7 +60,7 @@ train_settings:
   add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: False  # check apply_DNN
   position_loss_T: 0.2
-  class_loss_T: 2
+  class_loss_T: 4
 
 valid_settings:
   do_every: 1
