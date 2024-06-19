@@ -35,7 +35,7 @@ decoder:
 
 train_settings:
   dataloader: "batchsample" #"batchsample","clean"
-  num_epochs: 1
+  num_epochs: 15
   shuffle: True
   device: cuda:0
   batch_size: 16 #16
@@ -61,7 +61,7 @@ train_settings:
   add_sample_weight_to_class_loss_when_data_aug: True
   only_use_position_loss: False  # check apply_DNN
   position_loss_T: 0.2
-  class_loss_T: 5
+  class_loss_T: 3
 
 valid_settings:
   do_every: 1
