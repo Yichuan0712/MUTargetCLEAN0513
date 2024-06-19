@@ -7,9 +7,11 @@
 
 #SBATCH --time 0-12:00:00 #Time for the job to run
 #SBATCH --job-name mutarget
-#SBATCH -p gpu
-##SBATCH -p xudong-gpu
-##SBATCH -A xudong-lab
+
+#SBATCH -p xudong-gpu
+#SBATCH -A xudong-lab
+
+##SBATCH -p gpu
 
 
 module load miniconda3
