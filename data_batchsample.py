@@ -85,6 +85,7 @@ class LocalizationDataset(Dataset):
             if configs.train_settings.data_aug.add_original:
                 if configs.train_settings.data_aug.add_original_but_not_export:
                     if type_protein[4] != 1:  # 0619 yichuan if not export
+                        print(type_protein[4])
                         aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))
                 else:
                     aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
