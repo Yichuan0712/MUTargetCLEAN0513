@@ -1,4 +1,4 @@
-run_hellbender_0620_mut3.sh#!/bin/bash
+#!/bin/bash
 #SBATCH --mem 50G
 #SBATCH -n 1
 #SBATCH --gres gpu:A100:1
