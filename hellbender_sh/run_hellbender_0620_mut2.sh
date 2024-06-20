@@ -5,7 +5,7 @@
 
 #SBATCH --error=error.log           # 错误日志文件
 
-#SBATCH --time 0-12:00:00 #Time for the job to run
+#SBATCH --time 1-00:00:00 #Time for the job to run
 #SBATCH --job-name mutarget
 
 ##SBATCH -p xudong-gpu
