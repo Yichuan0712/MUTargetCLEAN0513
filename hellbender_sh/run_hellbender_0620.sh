@@ -23,6 +23,6 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-python train.py --config_path ./configs_yaml/0619config/config0619_E15_T0.2_T5_addori.yaml--result_path ./result_0619/  || true
+python train.py --config_path ./configs_yaml/0619config/config0619_E15_T0.2_T5_addori.yaml --result_path ./result_0619/  || true
 
 
