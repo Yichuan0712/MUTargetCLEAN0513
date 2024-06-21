@@ -1038,10 +1038,10 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
                       customlog(logfilepath,
                                 f"Epoch {epoch}: valid position loss {valid_position_loss} smaller than best position loss {best_valid_position_loss}\n-------------------------------\n")
                       best_valid_position_loss = valid_position_loss
-                      model_path = os.path.join(tools['checkpoint_path'], f'best_position_model.pth')
+                      model_path1 = os.path.join(tools['checkpoint_path'], f'best_position_model.pth')
                       customlog(logfilepath,
-                                f"Epoch {epoch}: A better checkpoint is saved into {model_path} \n-------------------------------\n")
-                      save_checkpoint(epoch, model_path, tools)
+                                f"Epoch {epoch}: A better checkpoint is saved into {model_path1} \n-------------------------------\n")
+                      save_checkpoint(epoch, model_path1, tools)
 
             if epoch % configs.checkpoints_every == 0 and epoch != 0:
                 model_path_every = os.path.join(tools['checkpoint_path'], f'checkpoint_{epoch}.pth')
