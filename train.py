@@ -1123,10 +1123,14 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     config_path = args.config_path
+
+    print(int(args.fold_num))
+    exit(0)
+
     with open(config_path) as file:
         config_dict = yaml.full_load(file)
 
-    for i in range(int(args.fold_num)):
+    for i in range(0):
         valid_num = i
         if valid_num == 4:
             test_num = 0
