@@ -1126,7 +1126,7 @@ if __name__ == "__main__":
     with open(config_path) as file:
         config_dict = yaml.full_load(file)
 
-    for i in range(args.fold_num):
+    for i in range(int(args.fold_num)):
         valid_num = i
         if valid_num == 4:
             test_num = 0
