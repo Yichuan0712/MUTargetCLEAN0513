@@ -1116,6 +1116,9 @@ if __name__ == "__main__":
                              "by default is None")
     parser.add_argument("--resume_path", default=None,
                         help="if set, overwrite the one in config.yaml, by default is None")
+
+    parser.add_argument("--fold_num", default=0,
+                        help="")
     
     args = parser.parse_args()
 
@@ -1123,13 +1126,13 @@ if __name__ == "__main__":
     with open(config_path) as file:
         config_dict = yaml.full_load(file)
 
-    for i in range(1):
+    for i in range(args.fold_num):
         valid_num = i
         if valid_num == 4:
             test_num = 0
         else:
             test_num = valid_num+1
-        main(config_dict, args,valid_num, test_num)
+        main(config_dict, args, valid_num, test_num)
         break
 
 
