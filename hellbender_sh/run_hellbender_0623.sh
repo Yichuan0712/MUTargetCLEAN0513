@@ -5,13 +5,13 @@
 
 #SBATCH --error=error.log           # 错误日志文件
 
-#SBATCH --time 2-00:00:00 #Time for the job to run
+#SBATCH --time 1-00:00:00 #Time for the job to run
 #SBATCH --job-name mutarget
 
-##SBATCH -p xudong-gpu
-##SBATCH -A xudong-lab
+#SBATCH -p xudong-gpu
+#SBATCH -A xudong-lab
 
-#SBATCH -p gpu
+##SBATCH -p gpu
 
 
 module load miniconda3
@@ -23,6 +23,6 @@ source activate /home/yz3qt/data/miniconda/envs/mutarget
 export TORCH_HOME=/home/yz3qt/data/torch_cache/
 export HF_HOME=/home/yz3qt/data/transformers_cache/
 
-python train.py --config_path ./configs_yaml/0622config/config0622_E100.yaml --result_path ./result_0623/  || true
+python train.py --config_path ./configs_yaml/0621config/config0621_E100.yaml --result_path ./result_0623/  || true
 
 
