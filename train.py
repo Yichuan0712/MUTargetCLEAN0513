@@ -1123,8 +1123,8 @@ if __name__ == "__main__":
 
     config_path = args.config_path
 
-    print(args.fold_num)
-    exit(0)
+    # print(args.fold_num)
+    # exit(0)
 
     with open(config_path) as file:
         config_dict = yaml.full_load(file)
