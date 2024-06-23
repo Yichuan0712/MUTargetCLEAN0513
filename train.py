@@ -1117,8 +1117,7 @@ if __name__ == "__main__":
     parser.add_argument("--resume_path", default=None,
                         help="if set, overwrite the one in config.yaml, by default is None")
 
-    parser.add_argument("--fold_num", default=0,
-                        help="")
+    parser.add_argument("--fold_num", default=0, help="")
     
     args = parser.parse_args()
 
