@@ -161,31 +161,31 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 sample_weight_pt = torch.from_numpy(np.array(sample_weight_tuple)).to(tools['train_device']).unsqueeze(1)
 
                 if configs.train_settings.additional_pos_weights:
-
-                    motif_logits_nucleus = motif_logits[:, 0:1, :]
-                    motif_logits_nucleus_export = motif_logits[:, 4:5, :]
-                    # Concatenate the parts that exclude indices 0 and 4
-                    motif_logits_6 = torch.cat((motif_logits[:, 1:4, :], motif_logits[:, 5:, :]), dim=1)
-
-
-                    target_frag_nucleus = target_frag[:, 0:1, :]
-                    target_frag_nucleus_export = target_frag[:, 4:5, :]
-                    # Concatenate the parts that exclude indices 0 and 4
-                    target_frag_6 = torch.cat((target_frag[:, 1:4, :], target_frag[:, 5:, :]), dim=1)
-
-                    position_loss = tools['loss_function_6'](motif_logits_6, target_frag_6.to(tools['train_device']))
-                    nucleus_position_loss = tools['loss_function_nucleus']\
-                        (motif_logits_nucleus, target_frag_nucleus.to(tools['train_device']))
-                    nucleus_export_position_loss = tools['loss_function_nucleus_export']\
-                        (motif_logits_nucleus_export, target_frag_nucleus_export.to(tools['train_device']))
-
-                    """
-                    add_position_loss & add_sample_weight_to_position_loss
-                    """
-                    if configs.train_settings.add_sample_weight_to_position_loss:
-                        print('add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime')
-                        customlog(tools["logfilepath"], f'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime\n')
-                        raise 'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime'
+                    pass
+                    # motif_logits_nucleus = motif_logits[:, 0:1, :]
+                    # motif_logits_nucleus_export = motif_logits[:, 4:5, :]
+                    # # Concatenate the parts that exclude indices 0 and 4
+                    # motif_logits_6 = torch.cat((motif_logits[:, 1:4, :], motif_logits[:, 5:, :]), dim=1)
+                    #
+                    #
+                    # target_frag_nucleus = target_frag[:, 0:1, :]
+                    # target_frag_nucleus_export = target_frag[:, 4:5, :]
+                    # # Concatenate the parts that exclude indices 0 and 4
+                    # target_frag_6 = torch.cat((target_frag[:, 1:4, :], target_frag[:, 5:, :]), dim=1)
+                    #
+                    # position_loss = tools['loss_function_6'](motif_logits_6, target_frag_6.to(tools['train_device']))
+                    # nucleus_position_loss = tools['loss_function_nucleus']\
+                    #     (motif_logits_nucleus, target_frag_nucleus.to(tools['train_device']))
+                    # nucleus_export_position_loss = tools['loss_function_nucleus_export']\
+                    #     (motif_logits_nucleus_export, target_frag_nucleus_export.to(tools['train_device']))
+                    #
+                    # """
+                    # add_position_loss & add_sample_weight_to_position_loss
+                    # """
+                    # if configs.train_settings.add_sample_weight_to_position_loss:
+                    #     print('add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime')
+                    #     customlog(tools["logfilepath"], f'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime\n')
+                    #     raise 'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime'
 
                 else:
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
@@ -225,53 +225,54 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     class_loss = torch.mean(tools['loss_function_pro'](classification_head, type_protein_pt.to(tools['train_device'])) * sample_weight_pt)
 
                 if configs.train_settings.additional_pos_weights:
-                    train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
-                    train_writer.add_scalar('step position_loss_6', position_loss.item(), global_step=global_step)
-                    train_writer.add_scalar('step nucleus_position_loss', nucleus_position_loss.item(),
-                                            global_step=global_step)
-                    train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
-                                            global_step=global_step)
-
-                    element_num = motif_logits.numel()
-                    position_loss_sum = (position_loss + nucleus_position_loss + nucleus_export_position_loss)/element_num
-                    # print(element_num)
-                    # exit(0)
-
-                    print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss_sum}  " +
-                          f"element_num:{element_num}  " +
-                          f"position_loss_6(sum):{position_loss.item()}  " +
-                          f"nucleus_position_loss(sum):{nucleus_position_loss.item()}  " +
-                          f"nucleus_export_position_loss(sum):{nucleus_export_position_loss.item()}")
-                    # weighted_loss_sum = class_loss + position_loss_sum
-                    # if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
-                    #     weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss_sum * configs.train_settings.loss_sum_weights[1]
+                    pass
+                    # train_writer.add_scalar('step class_loss', class_loss.item(), global_step=global_step)
+                    # train_writer.add_scalar('step position_loss_6', position_loss.item(), global_step=global_step)
+                    # train_writer.add_scalar('step nucleus_position_loss', nucleus_position_loss.item(),
+                    #                         global_step=global_step)
+                    # train_writer.add_scalar('step nucleus_export_position_loss', nucleus_export_position_loss.item(),
+                    #                         global_step=global_step)
+                    #
+                    # element_num = motif_logits.numel()
+                    # position_loss_sum = (position_loss + nucleus_position_loss + nucleus_export_position_loss)/element_num
+                    # # print(element_num)
+                    # # exit(0)
+                    #
+                    # print(f"{global_step} class_loss:{class_loss.item()}  position_loss:{position_loss_sum}  " +
+                    #       f"element_num:{element_num}  " +
+                    #       f"position_loss_6(sum):{position_loss.item()}  " +
+                    #       f"nucleus_position_loss(sum):{nucleus_position_loss.item()}  " +
+                    #       f"nucleus_export_position_loss(sum):{nucleus_export_position_loss.item()}")
+                    # # weighted_loss_sum = class_loss + position_loss_sum
+                    # # if epoch >= configs.train_settings.weighted_loss_sum_start_epoch:  # yichuan 0529
+                    # #     weighted_loss_sum = class_loss * configs.train_settings.loss_sum_weights[0] + position_loss_sum * configs.train_settings.loss_sum_weights[1]
+                    # # else:
+                    # # Simplified code for weighted loss calculation
+                    # # position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
+                    # # if configs.train_settings.only_use_position_loss:
+                    # #     weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+                    # # else:
+                    # #     weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
+                    #
+                    # # Determine the weighted position loss based on a configurable threshold.
+                    # if configs.train_settings.position_loss_T != 1:
+                    #     position_loss_weighted = position_loss / configs.train_settings.position_loss_T
                     # else:
-                    # Simplified code for weighted loss calculation
-                    # position_loss_weighted = position_loss / configs.train_settings.position_loss_T if configs.train_settings.position_loss_T != 1 else position_loss
+                    #     position_loss_weighted = position_loss
+                    #
+                    # # Determine the weighted class loss based on a configurable threshold.
+                    # if configs.train_settings.class_loss_T != 1:
+                    #     class_loss_weighted = class_loss / configs.train_settings.class_loss_T
+                    # else:
+                    #     class_loss_weighted = class_loss
+                    #
+                    # # Calculate the weighted sum of losses.
                     # if configs.train_settings.only_use_position_loss:
-                    #     weighted_loss_sum = position_loss_weighted  # yichuan updated on 0610 and 0601
+                    #     # If configured to only use position loss, ignore class loss.
+                    #     weighted_loss_sum = position_loss_weighted
                     # else:
-                    #     weighted_loss_sum = class_loss + position_loss_weighted  # yichuan updated on 0612
-
-                    # Determine the weighted position loss based on a configurable threshold.
-                    if configs.train_settings.position_loss_T != 1:
-                        position_loss_weighted = position_loss / configs.train_settings.position_loss_T
-                    else:
-                        position_loss_weighted = position_loss
-
-                    # Determine the weighted class loss based on a configurable threshold.
-                    if configs.train_settings.class_loss_T != 1:
-                        class_loss_weighted = class_loss / configs.train_settings.class_loss_T
-                    else:
-                        class_loss_weighted = class_loss
-
-                    # Calculate the weighted sum of losses.
-                    if configs.train_settings.only_use_position_loss:
-                        # If configured to only use position loss, ignore class loss.
-                        weighted_loss_sum = position_loss_weighted
-                    else:
-                        # Otherwise, sum class loss and weighted position loss.
-                        weighted_loss_sum = class_loss_weighted + position_loss_weighted
+                    #     # Otherwise, sum class loss and weighted position loss.
+                    #     weighted_loss_sum = class_loss_weighted + position_loss_weighted
 
 
 
