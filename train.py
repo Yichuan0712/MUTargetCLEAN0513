@@ -90,10 +90,11 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
         if configs.train_settings.ignore_ori:
             print(len(id_tuple), id_tuple)
             print(len(id_frag_list_tuple), id_frag_list_tuple)
-            for i in id_frag_list_tuple:
-                if len(i)!=1:
-                    print(i)
             print(len(ORI_AUG), ORI_AUG)
+            expanded_ORI_AUG = []
+            for ids, label in zip(id_frag_list_tuple, ORI_AUG):
+                expanded_ORI_AUG.extend([label] * len(ids))
+            print(len(expanded_ORI_AUG), expanded_ORI_AUG)
         exit(0)
         b_size = len(id_tuple)
         flag_batch_extension = False
