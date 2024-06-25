@@ -195,16 +195,19 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                     #     raise 'add_position_loss & add_sample_weight_to_position_loss cannot be True at the sametime'
 
                 else:
-
                     if configs.train_settings.ignore_ori:
                         # exit(0)
                         mask = [label == 'AUG' for label in expanded_ORI_AUG]
                         print('mask', len(mask), mask)
                         mask_tensor = torch.tensor(mask)
+
                         filtered_motif_logits = motif_logits[mask_tensor]
                         print(motif_logits.shape, '->', filtered_motif_logits.shape)
                         motif_logits = filtered_motif_logits
 
+                        filtered_target_frag = target_frag[mask_tensor]
+                        print(target_frag.shape, '->', filtered_target_frag.shape)
+                        target_frag = filtered_target_frag
 
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
