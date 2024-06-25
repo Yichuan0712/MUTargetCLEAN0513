@@ -189,9 +189,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                 else:
 
-                    if 1==1:
-                        print(motif_logits.shape)
-                        exit(0)
+                    # if 1==1:
+                    #     print(motif_logits.shape)
+                    #     exit(0)
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
                     # yichuan: 因为BCEloss已经修改成了none, 所以这里必须要加mean
