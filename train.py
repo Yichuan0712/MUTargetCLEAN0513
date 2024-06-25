@@ -89,6 +89,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
     for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, ORI_AUG) in enumerate(tools['train_loader']):
         if configs.train_settings.ignore_ori:
             print(len(id_tuple), id_tuple)
+            print(len(id_frag_list_tuple), id_frag_list_tuple)
             print(len(ORI_AUG), ORI_AUG)
         # exit(0)
         b_size = len(id_tuple)
