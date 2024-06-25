@@ -90,8 +90,11 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
         if configs.train_settings.ignore_ori:
             print(len(id_tuple), id_tuple)
             print(len(id_frag_list_tuple), id_frag_list_tuple)
+            for i in id_frag_list_tuple:
+                if len(i)!=1:
+                    print(i)
             print(len(ORI_AUG), ORI_AUG)
-        # exit(0)
+        exit(0)
         b_size = len(id_tuple)
         flag_batch_extension = False
         if (configs.supcon.apply and not warm_starting and pos_neg is not None) or \
