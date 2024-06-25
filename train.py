@@ -87,6 +87,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
     # model.train().cuda()
     tools['net'].train().to(tools['train_device'])
     for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, ORI_AUG) in enumerate(tools['train_loader']):
+        print(id_tuple)
         print(ORI_AUG)
         # exit(0)
         b_size = len(id_tuple)
@@ -348,8 +349,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 customlog(tools["logfilepath"], f"{global_step} loss: {loss:>7f}  [{current:>5d}/{size:>5d}]\n")
             if class_loss !=-1:
                 if configs.train_settings.additional_pos_weights:  # yichuan 0529
-                    customlog(tools["logfilepath"],
-                              f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss_sum.item():>7f}\n")
+                    # customlog(tools["logfilepath"],
+                    #           f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss_sum.item():>7f}\n")
+                    pass
                 else:
                     customlog(tools["logfilepath"], f"{global_step} class loss: {class_loss.item():>7f} position_loss:{position_loss.item():>7f}\n")
 
