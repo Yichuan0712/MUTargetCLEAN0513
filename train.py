@@ -88,7 +88,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
     tools['net'].train().to(tools['train_device'])
     for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, ORI_AUG) in enumerate(tools['train_loader']):
         print(ORI_AUG)
-        exit(0)
+        # exit(0)
         b_size = len(id_tuple)
         flag_batch_extension = False
         if (configs.supcon.apply and not warm_starting and pos_neg is not None) or \
