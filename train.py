@@ -88,13 +88,13 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
     tools['net'].train().to(tools['train_device'])
     for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, ORI_AUG) in enumerate(tools['train_loader']):
         if configs.train_settings.ignore_ori:
-            print(len(id_tuple), id_tuple)
-            print(len(id_frag_list_tuple), id_frag_list_tuple)
-            print(len(ORI_AUG), ORI_AUG)
+            # print(len(id_tuple), id_tuple)
+            print('id_frag_list_tuple', len(id_frag_list_tuple), id_frag_list_tuple)
+            print('ORI_AUG', len(ORI_AUG), ORI_AUG)
             expanded_ORI_AUG = []
             for ids, label in zip(id_frag_list_tuple, ORI_AUG):
                 expanded_ORI_AUG.extend([label] * len(ids))
-            print(len(expanded_ORI_AUG), expanded_ORI_AUG)
+            print('expanded_ORI_AUG', len(expanded_ORI_AUG), expanded_ORI_AUG)
         # exit(0)
         b_size = len(id_tuple)
         flag_batch_extension = False
@@ -196,7 +196,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                 else:
 
-                    if 1==1:
+                    if configs.train_settings.ignore_ori:
                         print(motif_logits.shape)
                         exit(0)
 
