@@ -205,9 +205,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         print('motif_logits', motif_logits.shape, '->', filtered_motif_logits.shape)
                         motif_logits = filtered_motif_logits
 
-                        # filtered_target_frag = target_frag[mask_tensor]
-                        # print('target_frag', target_frag.shape, '->', filtered_target_frag.shape)
-                        # target_frag = filtered_target_frag
+                        filtered_target_frag = target_frag[mask_tensor]
+                        print('target_frag', target_frag.shape, '->', filtered_target_frag.shape)
+                        target_frag = filtered_target_frag
 
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
