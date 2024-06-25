@@ -81,9 +81,9 @@ class LocalizationDataset(Dataset):
         aug_samples = []
         pos_mutation_rate, neg_mutation_rate = configs.train_settings.data_aug.pos_mutation_rate, configs.train_settings.data_aug.neg_mutation_rate
 
-        if 1 < 0:
-            for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
-                aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
+        # if 1 < 0:
+        #     for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
+        #         aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
 
         for id, id_frag_list, seq_frag_list, target_frag_list, type_protein in samples:
             if configs.train_settings.data_aug.add_original:
