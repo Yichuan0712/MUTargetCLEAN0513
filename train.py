@@ -190,7 +190,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                 else:
 
                     if 1==1:
-                        print(motif_logits)
+                        print(motif_logits.shape)
                         exit(0)
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
