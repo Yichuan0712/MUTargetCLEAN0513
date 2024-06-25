@@ -178,8 +178,9 @@ class LocalizationDataset(Dataset):
             # print(aug_target_frag_list)
             # print()
             # print()
-
+        print(len(aug_samples_tag))
         print("data length after augmentation is ", str(len(aug_samples)))
+        exit(0)
         return aug_samples
 
     @staticmethod
