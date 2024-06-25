@@ -1,0 +1,1193 @@
+use k-fold index: 0
+
+Done Loading data
+
+number of steps for training data: 221
+
+number of steps for valid data: 67
+
+number of steps for test data: 67
+
+Done initialize tokenizer
+
+trainable params: 39950470 || all params: 652949531 || trainable%: 6.118462163349038
+
+Done initialize model
+
+preparing optimizer is done
+
+number of train steps per epoch: 221
+
+Start training...
+
+Fold 0 Epoch 1 train...
+-------------------------------
+
+0 loss: 0.125519  [   16/ 3543]
+
+0 class loss: 0.026866 position_loss:0.024029
+
+30 loss: 0.440142  [  496/ 3543]
+
+30 class loss: 0.112242 position_loss:0.083539
+
+60 loss: 0.088130  [  976/ 3543]
+
+60 class loss: 0.019372 position_loss:0.016851
+
+90 loss: 0.755901  [ 1456/ 3543]
+
+90 class loss: 0.158373 position_loss:0.144845
+
+120 loss: 0.611925  [ 1936/ 3543]
+
+120 class loss: 0.121398 position_loss:0.117529
+
+150 loss: 0.363642  [ 2416/ 3543]
+
+150 class loss: 0.079860 position_loss:0.069534
+
+180 loss: 0.442689  [ 2896/ 3543]
+
+180 class loss: 0.094819 position_loss:0.084745
+
+210 loss: 0.927446  [ 3376/ 3543]
+
+210 class loss: 0.197817 position_loss:0.177577
+
+Epoch 1: train loss: 0.477364
+
+Fold 0 Epoch 1 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 1: valid loss:0.282988
+
+Epoch 1: valid_class_loss:0.059056	valid_position_loss:0.054235
+
+Epoch 1: valid loss 0.2829877687369827 smaller than best loss inf
+-------------------------------
+
+Epoch 1: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 1: valid position loss 0.05423530400743454 smaller than best position loss inf
+-------------------------------
+
+Epoch 1: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 2 train...
+-------------------------------
+
+221 loss: 0.227914  [   16/ 3543]
+
+221 class loss: 0.050905 position_loss:0.043547
+
+251 loss: 0.069408  [  496/ 3543]
+
+251 class loss: 0.015045 position_loss:0.013280
+
+281 loss: 0.625320  [  976/ 3543]
+
+281 class loss: 0.156449 position_loss:0.118806
+
+311 loss: 0.568903  [ 1456/ 3543]
+
+311 class loss: 0.133210 position_loss:0.108452
+
+341 loss: 0.438351  [ 1936/ 3543]
+
+341 class loss: 0.086141 position_loss:0.084224
+
+371 loss: 0.363971  [ 2416/ 3543]
+
+371 class loss: 0.083384 position_loss:0.069459
+
+401 loss: 0.207159  [ 2896/ 3543]
+
+401 class loss: 0.047485 position_loss:0.039532
+
+431 loss: 0.320700  [ 3376/ 3543]
+
+431 class loss: 0.069744 position_loss:0.061350
+
+Epoch 2: train loss: 0.416460
+
+Fold 0 Epoch 2 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 2: valid loss:0.215463
+
+Epoch 2: valid_class_loss:0.049046	valid_position_loss:0.041131
+
+Epoch 2: valid loss 0.21546325503836397 smaller than best loss 0.2829877687369827
+-------------------------------
+
+Epoch 2: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 2: valid position loss 0.0411308190780924 smaller than best position loss 0.05423530400743454
+-------------------------------
+
+Epoch 2: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 3 train...
+-------------------------------
+
+442 loss: 0.480018  [   16/ 3543]
+
+442 class loss: 0.110978 position_loss:0.091565
+
+472 loss: 0.251161  [  496/ 3543]
+
+472 class loss: 0.064371 position_loss:0.047657
+
+502 loss: 0.366282  [  976/ 3543]
+
+502 class loss: 0.081982 position_loss:0.069977
+
+532 loss: 0.173132  [ 1456/ 3543]
+
+532 class loss: 0.044485 position_loss:0.032847
+
+562 loss: 0.370389  [ 1936/ 3543]
+
+562 class loss: 0.111069 position_loss:0.069635
+
+592 loss: 0.116293  [ 2416/ 3543]
+
+592 class loss: 0.028156 position_loss:0.022132
+
+622 loss: 0.227751  [ 2896/ 3543]
+
+622 class loss: 0.075853 position_loss:0.042516
+
+652 loss: 0.360663  [ 3376/ 3543]
+
+652 class loss: 0.131835 position_loss:0.066859
+
+Epoch 3: train loss: 0.263106
+
+Fold 0 Epoch 3 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 3: valid loss:0.109995
+
+Epoch 3: valid_class_loss:0.038089	valid_position_loss:0.020475
+
+Epoch 3: valid loss 0.10999506974606892 smaller than best loss 0.21546325503836397
+-------------------------------
+
+Epoch 3: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 3: valid position loss 0.020475462822736205 smaller than best position loss 0.0411308190780924
+-------------------------------
+
+Epoch 3: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 4 train...
+-------------------------------
+
+663 loss: 0.206766  [   16/ 3543]
+
+663 class loss: 0.081456 position_loss:0.038095
+
+693 loss: 0.193149  [  496/ 3543]
+
+693 class loss: 0.061380 position_loss:0.036175
+
+723 loss: 0.162974  [  976/ 3543]
+
+723 class loss: 0.078636 position_loss:0.029449
+
+753 loss: 0.219662  [ 1456/ 3543]
+
+753 class loss: 0.119253 position_loss:0.039162
+
+783 loss: 0.043146  [ 1936/ 3543]
+
+783 class loss: 0.023062 position_loss:0.007707
+
+813 loss: 0.078068  [ 2416/ 3543]
+
+813 class loss: 0.051702 position_loss:0.013545
+
+843 loss: 0.168783  [ 2896/ 3543]
+
+843 class loss: 0.104535 position_loss:0.029575
+
+873 loss: 0.122034  [ 3376/ 3543]
+
+873 class loss: 0.071552 position_loss:0.021545
+
+Epoch 4: train loss: 0.132766
+
+Fold 0 Epoch 4 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 4: valid loss:0.073646
+
+Epoch 4: valid_class_loss:0.032327	valid_position_loss:0.013436
+
+Epoch 4: valid loss 0.07364616353747347 smaller than best loss 0.10999506974606892
+-------------------------------
+
+Epoch 4: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 4: valid position loss 0.013436151068127067 smaller than best position loss 0.020475462822736205
+-------------------------------
+
+Epoch 4: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 5 train...
+-------------------------------
+
+884 loss: 0.135662  [   16/ 3543]
+
+884 class loss: 0.085920 position_loss:0.023696
+
+914 loss: 0.060863  [  496/ 3543]
+
+914 class loss: 0.047194 position_loss:0.010285
+
+944 loss: 0.101954  [  976/ 3543]
+
+944 class loss: 0.066013 position_loss:0.017750
+
+974 loss: 0.052628  [ 1456/ 3543]
+
+974 class loss: 0.035678 position_loss:0.009099
+
+1004 loss: 0.048561  [ 1936/ 3543]
+
+1004 class loss: 0.043209 position_loss:0.007984
+
+1034 loss: 0.068558  [ 2416/ 3543]
+
+1034 class loss: 0.024928 position_loss:0.012714
+
+1064 loss: 0.111038  [ 2896/ 3543]
+
+1064 class loss: 0.086455 position_loss:0.018749
+
+1094 loss: 0.045172  [ 3376/ 3543]
+
+1094 class loss: 0.035357 position_loss:0.007620
+
+Epoch 5: train loss: 0.091122
+
+Fold 0 Epoch 5 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 5: valid loss:0.056983
+
+Epoch 5: valid_class_loss:0.031030	valid_position_loss:0.010155
+
+Epoch 5: valid loss 0.056982831860197924 smaller than best loss 0.07364616353747347
+-------------------------------
+
+Epoch 5: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 5: valid position loss 0.010155358535516927 smaller than best position loss 0.013436151068127067
+-------------------------------
+
+Epoch 5: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 6 train...
+-------------------------------
+
+1105 loss: 0.058693  [   16/ 3543]
+
+1105 class loss: 0.083586 position_loss:0.008395
+
+1135 loss: 0.085552  [  496/ 3543]
+
+1135 class loss: 0.055362 position_loss:0.014896
+
+1165 loss: 0.030452  [  976/ 3543]
+
+1165 class loss: 0.009226 position_loss:0.005721
+
+1195 loss: 0.034974  [ 1456/ 3543]
+
+1195 class loss: 0.031762 position_loss:0.005724
+
+1225 loss: 0.046510  [ 1936/ 3543]
+
+1225 class loss: 0.047712 position_loss:0.007394
+
+1255 loss: 0.078528  [ 2416/ 3543]
+
+1255 class loss: 0.075611 position_loss:0.012681
+
+1285 loss: 0.096212  [ 2896/ 3543]
+
+1285 class loss: 0.109774 position_loss:0.014852
+
+1315 loss: 0.073951  [ 3376/ 3543]
+
+1315 class loss: 0.068129 position_loss:0.012065
+
+Epoch 6: train loss: 0.075011
+
+Fold 0 Epoch 6 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 6: valid loss:0.045753
+
+Epoch 6: valid_class_loss:0.029816	valid_position_loss:0.007958
+
+Epoch 6: valid loss 0.04575285661617773 smaller than best loss 0.056982831860197924
+-------------------------------
+
+Epoch 6: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 6: valid position loss 0.007957931238263735 smaller than best position loss 0.010155358535516927
+-------------------------------
+
+Epoch 6: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 7 train...
+-------------------------------
+
+1326 loss: 0.102941  [   16/ 3543]
+
+1326 class loss: 0.094783 position_loss:0.016797
+
+1356 loss: 0.092656  [  496/ 3543]
+
+1356 class loss: 0.067265 position_loss:0.015841
+
+1386 loss: 0.034428  [  976/ 3543]
+
+1386 class loss: 0.037458 position_loss:0.005387
+
+1416 loss: 0.048764  [ 1456/ 3543]
+
+1416 class loss: 0.058841 position_loss:0.007399
+
+1446 loss: 0.035604  [ 1936/ 3543]
+
+1446 class loss: 0.042075 position_loss:0.005438
+
+1476 loss: 0.021842  [ 2416/ 3543]
+
+1476 class loss: 0.025109 position_loss:0.003364
+
+1506 loss: 0.026969  [ 2896/ 3543]
+
+1506 class loss: 0.034985 position_loss:0.003994
+
+1536 loss: 0.049453  [ 3376/ 3543]
+
+1536 class loss: 0.027528 position_loss:0.008790
+
+Epoch 7: train loss: 0.058574
+
+Fold 0 Epoch 7 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 7: valid loss:0.041895
+
+Epoch 7: valid_class_loss:0.031409	valid_position_loss:0.007123
+
+Epoch 7: valid loss 0.041894611039696626 smaller than best loss 0.04575285661617773
+-------------------------------
+
+Epoch 7: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 7: valid position loss 0.007122559182328373 smaller than best position loss 0.007957931238263735
+-------------------------------
+
+Epoch 7: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 8 train...
+-------------------------------
+
+1547 loss: 0.052103  [   16/ 3543]
+
+1547 class loss: 0.045738 position_loss:0.008591
+
+1577 loss: 0.028609  [  496/ 3543]
+
+1577 class loss: 0.020112 position_loss:0.004917
+
+1607 loss: 0.066203  [  976/ 3543]
+
+1607 class loss: 0.060464 position_loss:0.010822
+
+1637 loss: 0.061037  [ 1456/ 3543]
+
+1637 class loss: 0.060939 position_loss:0.009770
+
+1667 loss: 0.089653  [ 1936/ 3543]
+
+1667 class loss: 0.086648 position_loss:0.014465
+
+1697 loss: 0.051488  [ 2416/ 3543]
+
+1697 class loss: 0.048921 position_loss:0.008341
+
+1727 loss: 0.043709  [ 2896/ 3543]
+
+1727 class loss: 0.042347 position_loss:0.007048
+
+1757 loss: 0.059191  [ 3376/ 3543]
+
+1757 class loss: 0.071230 position_loss:0.008989
+
+Epoch 8: train loss: 0.044785
+
+Fold 0 Epoch 8 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 8: valid loss:0.032260
+
+Epoch 8: valid_class_loss:0.029489	valid_position_loss:0.005272
+
+Epoch 8: valid loss 0.032260094876218656 smaller than best loss 0.041894611039696626
+-------------------------------
+
+Epoch 8: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 8: valid position loss 0.005272440152662624 smaller than best position loss 0.007122559182328373
+-------------------------------
+
+Epoch 8: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 9 train...
+-------------------------------
+
+1768 loss: 0.042031  [   16/ 3543]
+
+1768 class loss: 0.058244 position_loss:0.006076
+
+1798 loss: 0.026360  [  496/ 3543]
+
+1798 class loss: 0.017261 position_loss:0.004582
+
+1828 loss: 0.067240  [  976/ 3543]
+
+1828 class loss: 0.082973 position_loss:0.010129
+
+1858 loss: 0.035268  [ 1456/ 3543]
+
+1858 class loss: 0.049438 position_loss:0.005076
+
+1888 loss: 0.042537  [ 1936/ 3543]
+
+1888 class loss: 0.039678 position_loss:0.006920
+
+1918 loss: 0.040682  [ 2416/ 3543]
+
+1918 class loss: 0.051005 position_loss:0.006096
+
+1948 loss: 0.032298  [ 2896/ 3543]
+
+1948 class loss: 0.046402 position_loss:0.004603
+
+1978 loss: 0.030271  [ 3376/ 3543]
+
+1978 class loss: 0.020320 position_loss:0.005241
+
+Epoch 9: train loss: 0.036398
+
+Fold 0 Epoch 9 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 9: valid loss:0.027531
+
+Epoch 9: valid_class_loss:0.026704	valid_position_loss:0.004438
+
+Epoch 9: valid loss 0.027531425166857033 smaller than best loss 0.032260094876218656
+-------------------------------
+
+Epoch 9: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 9: valid position loss 0.004438108444450871 smaller than best position loss 0.005272440152662624
+-------------------------------
+
+Epoch 9: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 10 train...
+-------------------------------
+
+1989 loss: 0.013806  [   16/ 3543]
+
+1989 class loss: 0.023274 position_loss:0.001830
+
+2019 loss: 0.033993  [  496/ 3543]
+
+2019 class loss: 0.042589 position_loss:0.005095
+
+2049 loss: 0.052838  [  976/ 3543]
+
+2049 class loss: 0.044401 position_loss:0.008792
+
+2079 loss: 0.009872  [ 1456/ 3543]
+
+2079 class loss: 0.018845 position_loss:0.001221
+
+2109 loss: 0.031120  [ 1936/ 3543]
+
+2109 class loss: 0.039481 position_loss:0.004645
+
+2139 loss: 0.025511  [ 2416/ 3543]
+
+2139 class loss: 0.032275 position_loss:0.003811
+
+2169 loss: 0.025682  [ 2896/ 3543]
+
+2169 class loss: 0.032719 position_loss:0.003828
+
+2199 loss: 0.023105  [ 3376/ 3543]
+
+2199 class loss: 0.032682 position_loss:0.003314
+
+Epoch 10: train loss: 0.031370
+
+Fold 0 Epoch 10 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 10: valid loss:0.024826
+
+Epoch 10: valid_class_loss:0.024871	valid_position_loss:0.003970
+
+Epoch 10: valid loss 0.024825577832617414 smaller than best loss 0.027531425166857033
+-------------------------------
+
+Epoch 10: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 10: valid position loss 0.003970280394532683 smaller than best position loss 0.004438108444450871
+-------------------------------
+
+Epoch 10: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 11 train...
+-------------------------------
+
+2210 loss: 0.030130  [   16/ 3543]
+
+2210 class loss: 0.024319 position_loss:0.005053
+
+2240 loss: 0.040979  [  496/ 3543]
+
+2240 class loss: 0.020876 position_loss:0.007361
+
+2270 loss: 0.023699  [  976/ 3543]
+
+2270 class loss: 0.038640 position_loss:0.003194
+
+2300 loss: 0.015109  [ 1456/ 3543]
+
+2300 class loss: 0.027265 position_loss:0.001931
+
+2330 loss: 0.047798  [ 1936/ 3543]
+
+2330 class loss: 0.055368 position_loss:0.007345
+
+2360 loss: 0.039098  [ 2416/ 3543]
+
+2360 class loss: 0.021837 position_loss:0.006946
+
+2390 loss: 0.047195  [ 2896/ 3543]
+
+2390 class loss: 0.057553 position_loss:0.007137
+
+2420 loss: 0.021750  [ 3376/ 3543]
+
+2420 class loss: 0.036300 position_loss:0.002898
+
+Epoch 11: train loss: 0.027432
+
+Fold 0 Epoch 11 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 11: valid loss:0.023996
+
+Epoch 11: valid_class_loss:0.024463	valid_position_loss:0.003821
+
+Epoch 11: valid loss 0.023996255166819434 smaller than best loss 0.024825577832617414
+-------------------------------
+
+Epoch 11: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 11: valid position loss 0.0038207433631213617 smaller than best position loss 0.003970280394532683
+-------------------------------
+
+Epoch 11: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 12 train...
+-------------------------------
+
+2431 loss: 0.013343  [   16/ 3543]
+
+2431 class loss: 0.012698 position_loss:0.002161
+
+2461 loss: 0.004880  [  496/ 3543]
+
+2461 class loss: 0.009224 position_loss:0.000607
+
+2491 loss: 0.012163  [  976/ 3543]
+
+2491 class loss: 0.015999 position_loss:0.001793
+
+2521 loss: 0.029780  [ 1456/ 3543]
+
+2521 class loss: 0.050395 position_loss:0.003940
+
+2551 loss: 0.006570  [ 1936/ 3543]
+
+2551 class loss: 0.011093 position_loss:0.000870
+
+2581 loss: 0.017307  [ 2416/ 3543]
+
+2581 class loss: 0.028646 position_loss:0.002315
+
+2611 loss: 0.016625  [ 2896/ 3543]
+
+2611 class loss: 0.018567 position_loss:0.002582
+
+2641 loss: 0.015406  [ 3376/ 3543]
+
+2641 class loss: 0.030627 position_loss:0.001856
+
+Epoch 12: train loss: 0.024162
+
+Fold 0 Epoch 12 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 12: valid loss:0.021168
+
+Epoch 12: valid_class_loss:0.022275	valid_position_loss:0.003343
+
+Epoch 12: valid loss 0.021167856528949112 smaller than best loss 0.023996255166819434
+-------------------------------
+
+Epoch 12: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 12: valid position loss 0.0033425813558614604 smaller than best position loss 0.0038207433631213617
+-------------------------------
+
+Epoch 12: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 13 train...
+-------------------------------
+
+2652 loss: 0.019307  [   16/ 3543]
+
+2652 class loss: 0.024652 position_loss:0.002875
+
+2682 loss: 0.043414  [  496/ 3543]
+
+2682 class loss: 0.064491 position_loss:0.006103
+
+2712 loss: 0.006575  [  976/ 3543]
+
+2712 class loss: 0.008764 position_loss:0.000964
+
+2742 loss: 0.023655  [ 1456/ 3543]
+
+2742 class loss: 0.038506 position_loss:0.003191
+
+2772 loss: 0.012431  [ 1936/ 3543]
+
+2772 class loss: 0.019441 position_loss:0.001709
+
+2802 loss: 0.022036  [ 2416/ 3543]
+
+2802 class loss: 0.016596 position_loss:0.003743
+
+2832 loss: 0.015780  [ 2896/ 3543]
+
+2832 class loss: 0.033680 position_loss:0.001809
+
+2862 loss: 0.010217  [ 3376/ 3543]
+
+2862 class loss: 0.022573 position_loss:0.001140
+
+Epoch 13: train loss: 0.021440
+
+Fold 0 Epoch 13 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 13: valid loss:0.019984
+
+Epoch 13: valid_class_loss:0.022515	valid_position_loss:0.003096
+
+Epoch 13: valid loss 0.019984009645371874 smaller than best loss 0.021167856528949112
+-------------------------------
+
+Epoch 13: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 13: valid position loss 0.003096203449931253 smaller than best position loss 0.0033425813558614604
+-------------------------------
+
+Epoch 13: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Fold 0 Epoch 14 train...
+-------------------------------
+
+2873 loss: 0.024228  [   16/ 3543]
+
+2873 class loss: 0.046621 position_loss:0.002981
+
+2903 loss: 0.022800  [  496/ 3543]
+
+2903 class loss: 0.035125 position_loss:0.003155
+
+2933 loss: 0.016973  [  976/ 3543]
+
+2933 class loss: 0.037037 position_loss:0.001913
+
+2963 loss: 0.030987  [ 1456/ 3543]
+
+2963 class loss: 0.047192 position_loss:0.004310
+
+2993 loss: 0.023269  [ 1936/ 3543]
+
+2993 class loss: 0.041937 position_loss:0.002976
+
+3023 loss: 0.010123  [ 2416/ 3543]
+
+3023 class loss: 0.018326 position_loss:0.001291
+
+3053 loss: 0.015388  [ 2896/ 3543]
+
+3053 class loss: 0.022586 position_loss:0.002174
+
+3083 loss: 0.011979  [ 3376/ 3543]
+
+3083 class loss: 0.018484 position_loss:0.001657
+
+Epoch 14: train loss: 0.019862
+
+Fold 0 Epoch 14 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 14: valid loss:0.019909
+
+Epoch 14: valid_class_loss:0.020321	valid_position_loss:0.003169
+
+Epoch 14: valid loss 0.01990909634199254 smaller than best loss 0.019984009645371874
+-------------------------------
+
+Epoch 14: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Fold 0 Epoch 15 train...
+-------------------------------
+
+3094 loss: 0.044603  [   16/ 3543]
+
+3094 class loss: 0.051915 position_loss:0.006844
+
+3124 loss: 0.026439  [  496/ 3543]
+
+3124 class loss: 0.023089 position_loss:0.004364
+
+3154 loss: 0.011614  [  976/ 3543]
+
+3154 class loss: 0.016911 position_loss:0.001646
+
+3184 loss: 0.013979  [ 1456/ 3543]
+
+3184 class loss: 0.024900 position_loss:0.001800
+
+3214 loss: 0.003972  [ 1936/ 3543]
+
+3214 class loss: 0.007069 position_loss:0.000512
+
+3244 loss: 0.015710  [ 2416/ 3543]
+
+3244 class loss: 0.015577 position_loss:0.002519
+
+3274 loss: 0.026288  [ 2896/ 3543]
+
+3274 class loss: 0.018671 position_loss:0.004511
+
+3304 loss: 0.014825  [ 3376/ 3543]
+
+3304 class loss: 0.022797 position_loss:0.002053
+
+Epoch 15: train loss: 0.017640
+
+Fold 0 Epoch 15 validation...
+-------------------------------
+
+number of test steps per epoch: 67
+
+Epoch 15: valid loss:0.018407
+
+Epoch 15: valid_class_loss:0.020492	valid_position_loss:0.002862
+
+Epoch 15: valid loss 0.01840688946068266 smaller than best loss 0.01990909634199254
+-------------------------------
+
+Epoch 15: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth 
+-------------------------------
+
+Epoch 15: valid position loss 0.0028616922494003483 smaller than best position loss 0.003096203449931253
+-------------------------------
+
+Epoch 15: A better checkpoint is saved into /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_position_model.pth 
+-------------------------------
+
+Loading checkpoint from /mnt/pixstor/data/yz3qt/MUTargetCLEAN0513/result_0624_dpr/2024-06-24__16-06-15/checkpoints/best_model.pth
+
+Fold 0 test
+-------------------------------
+
+===================Evaluate protein results========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.8  0.4         0.5            0.2             0.9     0.2   
+cutoffs_aa       0.2  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.4        0.8  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.761702
+Nucleus_export  0.652417
+===========================================
+
+ TPR, FPR, FNR: 
+
+                       0         1         2
+Nucleus         0.887121  0.170804  0.112879
+Nucleus_export  0.821736  0.246737  0.178264
+===========================================
+
+ cs acc: 
+
+                      0
+ER             0.866667
+Peroxisome     0.307692
+Mitochondrion  0.375000
+SIGNAL         0.869432
+chloroplast    0.407895
+Thylakoid      0.800000
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.989650                 0.917776           0.822314   
+ER                   0.951374                 0.618504           0.752349   
+Peroxisome           0.622504                 0.331856           0.552334   
+Mitochondrion        0.911772                 0.877315           0.820803   
+Nucleus_export       0.970077                 0.494338           0.431967   
+SIGNAL               0.964969                 0.978720           0.832182   
+chloroplast          0.912063                 0.797925           0.682008   
+Thylakoid            0.993815                 0.497049           0.635272   
+
+                recall_score  precision_score  f1_score  
+Nucleus             0.843750         0.843750  0.843750  
+ER                  0.866667         0.666667  0.753623  
+Peroxisome          0.307692         1.000000  0.470588  
+Mitochondrion       0.831250         0.863636  0.847134  
+Nucleus_export      0.560000         0.358974  0.437500  
+SIGNAL              0.952381         0.921248  0.936556  
+chloroplast         0.723684         0.687500  0.705128  
+Thylakoid           0.700000         0.583333  0.636364  
+===================Test protein results constrain: False========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.8  0.4         0.5            0.2             0.9     0.2   
+cutoffs_aa       0.2  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.4        0.8  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.642222
+Nucleus_export  0.368543
+===========================================
+
+ TPR, FPR, FNR: 
+
+                       0         1         2
+Nucleus         0.753009  0.184749  0.246991
+Nucleus_export  0.473333  0.193953  0.526667
+===========================================
+
+ cs acc: 
+
+                      0
+ER             0.965517
+Peroxisome     0.461538
+Mitochondrion  0.257862
+SIGNAL         0.881620
+chloroplast    0.369863
+Thylakoid      0.777778
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.981105                 0.896242           0.841695   
+ER                   0.998457                 0.928371           0.897611   
+Peroxisome           0.868627                 0.545247           0.683551   
+Mitochondrion        0.902439                 0.874745           0.815121   
+Nucleus_export       0.949264                 0.271012           0.328028   
+SIGNAL               0.963852                 0.975781           0.836627   
+chloroplast          0.969958                 0.810258           0.692971   
+Thylakoid            0.994275                 0.441259           0.598266   
+
+                recall_score  precision_score  f1_score  
+Nucleus             0.909091         0.814815  0.859375  
+ER                  0.931034         0.870968  0.900000  
+Peroxisome          0.538462         0.875000  0.666667  
+Mitochondrion       0.786164         0.899281  0.838926  
+Nucleus_export      0.440000         0.275000  0.338462  
+SIGNAL              0.950156         0.924242  0.937020  
+chloroplast         0.821918         0.625000  0.710059  
+Thylakoid           0.777778         0.466667  0.583333  
+===================Test protein results constrain: True========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.8  0.4         0.5            0.2             0.9     0.2   
+cutoffs_aa       0.2  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.4        0.8  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.635257
+Nucleus_export  0.309376
+===========================================
+
+ TPR, FPR, FNR: 
+
+                       0         1         2
+Nucleus         0.744744  0.177783  0.164347
+Nucleus_export  0.400000  0.137207  0.040000
+===========================================
+
+ cs acc: 
+
+                      0
+ER             0.962963
+Peroxisome     0.857143
+Mitochondrion  0.272000
+SIGNAL         0.895082
+chloroplast    0.400000
+Thylakoid      0.714286
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus              0.981105                 0.896242           0.841695   
+ER                   0.998457                 0.928371           0.897611   
+Peroxisome           0.868627                 0.545247           0.683551   
+Mitochondrion        0.902439                 0.874745           0.815121   
+Nucleus_export       0.949264                 0.271012           0.328028   
+SIGNAL               0.963852                 0.975781           0.836627   
+chloroplast          0.969958                 0.810258           0.692971   
+Thylakoid            0.994275                 0.441259           0.598266   
+
+                recall_score  precision_score  f1_score  
+Nucleus             0.909091         0.814815  0.859375  
+ER                  0.931034         0.870968  0.900000  
+Peroxisome          0.538462         0.875000  0.666667  
+Mitochondrion       0.786164         0.899281  0.838926  
+Nucleus_export      0.440000         0.275000  0.338462  
+SIGNAL              0.950156         0.924242  0.937020  
+chloroplast         0.821918         0.625000  0.710059  
+Thylakoid           0.777778         0.466667  0.583333  
+
+
+
+
+Comparable Test Data
+-------------------------------
+
+===================Test protein results constrain: False========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.8  0.4         0.5            0.2             0.9     0.2   
+cutoffs_aa       0.2  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.4        0.8  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.919737
+Nucleus_export  0.446943
+===========================================
+
+ TPR, FPR, FNR: 
+
+                       0         1         2
+Nucleus         1.000000  0.087578  0.000000
+Nucleus_export  0.566667  0.281657  0.433333
+===========================================
+
+ cs acc: 
+
+                0
+ER            NaN
+Peroxisome    NaN
+Mitochondrion NaN
+SIGNAL        NaN
+chloroplast   NaN
+Thylakoid     NaN
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus                   0.5                      0.7                0.0   
+ER                        NaN                     -0.0                0.0   
+Peroxisome                NaN                     -0.0                0.0   
+Mitochondrion             NaN                     -0.0                0.0   
+Nucleus_export            NaN                      1.0                0.0   
+SIGNAL                    NaN                     -0.0                0.0   
+chloroplast               NaN                     -0.0                0.0   
+Thylakoid                 NaN                     -0.0                0.0   
+
+                recall_score  precision_score  f1_score  
+Nucleus                  1.0              0.4  0.571429  
+ER                       0.0              0.0  0.000000  
+Peroxisome               0.0              0.0  0.000000  
+Mitochondrion            0.0              0.0  0.000000  
+Nucleus_export           0.6              1.0  0.750000  
+SIGNAL                   0.0              0.0  0.000000  
+chloroplast              0.0              0.0  0.000000  
+Thylakoid                0.0              0.0  0.000000  
+===================Test protein results constrain: True========================
+
+ optimized cutoffs: 
+
+             Nucleus   ER  Peroxisome  Mitochondrion  Nucleus_export  SIGNAL  \
+cutoffs_pro      0.8  0.4         0.5            0.2             0.9     0.2   
+cutoffs_aa       0.2  0.1         0.1            0.1             0.1     0.1   
+
+             chloroplast  Thylakoid  
+cutoffs_pro          0.4        0.8  
+cutoffs_aa           0.1        0.1  
+===========================================
+
+ Jaccard Index (protein): 
+
+                       0
+Nucleus         0.919737
+Nucleus_export  0.296943
+===========================================
+
+ TPR, FPR, FNR: 
+
+                  0         1    2
+Nucleus         1.0  0.087578  0.0
+Nucleus_export  0.4  0.232478  0.2
+===========================================
+
+ cs acc: 
+
+                0
+ER            NaN
+Peroxisome    NaN
+Mitochondrion NaN
+SIGNAL        NaN
+chloroplast   NaN
+Thylakoid     NaN
+===========================================
+
+ Class prediction performance: 
+
+                roc_auc_score  average_precision_score  matthews_corrcoef  \
+Nucleus                   0.5                      0.7                0.0   
+ER                        NaN                     -0.0                0.0   
+Peroxisome                NaN                     -0.0                0.0   
+Mitochondrion             NaN                     -0.0                0.0   
+Nucleus_export            NaN                      1.0                0.0   
+SIGNAL                    NaN                     -0.0                0.0   
+chloroplast               NaN                     -0.0                0.0   
+Thylakoid                 NaN                     -0.0                0.0   
+
+                recall_score  precision_score  f1_score  
+Nucleus                  1.0              0.4  0.571429  
+ER                       0.0              0.0  0.000000  
+Peroxisome               0.0              0.0  0.000000  
+Mitochondrion            0.0              0.0  0.000000  
+Nucleus_export           0.6              1.0  0.750000  
+SIGNAL                   0.0              0.0  0.000000  
+chloroplast              0.0              0.0  0.000000  
+Thylakoid                0.0              0.0  0.000000  
