@@ -309,8 +309,8 @@ class LocalizationDataset(Dataset):
         return np.array(neg)
 
 def custom_collate(batch):
-    id, id_frags, fragments, target_frags, type_protein, sample_weight, pos_neg = zip(*batch)
-    return id, id_frags, fragments, target_frags, type_protein, sample_weight, pos_neg
+    id, id_frags, fragments, target_frags, type_protein, sample_weight, pos_neg, ORI_AUG = zip(*batch)
+    return id, id_frags, fragments, target_frags, type_protein, sample_weight, pos_neg, ORI_AUG
 
 
 def prot_id_to_seq(seq_file):
