@@ -202,12 +202,12 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         mask_tensor = torch.tensor(mask)
 
                         filtered_motif_logits = motif_logits[mask_tensor]
-                        print(motif_logits.shape, '->', filtered_motif_logits.shape)
+                        print('motif_logits', motif_logits.shape, '->', filtered_motif_logits.shape)
                         motif_logits = filtered_motif_logits
 
-                        filtered_target_frag = target_frag[mask_tensor]
-                        print(target_frag.shape, '->', filtered_target_frag.shape)
-                        target_frag = filtered_target_frag
+                        # filtered_target_frag = target_frag[mask_tensor]
+                        # print('target_frag', target_frag.shape, '->', filtered_target_frag.shape)
+                        # target_frag = filtered_target_frag
 
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
@@ -230,6 +230,15 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         # print(sample_weight_pt)
                         # print(new_sample_weight_pt)
                         # print(motif_logits.shape)
+                        if configs.train_settings.ignore_ori:
+                            # exit(0)
+                            mask = [label == 'AUG' for label in expanded_ORI_AUG]
+                            print('mask', len(mask), mask)
+                            mask_tensor = torch.tensor(mask)
+
+                            filtered_new_sample_weight_pt = new_sample_weight_pt[mask_tensor]
+                            print('new_sample_weight_pt', new_sample_weight_pt.shape, '->', filtered_new_sample_weight_pt.shape)
+                            new_sample_weight_pt = filtered_new_sample_weight_pt
                         # exit(0)
                         position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])) * new_sample_weight_pt.unsqueeze(1))
 
