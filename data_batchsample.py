@@ -198,7 +198,7 @@ class LocalizationDataset(Dataset):
 
     def __getitem__(self, idx):
         #print(idx)
-        id, id_frag_list, seq_frag_list, target_frag_list, type_protein = self.samples[idx]
+        id, id_frag_list, seq_frag_list, target_frag_list, type_protein, ORI_AUG = self.samples[idx]
         labels = np.where(type_protein == 1)[0]
         weights = []
         for label in labels:
