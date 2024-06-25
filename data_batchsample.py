@@ -91,10 +91,10 @@ class LocalizationDataset(Dataset):
                 if configs.train_settings.data_aug.add_original_but_not_export:
                     if type_protein[4] != 1:  # 0619 yichuan if not export
                         # print(type_protein[4])
-                        aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))
+                        aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein, 'ORI'))
                         # aug_samples_tag.append(1)
                 else:
-                    aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
+                    aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein, 'ORI'))  # add original
                     # aug_samples_tag.append(1)
 
             class_positions = np.where(type_protein == 1)[0]
@@ -169,7 +169,7 @@ class LocalizationDataset(Dataset):
                 aug_target_frag_list = target_frag_list
                 aug_type_protein = type_protein
                 aug_samples.append(
-                    (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
+                    (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein, 'AUG'))
                 # aug_samples_tag.append(0)
 
             # print(aug_type_protein)
