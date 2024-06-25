@@ -62,6 +62,7 @@ train_settings:
   only_use_position_loss: False  # check apply_DNN
   position_loss_T: 0.2
   class_loss_T: 5
+  ignore_ori: True
 
 valid_settings:
   do_every: 1
