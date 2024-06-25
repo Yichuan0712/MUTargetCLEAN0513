@@ -79,7 +79,7 @@ class LocalizationDataset(Dataset):
     def data_aug_train(self, samples, configs, class_weights):
         print("data aug on len of " + str(len(samples)))
         aug_samples = []
-        aug_samples_tag = []
+        # aug_samples_tag = []
         pos_mutation_rate, neg_mutation_rate = configs.train_settings.data_aug.pos_mutation_rate, configs.train_settings.data_aug.neg_mutation_rate
 
         # if 1 < 0:
@@ -92,10 +92,10 @@ class LocalizationDataset(Dataset):
                     if type_protein[4] != 1:  # 0619 yichuan if not export
                         # print(type_protein[4])
                         aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))
-                        aug_samples_tag.append(1)
+                        # aug_samples_tag.append(1)
                 else:
                     aug_samples.append((id, id_frag_list, seq_frag_list, target_frag_list, type_protein))  # add original
-                    aug_samples_tag.append(1)
+                    # aug_samples_tag.append(1)
 
             class_positions = np.where(type_protein == 1)[0]
 
@@ -170,7 +170,7 @@ class LocalizationDataset(Dataset):
                 aug_type_protein = type_protein
                 aug_samples.append(
                     (aug_id, aug_id_frag_list, aug_seq_frag_list, aug_target_frag_list, aug_type_protein))
-                aug_samples_tag.append(0)
+                # aug_samples_tag.append(0)
 
             # print(aug_type_protein)
             # print(aug_seq_frag_list)
@@ -178,9 +178,9 @@ class LocalizationDataset(Dataset):
             # print(aug_target_frag_list)
             # print()
             # print()
-        print(len(aug_samples_tag))
+        # print(len(aug_samples_tag))
         print("data length after augmentation is ", str(len(aug_samples)))
-        exit(0)
+        # exit(0)
         return aug_samples
 
     @staticmethod
