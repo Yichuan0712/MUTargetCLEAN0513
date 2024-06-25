@@ -233,7 +233,7 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
                         if configs.train_settings.ignore_ori:
                             # exit(0)
                             mask = [label == 'AUG' for label in expanded_ORI_AUG]
-                            print('mask', len(mask), mask)
+                            # print('mask', len(mask), mask)
                             mask_tensor = torch.tensor(mask)
 
                             filtered_new_sample_weight_pt = new_sample_weight_pt[mask_tensor]
