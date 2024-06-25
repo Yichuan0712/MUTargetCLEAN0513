@@ -87,8 +87,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
     # model.train().cuda()
     tools['net'].train().to(tools['train_device'])
     for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, ORI_AUG) in enumerate(tools['train_loader']):
-        print(len(id_tuple), id_tuple)
-        print(len(ORI_AUG), ORI_AUG)
+        if configs.train_settings.ignore_ori:
+            print(len(id_tuple), id_tuple)
+            print(len(ORI_AUG), ORI_AUG)
         # exit(0)
         b_size = len(id_tuple)
         flag_batch_extension = False
@@ -190,9 +191,9 @@ def train_loop(tools, configs, warm_starting, train_writer, epoch):
 
                 else:
 
-                    # if 1==1:
-                    #     print(motif_logits.shape)
-                    #     exit(0)
+                    if 1==1:
+                        print(motif_logits.shape)
+                        # exit(0)
 
                     position_loss = torch.mean(tools['loss_function'](motif_logits, target_frag.to(tools['train_device'])))
                     # yichuan: 因为BCEloss已经修改成了none, 所以这里必须要加mean
