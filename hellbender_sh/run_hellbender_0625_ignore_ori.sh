@@ -27,4 +27,8 @@ python train.py --config_path ./configs_yaml/0625config/config0625_E15_M0.3_M0.1
 
 python train.py --config_path ./configs_yaml/0625config/config0625_E15_M0.27_M0.09.yaml --result_path ./result_0625/ || true
 
-
+python train.py --config_path ./configs_yaml/0625config/config0625_E16_M0.3_M0.1.yaml --result_path ./result_0625/ || true
+python train.py --config_path ./configs_yaml/0625config/config0625_E17_M0.3_M0.1.yaml --result_path ./result_0625/ || true
+python train.py --config_path ./configs_yaml/0625config/config0625_E18_M0.3_M0.1.yaml --result_path ./result_0625/ || true
+python train.py --config_path ./configs_yaml/0625config/config0625_E19_M0.3_M0.1.yaml --result_path ./result_0625/ || true
+python train.py --config_path ./configs_yaml/0625config/config0625_E20_M0.3_M0.1.yaml --result_path ./result_0625/ || true
