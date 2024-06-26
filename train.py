@@ -404,7 +404,7 @@ def test_loop(tools, dataloader,train_writer,valid_writer,configs):
     # also serves to reduce unnecessary gradient computations and memory usage for tensors with requires_grad=True
     #print("in test loop")
     with torch.no_grad():
-        for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg) in enumerate(dataloader):
+        for batch, (id_tuple, id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple, sample_weight_tuple, pos_neg, placeholder) in enumerate(dataloader):
             id_frags_list, seq_frag_tuple, target_frag_pt, type_protein_pt = make_buffer(id_frag_list_tuple, seq_frag_list_tuple, target_frag_nplist_tuple, type_protein_pt_tuple)
             encoded_seq=tokenize(tools, seq_frag_tuple)
             if type(encoded_seq)==dict:
