@@ -50,7 +50,7 @@ train_settings:
   data_aug:
     enable: True
     per_times: 5
-    add_original: False
+    add_original: True
     add_original_but_not_export: False  # False: old add_original
     neg_mutation_rate: 0.3
     pos_mutation_rate: 0.1
