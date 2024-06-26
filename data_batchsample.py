@@ -35,6 +35,8 @@ class LocalizationDataset(Dataset):
            self.n_neg = configs.supcon.n_neg
            self.hard_neg = configs.supcon.hard_neg
 
+        self.mode = mode
+
     #"""
     def random_mutation(self, sequence, target, pos_mutation_rate, neg_mutation_rate):
         amino_acids = "ACDEFGHIKLMNPQRSTVWY"  # List of standard amino acids
@@ -198,7 +200,11 @@ class LocalizationDataset(Dataset):
 
     def __getitem__(self, idx):
         #print(idx)
-        id, id_frag_list, seq_frag_list, target_frag_list, type_protein, ORI_AUG = self.samples[idx]
+        if self.mode == "train":
+            id, id_frag_list, seq_frag_list, target_frag_list, type_protein, ORI_AUG = self.samples[idx]
+        else:
+            id, id_frag_list, seq_frag_list, target_frag_list, type_protein = self.samples[idx]
+            ORI_AUG = None
         labels = np.where(type_protein == 1)[0]
         weights = []
         for label in labels:
