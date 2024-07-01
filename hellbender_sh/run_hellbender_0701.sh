@@ -26,3 +26,5 @@ export HF_HOME=/home/yz3qt/data/transformers_cache/
 python train.py --config_path ./configs_yaml/0701config/config0701_E15_M0.3_M0.1.yaml --result_path ./result_0701/ || true
 
 python train.py --config_path ./configs_yaml/0701config/config0701_E15_M0.27_M0.09.yaml --result_path ./result_0701/ || true
+
+python train.py --config_path ./configs_yaml/0701config/config0701_E15_M0.15_M0.05_addori.yaml --result_path ./result_0701/ || true
