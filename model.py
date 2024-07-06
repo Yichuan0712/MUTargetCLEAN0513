@@ -653,7 +653,7 @@ class Encoder(nn.Module):
             else:
                 # print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
-                # print('classification_head', classification_head.shape)
+                print('classification_head', classification_head.shape)
 
         # print(motif_logits[0,0,:])
         # print(motif_logits.shape)
