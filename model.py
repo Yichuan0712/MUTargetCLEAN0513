@@ -614,6 +614,8 @@ class Encoder(nn.Module):
 
             if not self.combine:  # only need type_head if combine is False
                 emb_pro = self.get_pro_emb(id, id_frags_list, seq_frag_tuple, last_hidden_state, self.overlap)
+                print(emb_pro.shape)
+                exit(0)
 
         if self.apply_supcon:
             pass
