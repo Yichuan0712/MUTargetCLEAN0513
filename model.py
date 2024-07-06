@@ -611,9 +611,7 @@ class Encoder(nn.Module):
             # print(features)
             last_hidden_state = remove_s_e_token(features.last_hidden_state,
                                                  encoded_sequence['attention_mask'])  # [batch, maxlen-2, dim]
-            emb_pro = self.get_pro_emb(id, id_frags_list, seq_frag_tuple, last_hidden_state, self.overlap)
-            print(emb_pro.shape)
-            exit(0)
+
             if not self.combine:  # only need type_head if combine is False
                 emb_pro = self.get_pro_emb(id, id_frags_list, seq_frag_tuple, last_hidden_state, self.overlap)
 
