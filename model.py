@@ -651,7 +651,7 @@ class Encoder(nn.Module):
                 #                                              motif_logits, self.overlap)
 
             else:
-                # print('emb_pro', emb_pro.shape)
+                print('emb_pro', emb_pro.shape)
                 classification_head = self.type_head(emb_pro)  # [sample, num_class]
                 print('classification_head', classification_head.shape)
 
