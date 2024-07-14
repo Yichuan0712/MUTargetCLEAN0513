@@ -1126,7 +1126,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
 
     dataloader = tools["test_loader"]
     data_dict = get_data_dict(args, dataloader, tools)
-    testdata = {key for key, value in data_dict.items() if key in filter_list}
+    testdata = {key for key, value in data_dict.items()}
     print('testdata')
     print(testdata, len(testdata))
     filtered_data_dict = {key: value for key, value in data_dict.items() if key in filter_list}
