@@ -1172,27 +1172,16 @@ if __name__ == "__main__":
     with open(config_path) as file:
         config_dict = yaml.full_load(file)
 
-    # for i in range(int(args.fold_num)):
-    #     valid_num = i
-    #     if valid_num == 4:
-    #         test_num = 0
-    #     else:
-    #         test_num = valid_num+1
-    #     main(config_dict, args, valid_num, test_num)
+    for i in range(int(args.fold_num)):
+        valid_num = i
+        if valid_num == 4:
+            test_num = 0
+        else:
+            test_num = valid_num+1
+        main(config_dict, args, valid_num, test_num)
 
     # main(config_dict, args, 0, 1)
-    main(config_dict, args, 1, 2)
+    # main(config_dict, args, 1, 2)
     # main(config_dict, args, 2, 3)
     # main(config_dict, args, 3, 4)
     # main(config_dict, args, 4, 0)
-
-
-
-
-
-
-
-
-
-
-# test commit test commit
