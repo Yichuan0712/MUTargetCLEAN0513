@@ -1000,7 +1000,7 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'O00571', 'P52306', 'Q13015', 'Q13568', 'Q5TAQ9', 'Q8NAG6', 'Q9BZ23', 'Q9BZS1',
     ]
     dataloader = tools["test_loader"]
-    data_dict = get_data_dict(-1, dataloader, tools)
+    data_dict = get_data_dict(args, dataloader, tools)
     testdata = {key for key, value in data_dict.items()}
     print('testdata')
     print(testdata, len(testdata))
