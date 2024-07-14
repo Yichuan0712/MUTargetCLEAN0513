@@ -991,6 +991,24 @@ def main(config_dict, args,valid_batch_number, test_batch_number):
         'num_classes': configs.encoder.num_classes,
         # 'masked_lm_data_collator': masked_lm_data_collator,
     }
+
+    filter_list = [
+        'Q9LPZ4', 'P15330', 'P35869', 'P70278', 'Q80UP3',
+        'Q8LH59', 'P19484', 'P35123', 'Q6NVF4', 'Q8NG08', 'Q9BVS4', 'Q9NRA0', 'Q9NUL5', 'Q9UBP0', 'P78953',
+        'A8MR65', 'Q8S4Q6', 'Q3U0V2', 'Q96D46', 'Q9NYA1', 'Q9ULX6', 'Q9WTL8',
+        'P35922', 'P46934', 'P81299', 'Q13148', 'Q6ICB0', 'Q7TPV4', 'Q8N884', 'Q99LG4', 'Q9Z207',
+        'O00571', 'P52306', 'Q13015', 'Q13568', 'Q5TAQ9', 'Q8NAG6', 'Q9BZ23', 'Q9BZS1',
+    ]
+    dataloader = tools["test_loader"]
+    data_dict = get_data_dict(-1, dataloader, tools)
+    testdata = {key for key, value in data_dict.items()}
+    print('testdata')
+    print(testdata, len(testdata))
+    filtered_data_dict = {key: value for key, value in data_dict.items() if key in filter_list}
+    print("len(filtered_data_dict)")
+    print(len(filtered_data_dict))
+    exit(0)
+
     if args.predict !=1:
         customlog(logfilepath, f'number of train steps per epoch: {len(tools["train_loader"])}\n')
         customlog(logfilepath, "Start training...\n")
