@@ -9,7 +9,6 @@
 #SBATCH --job-name mutarget
 
 #SBATCH -p xudong-gpu
-#SBATCH -A xudong-lab
 
 ##SBATCH -p gpu
 
