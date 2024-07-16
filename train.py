@@ -1155,7 +1155,7 @@ if __name__ == "__main__":
     parser.add_argument("--config_path", help="The location of config file", default='./config.yaml')
     parser.add_argument("--predict", type=int, help="predict:1 no training, call evaluate_protein; predict:0 call training loop", default=0)
     parser.add_argument("--result_path", default=None,
-                        help="result_path, if setted by command line, overwrite the one in config.yaml, "
+                        help="result_path, if set by command line, overwrite the one in config.yaml, "
                              "by default is None")
     parser.add_argument("--resume_path", default=None,
                         help="if set, overwrite the one in config.yaml, by default is None")
