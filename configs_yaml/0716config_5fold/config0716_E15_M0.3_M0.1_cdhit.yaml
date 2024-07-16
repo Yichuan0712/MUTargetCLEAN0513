@@ -44,7 +44,7 @@ train_settings:
   additional_pos_weights: False
   loss_pos_weight_nucleus: 35
   loss_pos_weight_nucleus_export: 35
-  dataset: v2_cdhit0.9_signal # v2, v3
+  dataset: v2_cdhit0.9 # v2, v3
   fine_tune_lr: -2 # -1, -2, -3
   log_every: 30
   data_aug:
